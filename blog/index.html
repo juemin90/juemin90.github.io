@@ -1,3 +1,7 @@
+---
+　　layout: default
+　　title: 卢珏玟的Blog
+　　---
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -20,16 +24,17 @@
     <div id="panel_blog">
     <div class="container">
         <div class="col-md-8" id="content">
+            {% for post in site.posts %}
             <article class="holder" id="blog">
                 <div class="header">
                     <a href=".">
-                        <h1>aa</h1>
+                        <h1>{{ post.title }}</h1>
                     </a>
                     <hr>
-                    <p>Posted by <small>卢珏玟</small> on <small>2015-10-04</small><span id="theme" class="label label-default" style="float:right;">JavaScript</span></p>
+                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small><span id="theme" class="label label-default" style="float:right;">JavaScript</span></p>
                 </div>
                 <div class="content">
-                    
+                    {{ post.content }}
                 </div>
                 <div class="footer">
                     <hr>
@@ -42,6 +47,7 @@
                     <div class="clearfix"></div>
                 </div>
             </article>
+            {% endfor %}
                    
         </div>
         <div class="col-md-4 col-sm-5 " id="aside">
