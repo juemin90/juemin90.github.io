@@ -1,0 +1,249 @@
+/*index page*/
+div {
+    margin:0;
+    padding:0;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+#innerContent {
+    min-height:900px;
+    width:100%;
+}
+footer {
+    height:50px;
+    line-height: 50px;
+    text-align: center;
+
+}
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+    font-family: 'PT Sans', Microsoft YaHei,'宋体' ,sans-serif;
+}
+
+/*home.php*/
+#panel {
+    min-height:1024px;
+    margin-top:51px;
+    width:100%;
+    background-color:beige;
+    position:relative;
+}
+
+
+/*footer*/
+hr {
+    margin:5px;
+}
+
+/*blog*/
+
+article.holder, section.holder {
+    margin:20px 0;
+    background-color:#f7f7f9;
+    box-shadow: 2px 2px 2px #aaa;
+    padding:20px;
+}
+
+
+#content .header h1 {
+    color:peru;
+    font-size:20px;
+}
+
+#content .header small {
+    color:darksalmon;
+}
+
+#content .content {
+    margin:50px 0;
+}
+#content .footer {
+    height:50px;
+    line-height: 50px;
+}
+#content .footer a {
+    color:#93a1a1;
+    transition:300ms linear;
+}
+#content .footer a:hover {
+    color:darkslategray;
+}
+#content .read-more {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    float:left;
+}
+#content .social-widget-holder {
+    letter-spacing: 0.2em;
+    float:right;
+    text-transform: uppercase;
+
+}
+
+/*asdies*/
+article.aside-holder {
+    margin:20px 0;
+    background-color:#f7f7f9;
+    box-shadow: 2px 2px 2px #aaa;
+    padding:20px;
+}
+#aside h2 {
+    color:peru;
+    text-transform:uppercase;
+    text-align: center;
+}
+#aside a {
+    color: black;
+    transition:200ms linear;
+}
+#aside a:hover {
+    color:silver;
+}
+#aside #about-me p{
+    margin-top:20px;
+}
+#aside #recent-posts p {
+    text-align: right;
+    color:palevioletred;
+}
+
+/*research page*/
+#research div.research-content {
+    min-height:600px;
+}
+#research article {
+    font-size:16px;
+    color:darkslategrey;
+    padding:30px;
+    display: none;
+}
+#research article h1 {
+    color:peru;
+}
+#research article h1 {
+
+    margin:10px 0;
+}
+
+#research article.active {
+    display: block;
+}
+#research section.research-selector {
+    margin:20px 0;
+    cursor:pointer;
+    text-align:center;
+    padding-top:30px;
+}
+#research section i {
+    font-size:100px;
+}
+
+#research section p {
+    font-size:30px;
+    color:#333;
+}
+
+#research section:hover i{
+    color:#7457ad;
+}
+
+#research section i.active {
+    color:#AA0000;
+}
+
+#research section span {
+    height:300px;
+}
+
+/*message page*/
+div#message-container {
+    margin-top:30px;
+    padding:20px;
+    min-height:100px;
+    background-color: #f7f7f9;
+    border-radius:5px;
+    box-shadow:2px 2px 2px #aaa;
+    transition:500ms linear;
+}
+#content #message .content {
+    margin:20px 0;
+}
+div#message-container article {
+    padding:20px;
+}
+
+div#message-container h1, h2, h3, h4, h5, h6, small{
+    color:peru;
+    text-transform: uppercase;
+}
+
+div.editor {
+    padding:0 20px;
+}
+div.editor div.form-group {
+    margin:10px 0
+}
+p#message-preview {
+    background-color: #ffffff;
+    margin-top:20px;
+    padding:10px;
+    border:1px dashed black;
+}
+#alert {
+    text-align: center;
+    margin-bottom:20px;
+}
+/*mobile*/
+@media (max-width: 768px) {
+    #innerContent {
+        min-height: 200px;
+    }
+    #panel {
+        min-height:100px;
+    }
+    div#research section.research-selector {
+        padding-top:0;
+        margin:0;
+        min-height: 100px;
+    }
+    .container {
+        padding:0;
+        margin:0;
+    }
+    #blog .read-more {
+        display:none;
+    }
+    #blog .social-widget-holder {
+        float: none;
+    }
+
+    #research {
+        padding:0;
+    }
+    #research section.research-selector {
+        padding-top:0;
+    }
+
+    #research section i {
+        font-size:40px;
+    }
+    #research section p {
+        font-size:10px;
+    }
+    div#message-container article {
+        padding:0;
+    }
+
+    div#message-editor {
+        padding:0;
+    }
+    p#message-preview {
+        display: none;
+    }
+    span#theme {
+        display:none;
+    }
+}

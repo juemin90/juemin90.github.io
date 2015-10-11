@@ -1,0 +1,113 @@
+html, body{
+	height:100%;
+}
+body{
+	padding: 0 30px;
+	background-color: beige;
+}
+aside{
+	height:100%;
+	width:20%;
+	position: fixed;
+	right:30px;
+	top:30px;
+	cursor:pointer;
+
+}
+aside ul li:hover {
+	background-color:silver;
+
+}
+
+#content {
+	height: 100%;
+	overflow: scroll;
+}
+section.dashboard {
+	float: left;
+	height:100%;
+	width:100%;
+	display: none;
+	background-color: white;
+	padding:50px 0 0 0;
+	transition:all 200ms linear;
+	overflow: scroll;
+}
+section.dashboard hr{
+	margin:15px;
+}
+section.dashboard:nth-child(2){
+	display: block;
+}
+#nav{
+	width:120px;
+	height:120px;
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+}
+#nav>div{
+	width:60px;
+	height:60px;
+	border-radius: 60px;
+	background-color: silver;
+	line-height: 60px;
+	text-align: center;
+	font-size:0.6em;
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	transition:all 200ms linear;
+}
+#home{
+	z-index: 1;
+}
+#nav>div>a {
+	color:white;
+	text-decoration: none;
+
+}
+#nav>div>a:hover{
+	color:black;
+}
+li {
+    margin:0;
+    padding:0;
+    list-style-type: none;
+    text-indent: 0;
+}
+li.ip_content{
+	cursor:pointer;
+}
+nav.pagination{
+	margin-left: 30px;
+}
+#dialog{
+	position: absolute;
+	top:0;
+	left:0;
+	display: none;
+}
+#dialog #dialog_body{
+	position: absolute;
+	width:300px;
+	min-height:200px;
+	max-height:700px;
+	color: white;
+	padding:20px;
+	background: rgba(72, 77, 216, 0.5);
+	border-radius:10px;
+	left:20px;
+	overflow: scroll;
+}
+#dialog #dialog_triangle{
+	position: absolute;
+	width:0px;
+	height:0px;
+	border-top: 10px solid transparent;
+    border-right: 20px solid rgba(72, 77, 216, 0.5);
+    border-bottom: 10px solid transparent;
+
+	left:-100%;
+	top:30px;
+}
