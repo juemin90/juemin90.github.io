@@ -27,7 +27,7 @@
             {% for post in site.posts %}
             <article class="holder" id="blog">
                 <div class="header">
-                    <a href=".">
+                    <a href="/{{post.url}}">
                         <h1>{{ post.title }}</h1>
                     </a>
                     <hr>
@@ -47,7 +47,7 @@
                     <div class="clearfix"></div>
                 </div>
             </article>
-            {% endfor %}
+        {% endfor %}
                    
         </div>
         <div class="col-md-4 col-sm-5 " id="aside">
