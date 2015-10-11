@@ -27,7 +27,7 @@ title: 卢珏玟的Blog
             {% for post in site.posts %}
             <article class="holder" id="blog">
                 <div class="header">
-                    <a href="/{{post.url}}">
+                    <a href="{{ site.baseurl }}{{post.url}}">
                         <h1>{{ post.title }}</h1>
                     </a>
                     <hr>
@@ -76,7 +76,7 @@ title: 卢珏玟的Blog
                     <a href="http://juemin90.dothome.co.kr/blog.php?id=56"><p>永远是你哥</p></a>
                     <a href="http://juemin90.dothome.co.kr/blog.php?id=57"><p>$(".ludi").remove()</p></a>
             </article>
-            
+
             <article id="recent-messages" class="aside-holder"><h2>recent messages</h2>
                         <hr>
                     <a href="http://juemin90.dothome.co.kr/message.php"><p>加油！</p></a>
