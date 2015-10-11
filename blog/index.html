@@ -1,0 +1,120 @@
+---
+　　layout: default
+　　title: 卢珏玟的Blog
+　　---
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/public.css">
+    <title>卢珏玟的博客</title>
+</head>
+<body>
+<header id="head" class="head">
+    <div class="container">
+        <a href="..">Lu Juemin</a>
+    </div>
+</header>
+
+<section id="innerContent">
+    <div id="panel_blog">
+    <div class="container">
+        <div class="col-md-8" id="content">
+            {% for post in site.posts %}
+            <article class="holder" id="blog">
+                <div class="header">
+                    <a href="/{{post.url}}">
+                        <h1>{{ post.title }}</h1>
+                    </a>
+                    <hr>
+                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small><span id="theme" class="label label-default" style="float:right;">JavaScript</span></p>
+                </div>
+                <div class="content">
+                    {{ post.content }}
+                </div>
+                <div class="footer">
+                    <hr>
+                    <div class="read-more">
+                        <a href="">continue reading</a>
+                    </div>
+                    <div class="social-widget-holder">
+                        <a href="" title="Comment on Keep learning">Leave a comment</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </article>
+        {% endfor %}
+                   
+        </div>
+        <div class="col-md-4 col-sm-5 " id="aside">
+            <article id="about-me" class="aside-holder">
+                <h2>about me</h2>
+                <div class="photo-holder">
+                    <a href="javascript:void(0);" id="my_photo"><img src="../im/juemin.png" alt="lujuemin" class="img-thumbnail"></a>
+                </div>
+                <p>I'm Lu Juemin, a student in Yonsei University, majoring in Computer Science</p>
+            </article>
+
+            <article id="recent-posts" class="aside-holder"><h2>recent posts</h2>
+                        <hr>
+                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">用Github page和jekyll建blog</a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">正确使用chrome的开发者选项</a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">CSS3的一些属性</a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">JS中继承的各种方式</a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">插件的写法</a>
+                    <hr>
+                        <p>Totally 50 blogs</p>
+                    </article>
+            <article id="recent-replies" class="aside-holder"><h2>recent replies</h2>
+                        <hr>
+                    <a href="http://juemin90.dothome.co.kr/blog.php?id=87"><p>developer.chrome.com居然也被墙了。。文章直接ctrlcctrlv的，图片不翻墙看不到。。</p></a>
+                    <a href="http://juemin90.dothome.co.kr/blog.php?id=87"><p>只是很笼统的讲了developer tools里面有什么东西，具体的还要点进去看。</p><p>开发者工具是个具有很强大功能的工具，用好它，就可以开发出一个高性能、高质量的web application。</p></a>
+                    <a href="http://juemin90.dothome.co.kr/blog.php?id=86"><p>to be continued.</p></a>
+                    <a href="http://juemin90.dothome.co.kr/blog.php?id=56"><p>永远是你哥</p></a>
+                    <a href="http://juemin90.dothome.co.kr/blog.php?id=57"><p>$(".ludi").remove()</p></a></article>
+            <article id="recent-messages" class="aside-holder"><h2>recent messages</h2>
+                        <hr>
+                    <a href="http://juemin90.dothome.co.kr/message.php"><p>加油！</p></a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/message.php"><p>做的挺好的，没啥好建议，多发些原创的东西好点，比如开发心得啥的</p></a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/message.php">이쁘게 만들어라..</a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/message.php">잘보고 갑니다 ^^ 좋은 자료  많이 부탁드릴게요</a>
+                    <hr>
+                    <a href="http://juemin90.dothome.co.kr/message.php"><p><strong>bb</strong></p></a>
+                    <hr>
+                    </article>            
+
+        </div>
+    </div>
+
+</div></section>
+<footer>
+    <a href="..">卢珏玟的个人网站</a>©2015
+</footer>
+<div id="nav">
+    <div id="nav1">
+        <a href=".#">BLOG</a>
+    </div>
+    <div id="nav2">
+        <a href="..">HOME</a>
+    </div>
+    <div id="nav3">
+        <a href="../message">MESSAGE</a>
+    </div>
+    <div id="nav4">
+        <a href="../slide">SLIDE</a>
+    </div>
+</div>
+<script src="../js/app.js"></script>
+
+</body></html>
