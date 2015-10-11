@@ -62,11 +62,11 @@ title: 卢珏玟的Blog
             <article id="recent-posts" class="aside-holder"><h2>recent posts</h2>
                         <hr>
                     {% for post in site.posts %}
-                    <a href="{{}}">{{ post.title }}</a>
+                    <a href="{{ site.baseurl }}{{post.url}}">{{ post.title }}</a>
                     <hr>
 
                     {% endfor %}
-                        <p>Totally {{site.pages}} blogs</p>
+                        <p>Totally 2 blogs</p>
                     </article>
             <article id="recent-replies" class="aside-holder"><h2>recent replies</h2>
                         <hr>
