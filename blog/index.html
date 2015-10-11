@@ -61,17 +61,12 @@ title: 卢珏玟的Blog
 
             <article id="recent-posts" class="aside-holder"><h2>recent posts</h2>
                         <hr>
-                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">用Github page和jekyll建blog</a>
+                    {% for post in site.posts %}
+                    <a href="{{}}">{{ post.title }}</a>
                     <hr>
-                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">正确使用chrome的开发者选项</a>
-                    <hr>
-                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">CSS3的一些属性</a>
-                    <hr>
-                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">JS中继承的各种方式</a>
-                    <hr>
-                    <a href="http://juemin90.dothome.co.kr/bloglist.php#">插件的写法</a>
-                    <hr>
-                        <p>Totally 50 blogs</p>
+
+                    {% endfor %}
+                        <p>Totally 2 blogs</p>
                     </article>
             <article id="recent-replies" class="aside-holder"><h2>recent replies</h2>
                         <hr>
@@ -79,7 +74,9 @@ title: 卢珏玟的Blog
                     <a href="http://juemin90.dothome.co.kr/blog.php?id=87"><p>只是很笼统的讲了developer tools里面有什么东西，具体的还要点进去看。</p><p>开发者工具是个具有很强大功能的工具，用好它，就可以开发出一个高性能、高质量的web application。</p></a>
                     <a href="http://juemin90.dothome.co.kr/blog.php?id=86"><p>to be continued.</p></a>
                     <a href="http://juemin90.dothome.co.kr/blog.php?id=56"><p>永远是你哥</p></a>
-                    <a href="http://juemin90.dothome.co.kr/blog.php?id=57"><p>$(".ludi").remove()</p></a></article>
+                    <a href="http://juemin90.dothome.co.kr/blog.php?id=57"><p>$(".ludi").remove()</p></a>
+            </article>
+            
             <article id="recent-messages" class="aside-holder"><h2>recent messages</h2>
                         <hr>
                     <a href="http://juemin90.dothome.co.kr/message.php"><p>加油！</p></a>
