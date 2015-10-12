@@ -81,6 +81,9 @@ a.social#stackoverflow {
 a.social#linkedin {
     background-position: 120px 0;
 }
+#innerContent {
+    height:100%;
+}
 footer {
     height:50px;
     line-height: 50px;
