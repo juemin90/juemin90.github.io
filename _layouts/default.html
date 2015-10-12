@@ -12,25 +12,31 @@
 	    </div>
 	</header>
 
-<section id="innerContent">
-	<div id="panel_blog">
-		<div class="container">
-			<div class="col-md-8" id="content">
-				<article class="holder" id="blog">
-					<div class="header">
-						<a href="{{ site.baseurl }}{{post.url}}">
-	                        <h1>{{ post.title }}</h1>
-	                    </a>
-					</div>
-					<div class="content"></div>
-					<div class="footer"></div>
-				</article>
+	<section id="innerContent">
+		<div id="panel_blog">
+			<div class="container">
+				<div class="col-md-8" id="content">
+					<section class="holder" id="blog">
+						<div class="header">
+							<a href="{{ site.baseurl }}{{post.url}}">
+		                        <h1>{{ page.title }}</h1>
+		                    </a>
+		                    <hr>
+		                    <p>Posted by <small>"Lu Juemin"</small> on <small>{{ post.date | date_to_string }}</small><span class='label label-default' style = 'float:right;'>{{ post.theme }}</span></p>
+						</div>
+						<div class="content"><p>{{page.content}}</p></div>
+						<div class='footer'>
+                            <hr/>
+                            <div class='social-widget-holder'><span>Totally 0 replies</span>
+                            </div>
+                            <div class='clearfix'></div>
+                        </div>
+                        <hr/>
+					</section>
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
-	valid
-	{{page.content}}
+	</section>
 	<footer>
 	    <a href=".">卢珏玟的个人网站</a>©2015
 	</footer>
