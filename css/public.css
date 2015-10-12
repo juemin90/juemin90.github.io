@@ -1,3 +1,6 @@
+html, body {
+    height:100%;
+}
 /*header*/
 #head {
     position: fixed;
@@ -77,10 +80,6 @@ a.social#stackoverflow {
 }
 a.social#linkedin {
     background-position: 120px 0;
-}
-#innerContent {
-    min-height:900px;
-    width:100%;
 }
 footer {
     height:50px;
