@@ -50,6 +50,7 @@ a {
 a:hover {
     text-decoration: none;
 }
+
 a.social {
     display:inline-block;
     height:40px;
