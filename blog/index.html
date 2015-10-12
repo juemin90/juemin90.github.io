@@ -31,7 +31,7 @@ title: 卢珏玟的Blog
                         <h1>{{ post.title }}</h1>
                     </a>
                     <hr>
-                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small><span id="theme" class="label label-default" style="float:right;">{{ post.theme }}</span></p>
+                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small><span id="theme" class="label label-primary" style="float:right;">{{ post.theme }}</span></p>
                 </div>
                 <div class="content">
                     {% if post.content contains "<!-- more -->" %}
