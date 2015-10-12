@@ -1,0 +1,161 @@
+/* Duoshuo.css
+----------------------------------------------------------------
+.ds-thread {
+display:none;
+}*/
+#ds-thread #ds-reset a.ds-like-thread-button {
+border: none!important;
+box-shadow: none!important;
+text-shadow: none!important;
+background: #f6f6f6!important;
+background-image: none!important;
+position: relative!important;
+z-index: 10!important;
+}
+#ds-thread #ds-reset .ds-replybox {
+width: auto;
+font-size: 12px;
+z-index: 3;
+margin: 8px 20px;
+padding: 0 0 0 60px;
+position: relative;
+_zoom: 1;
+}
+#ds-thread #ds-reset .ds-textarea-wrapper {
+border: none!important;
+background: #f6f6f6!important;
+}
+#ds-reset .ds-gradient-bg {
+background: #eee!important;
+}
+#ds-thread #ds-reset .ds-post-options {
+border:1px solid #f6f6f6!important;
+}
+#ds-thread #ds-reset .ds-post-button {
+background: #e9302a!important;
+border: 1px solid #f6f6f6!important;
+text-shadow:none!important;
+color:#fff!important;
+font-family:inherit!important;
+font-weight:normal!important;
+}
+button:hover.ds-post-button {
+color:#666;
+}
+#ds-thread #ds-reset .ds-toolbar {
+position: relative;
+z-index: 5;
+font-size: 12px;
+padding: 8px 20px;
+width: auto;
+clear: both;
+}
+#ds-thread #ds-reset .ds-powered-by {
+display: none!important;
+}
+#ds-thread #ds-reset .ds-meta {
+border-bottom:0px dotted #ddd!important;
+}
+#ds-reset .ds-rounded, #ds-reset input, #ds-reset button, #ds-reset .ds-rounded-top {
+-webkit-border-radius: 0px!important;
+border-radius: 0px!important;
+}
+
+#ds-thread #ds-reset .ds-textarea-wrapper textarea, #ds-thread #ds-reset .ds-textarea-wrapper .ds-hidden-text {
+font-family:inherit!important;
+font-size:14px!important;
+line-height:1.8em!important;
+}
+#ds-thread #ds-reset li.ds-tab a.ds-current {
+border: none!important;
+background-color: #f6f6f6!important;
+}
+#ds-thread #ds-reset li.ds-tab a {
+text-shadow: none!important;
+padding: 5px 8px!important;
+-webkit-border-radius: 0px!important;
+border-radius: 0px!important;;
+}
+#ds-thread #ds-reset .ds-comments-info {
+width: auto;
+font-size: 13px;
+margin-top: 10px;
+padding: 8px 20px;
+line-height: 25px;
+position: relative;
+}
+#ds-thread #ds-reset li.ds-post {
+width: auto;
+overflow: hidden;
+clear: both;
+border-top: 1px solid rgba(0,0,0,0.13);
+margin: 0;
+padding: 0 20px;
+list-style: none;
+}
+
+#ds-thread #ds-reset .ds-post-self {
+padding: 10px 20px!important;
+border-top:none!important;
+}
+
+
+/*主评论*/
+
+#ds-reset .ds-highlight {
+color: #6D6D6D !important;
+}
+
+.ds-post-likes, .ds-post-repost, .ds-post-report {
+display: none !important;
+}
+
+#ds-thread #ds-reset li.ds-post {
+border-top:none;
+}
+
+#ds-thread #ds-reset .ds-comment-actions a .ds-icon {
+display: none;
+}
+
+#ds-thread #ds-reset .ds-comment-footer a {
+margin: 0 8px;
+}
+
+#ds-reset .ds-avatar img {
+border-radius: 50%;
+}
+
+#ds-thread #ds-reset .ds-comment-header {
+padding: 5px 0;
+border-bottom: 1px solid #e2e2e2;
+}
+
+#ds-thread #ds-reset ul.ds-children .ds-post-self {
+padding-left: 20px;
+border-left: 1px solid #e2e2e2;
+}
+
+#ds-thread #ds-reset .ds-comment-footer {
+position: absolute;
+top: 0;
+right: 0;
+}
+
+#ds-thread #ds-reset li.ds-post {
+margin: 10px 0;
+}
+
+#ds-thread #ds-reset .ds-sort {
+display: none;
+}
+
+#ds-thread #ds-reset li.ds-tab a.ds-current {
+border:none;
+font-size: 20px;
+color: rgba(0,0,0,0.4);
+line-height: 80px;
+background-color:#fff;
+}
+
+#ds-thread #ds-reset li.ds-tab a:hover{background-color:none}
