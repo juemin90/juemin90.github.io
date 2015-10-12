@@ -12,18 +12,13 @@
     -o-transition:all 300ms ease;
     z-index: 1;
 }
+#head a{
+    font-size: 2em;
+    color:#145789;
+}
 #head.scrolled {
     height:50px;
     line-height: 50px;
-}
-#head span:hover {
-    border-radius: 0;
-}
-#head span#github {
-    background-position: 80px 40px;
-}
-#head span#weibo {
-
 }
 /*resume*/
 #resume_profile {
