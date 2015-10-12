@@ -94,7 +94,7 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
     font-family: Microsoft JhengHei, Microsoft YaHei,'宋体' ,sans-serif;
 }
 #panel {
-
+    padding-top:180px;
     background-color:#f1eee8;
     position:relative;
 }
@@ -277,7 +277,6 @@ p#message-preview {
 #nav>div>a, #nav>div {
     color:white;
     text-decoration: none;
-
 }
 #nav>div>a:hover{
     color:black;
