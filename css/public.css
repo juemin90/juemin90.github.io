@@ -24,6 +24,9 @@ html, body {
     height:50px;
     line-height: 50px;
 }
+#head span {
+    float:right;
+}
 /*resume*/
 #resume_profile {
     text-align: center;
