@@ -82,7 +82,6 @@ a.social#linkedin {
     background-position: 120px 0;
 }
 #innerContent {
-    height:100%;
 }
 footer {
     height:50px;
@@ -94,8 +93,6 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
     font-family: Microsoft JhengHei, Microsoft YaHei,'宋体' ,sans-serif;
 }
 #panel {
-    min-height:1024px;
-    width:100%;
     background-color:#f1eee8;
     position:relative;
 }
@@ -120,7 +117,6 @@ section.holder#blog{
 /*blog*/
 #panel_blog {
     padding-top:180px;
-    min-height:1024px;
     width:100%;
     background-color:#f1eee8;
     position:relative;
