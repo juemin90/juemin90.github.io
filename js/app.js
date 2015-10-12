@@ -9,8 +9,6 @@
 			})
 		})
 		var navs = $("#nav div");
-			var text = navs.eq(0).find("a").html();
-
 			navs.eq(0).mouseenter(function(){
 				navs.eq(1).css({bottom:'100px'});
 				navs.eq(2).css({bottom:'170px'});
