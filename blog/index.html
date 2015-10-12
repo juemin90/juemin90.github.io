@@ -34,7 +34,7 @@ title: 卢珏玟的Blog
                     <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small><span id="theme" class="label label-default" style="float:right;">{{ post.theme }}</span></p>
                 </div>
                 <div class="content">
-                    {{ post.content || split:'<!-- more -->' | first}}
+                    {{ post.excerpt }}
                 </div>
                 <div class="footer">
                     <hr>
@@ -61,7 +61,7 @@ title: 卢珏玟的Blog
 
             <article id="recent-posts" class="aside-holder"><h2>recent posts</h2>
                         <hr>
-                    {% for post in site.posts %}
+                    {% for post in site.posts limit: 5 %}
                     <a href="{{ site.baseurl }}{{post.url}}">{{ post.title }}</a>
                     <hr>
 
