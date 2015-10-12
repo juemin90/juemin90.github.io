@@ -1,0 +1,46 @@
+---
+layout: default
+title: Swap Two Variables Without Using a Temp Variable (With Math!)（转）
+theme: coding
+---
+<p>I wrote this as a comment on Hacker News before polishing it up to put it here &ndash; see&nbsp;<a href="http://news.ycombinator.com/item?id=5278915">original</a>.</p>
+
+<p>The question &ldquo;How do you swap two variables without using a temporary variable?&rdquo; is a favorite of unimaginative interviewers everywhere. If you haven&rsquo;t seen it, the typical solution is three bitwise exclusive or (xor) operations in succession:</p>
+<!-- more -->
+
+<p><code>var a = 10, b = 20; </code></p>
+
+<p><code>a = a ^ b; </code></p>
+
+<p><code>b = a ^ b; </code></p>
+
+<p><code>a = a ^ b; </code></p>
+
+<p><code>console.log(&quot;a = &quot; + a + &quot;, b = &quot; + b); // a = 20, b = 10</code></p>
+
+<p>&nbsp;</p>
+
+<p>As you can imagine, this is extremely useful in situations where you just can&rsquo;t spare even one byte of memory to hold a temporary variable.</p>
+
+<p>This is known as the &lsquo;xor trick&rsquo;. But it&rsquo;s not the only solution. Here&rsquo;s another way:</p>
+
+<p><code>var a = 10, b = 20; </code></p>
+
+<p><code>a = a + b; </code></p>
+
+<p><code>b = a - b; </code></p>
+
+<p><code>a = a - b; </code></p>
+
+<p><code>console.log(&quot;a = &quot; + a + &quot;, b = &quot; + b); // a = 20, b = 10</code></p>
+
+<p>&nbsp;</p>
+
+<p>That looks a bit different - instead of performing the same operation three times, we performed an addition followed by two subtractions.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
