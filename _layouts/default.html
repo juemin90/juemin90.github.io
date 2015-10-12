@@ -4,86 +4,80 @@
 	<meta charset="UTF-8">
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">    
-    <link rel="stylesheet" href="../css/public.css">
-
     <!-- <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'> -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<title>{{page.title}}</title>
 </head>
 <body>
 	<header id="head" class="head">
-    <div class="container">
-        <a href="http://www.juemin.win">Lu Juemin</a>
-        
-    </div>
-</header>
-<section id="innerContent">
-    <div id="panel">
-    <div class="container">
-        <div class="col-md-12" id="content">
-            <section class="holder" id="blog">
-                <div class='header'>
-                	<a href='{{ site.baseurl }}{{post.url}}'><h1>{{page.title}}"</h1></a>
-                	<hr/>
-                	<p>Posted by <small>"Lu Juemin"</small> on <small>{{ post.date | date_to_string }}</small><span class='label label-default' style = 'float:right;'>{{ post.theme }}</span></p></div>
-                <div class='content'><p>{{ content }}</p></div><div class='footer'>
-                    <hr/>
-                    <div class='social-widget-holder'><span>Totally 0 replies</span>
-                    </div>
-                    <div class='clearfix'></div>
-                </div>
-                <hr/>
+	    <div class="container">
+	        <a href="http://www.juemin.win">Lu Juemin</a>
+	        
+	    </div>
+	</header>
+	<section id="innerContent">
+	    <div id="panel">
+	    <div class="container">
+	        <div class="col-md-12" id="content">
+	            <section class="holder" id="blog">
+	                <div class='header'>
+	                	<a href='{{ site.baseurl }}{{post.url}}'><h1>{{page.title}}"</h1></a>
+	                	<hr/>
+	                	<p>Posted by <small>"Lu Juemin"</small> on <small>{{ post.date | date_to_string }}</small><span class='label label-default' style = 'float:right;'>{{ post.theme }}</span></p></div>
+	                <div class='content'><p>{{ content }}</p></div><div class='footer'>
+	                    <hr/>
+	                    <div class='social-widget-holder'><span>Totally 0 replies</span>
+	                    </div>
+	                    <div class='clearfix'></div>
+	                </div>
+	                <hr/>
 
-                <!-- <article>
-                	<div class='header'>
-                		<p>Replied by <small>".mysql_result($reply_result, $j, 'name')."</small>on <small>".mysql_result($reply_result, $j, 'time')."</small></p></div><div class='content'><p>".mysql_result($reply_result, $j, 'content')."</p>
-                	</div>
-                	<hr>
-                </article> -->
+	                <!-- <article>
+	                	<div class='header'>
+	                		<p>Replied by <small>".mysql_result($reply_result, $j, 'name')."</small>on <small>".mysql_result($reply_result, $j, 'time')."</small></p></div><div class='content'><p>".mysql_result($reply_result, $j, 'content')."</p>
+	                	</div>
+	                	<hr>
+	                </article> -->
 
-                <div id="message-editor" class="editor">
-                    <form  class="form-inline" method="post">
-                        <div class="form-group">
-                            <label for="exampleInputName2">Name:</label>
-                            <input type="text" class="form-control" id="name" placeholder="John Smith" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputName2">Email:</label>
-                            <input type="email" class="form-control" id="email" placeholder="John@example.com" name="email" required>
-                        </div>
-                        <textarea name="editor1" id="editor1"></textarea>
-                        <p id="message-preview"></p>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Reply</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
+	                <div id="message-editor" class="editor">
+	                    <form  class="form-inline" method="post">
+	                        <div class="form-group">
+	                            <label for="exampleInputName2">Name:</label>
+	                            <input type="text" class="form-control" id="name" placeholder="John Smith" name="name" required>
+	                        </div>
+	                        <div class="form-group">
+	                            <label for="exampleInputName2">Email:</label>
+	                            <input type="email" class="form-control" id="email" placeholder="John@example.com" name="email" required>
+	                        </div>
+	                        <textarea name="editor1" id="editor1"></textarea>
+	                        <p id="message-preview"></p>
+	                        <div class="form-group">
+	                            <button type="submit" class="btn btn-success">Reply</button>
+	                        </div>
+	                    </form>
+	                </div>
+	            </section>
 
-        </div>
-    </div>
-</section>
-<footer>
-    <a href="index.php">卢珏玟的个人网站</a>©2015 -
-</footer>
-<div id="nav">
-    <div id="nav1">
-        <a href="http://www.juemin.win">HOME</a>
-    </div>
-    <div id="nav2">
-        <a href="http://www.juemin.win/cv">CV</a>
-    </div>
-    <div id="nav3">
-        <a href="http://www.juemin.win/message">MESSAGE</a>
-    </div>
-    <div id="nav4">
-        <a href="http://www.juemin.win/slide">SLIDE</a>
-    </div>
-</div>
-<script src="js/app.js"></script>
+	        </div>
+	    </div>
+	</section>
+	<footer>
+	    <a href="index.php">卢珏玟的个人网站</a>©2015 -
+	</footer>
+	<div id="nav">
+	    <div id="nav1">
+	        <a href="http://www.juemin.win">HOME</a>
+	    </div>
+	    <div id="nav2">
+	        <a href="http://www.juemin.win/cv">CV</a>
+	    </div>
+	    <div id="nav3">
+	        <a href="http://www.juemin.win/message">MESSAGE</a>
+	    </div>
+	    <div id="nav4">
+	        <a href="http://www.juemin.win/slide">SLIDE</a>
+	    </div>
+	</div>
+	// <script src="js/app.js"></script>
 
 // <script>
 //     var title = document.getElementById("blog").getElementsByTagName("h1")[0].innerText;
