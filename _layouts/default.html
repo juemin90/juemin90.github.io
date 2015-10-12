@@ -2,10 +2,37 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/public.css">
 	<title>{{page.title}}</title>
 </head>
 <body>
+	<header id="head" class="head">
+	    <div class="container">
+	        <a href=".">卢珏玟 | Lu Juemin</a>
+	    </div>
+	</header>
+
+<section id="innerContent">
+	<div id="panel_blog">
+		<div class="container">
+			<div class="col-md-8" id="content">
+				<article class="holder" id="blog">
+					<div class="header">
+						<a href="{{ site.baseurl }}{{post.url}}">
+	                        <h1>{{ post.title }}</h1>
+	                    </a>
+					</div>
+					<div class="content"></div>
+					<div class="footer"></div>
+				</article>
+			</div>
+		</div>
+	</div>
+</section>
 	valid
 	{{page.content}}
+	<footer>
+	    <a href=".">卢珏玟的个人网站</a>©2015
+	</footer>
 </body>
 </html>
