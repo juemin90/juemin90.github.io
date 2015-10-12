@@ -34,7 +34,11 @@ title: 卢珏玟的Blog
                     <p>Posted by <small>卢珏玟</small> on <small>{{ post.date }}</small><span id="theme" class="label label-default" style="float:right;">{{ post.theme }}</span></p>
                 </div>
                 <div class="content">
-                    {{ post.excerpt }}
+                    {% if post.content contains "<!-- more -->" %}
+                        {{ post.content | split:"<!-- more -->" | first % }}
+                    {% else %}
+                        {{ post.excerpt }}
+                    {% endif %}
                 </div>
                 <div class="footer">
                     <hr>
