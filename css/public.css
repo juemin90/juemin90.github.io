@@ -10,6 +10,7 @@
     -webkit-transition:all 300ms ease;
     -moz-transition:all 300ms ease;
     -o-transition:all 300ms ease;
+    -ms-transition:all 300ms ease;
     z-index: 1;
 }
 #head a{
@@ -46,7 +47,7 @@ a {
 a:hover {
     text-decoration: none;
 }
-span.social {
+a.social {
     display:inline-block;
     height:40px;
     width:40px;
@@ -56,25 +57,25 @@ span.social {
     background-image: url(../im/social.png);
     transition:all 300ms linear;
 }
-span.social:hover {
+a.social:hover {
     border-radius: 10px;
 }
-span.social#github {
+a.social#github {
     background-position: 80px 40px;
 }
-span.social#weibo {
+a.social#weibo {
     background-position: 80px 0;
 }
-span.social#facebook {
+a.social#facebook {
     background-position: 200px 0;
 }
-span.social#twitter {
+a.social#twitter {
     background-position: 240px 0;
 }
-span.social#stackoverflow {
+a.social#stackoverflow {
     background-position: 40px 40px;
 }
-span.social#linkedin {
+a.social#linkedin {
     background-position: 120px 0;
 }
 #innerContent {
@@ -154,6 +155,7 @@ article.holder {
     -webkit-transition:300ms linear;
     -moz-transition:300ms linear;
     -o-transition:300ms linear;
+    -ms-transition:300ms linear;
 }
 #content .footer a:hover {
     color:darkslategray;
@@ -188,6 +190,7 @@ article.aside-holder {
     -webkit-transition:200ms linear;
     -o-transition:200ms linear;
     -moz-transition:200ms linear;
+    -ms-transition:200ms linear;
 }
 #aside a:hover {
     color:silver;
@@ -212,6 +215,7 @@ div#message-container {
     -webkit-transition:500ms linear;
     -moz-transition:500ms linear;
     -o-transition:500ms linear;
+    -ms-transition:500ms linear;
 }
 #content #message .content {
     margin:20px 0;
@@ -264,6 +268,8 @@ p#message-preview {
     -webkit-transition:all 200ms linear;
     -moz-transition:all 200ms linear;
     -o-transition:all 200ms linear;
+    -ms-transition:all 200ms linear;
+
 }
 #nav1:nth-child(1){
     z-index: 1;
