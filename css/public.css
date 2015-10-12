@@ -292,10 +292,6 @@ p#message-preview {
     #head{
         height:100px;
         line-height: 100px;
-        text-align: center;
-    }
-    #head span {
-        display: none;
     }
     #innerContent {
         min-height: 200px;
