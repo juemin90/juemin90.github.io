@@ -1,60 +1,37 @@
 (function($){
-	$.fn.jPages = function(options){
-		if(this.css('display')=='inline'){
-				console.log("do not use this");
-				return 0;
+	$(function(){
+		$.fn.jPages = function(options){
+			var default_setting = {
+				pages:2
+			},
+			me = this;
+			setting = $.extend(default_setting, options),
+			jPages = [];
+
+			for(var i=setting.pages; i>0; i--){
+				jPages[i] = $("<div>").addClass("jPages jPages"+i).css({
+					height:this.height(),
+					width:this.width(),
+					backgroundColor:this.css('backgroundColor'),
+					margin:this.css('margin'),
+					position:this.css('position'),
+					top:this.css('top'),
+					bottom:this.css('bottom'),
+					left:this.css('left'),
+					right:this.css('right'),
+					transform:'rotate('+(Math.random()*20-10)+'deg)',
+					boxShadow:'0px 0px 10px 2px #666',
+					// z-index:-1
+				});
+				this.before(jPages[i]);
+				if(this.css('position')!=='absolute' && this.css('position')!=='fixed') {
+
+				} else if(this.css('position')=='relative') {
+					jPages[i].css({top:(i*this.css('height'))})
+				} else {
+
+				}
 			}
-
-		var default_setting = {
-			pages:2
-		},
-			jPages = [],
-			setting = $.extend(default_setting, options);
-
-		jContainer_width = jPage_width = this.width(),
-		jContainer_height = jPage_height = this.height(),
-		jPage_left = this.css('left');
-		jPage_right = this.css('right');
-		jPage_top = this.css('top');
-		jPage_bototm = this.css('bottom');
-		jPage_box_shadow = this.css('boxShadow');
-		jPage_color = this.css("backgroundColor");
-		jPage_position = this.css("position");
-		jPage_margin = this.css("margin");
-		jWrapper = $("<div></div>").addClass("jWrapper").css({
-			display:'inline-block', 
-			position:jPage_position,
-			padding:-jPage_left,
-			paddingRight:-jPage_right,
-			paddingTop:-jPage_top,
-			paddingBottom:-jPage_bototm,
-			left:jPage_left,
-			right:jPage_right,
-			top:jPage_top,
-			bottom:jPage_bototm,
-			margin:jPage_margin
-		});
-		this.css({top:0, left:0, bottom:0, right:0, zIndex:2})
-
-		this.wrap(jWrapper);
-		for(var i=0, l=setting.pages; i<l; i++){
-			jPages[i] = $("<div>").addClass("jPages jPages"+i);
-			var deg = Math.random()*10-5;
-			this.after(jPages[i]);
-			jPages[i].css({
-				width:jPage_width, 
-				height:jPage_height, 
-				position:'absolute', 
-				transform:"rotate("+deg+"deg)", 
-				zIndex:1,
-				backgroundColor:jPage_color,
-				boxShadow:jPage_box_shadow
-			});
-			// if(jPage_position !== "absolute"){
-			// 	jPages[i].css({
-			// 		top:-jPage_height
-			// 	});
-			// }
 		}
-	}
+	});
 })(jQuery);
