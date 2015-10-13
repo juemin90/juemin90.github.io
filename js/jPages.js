@@ -38,7 +38,7 @@
 		for(var i=0, l=setting.pages; i<l; i++){
 			jPages[i] = $("<div>").addClass("jPages jPages"+i);
 			var deg = Math.random()*10-5;
-			this.before(jPages[i]);
+			this.after(jPages[i]);
 			jPages[i].css({
 				width:jPage_width, 
 				height:jPage_height, 
