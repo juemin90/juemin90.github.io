@@ -1,0 +1,110 @@
+<p>1. setTimeout()</p>
+
+<p>setTimeout()是window对象的一个方法，用来设定一个时间，时间到了就会去执行一个函数。</p>
+
+<p>最简单的一个例子：</p>
+
+<p>setTimeout(&quot;alert(&#39;3 seconds&#39;)&quot;, 3000); &nbsp;//网页开启3秒钟后，就会弹出一个alert。</p>
+<!-- more -->
+
+<p>setTimeout()经常是和function一起来使用。第一个参数就可以是要延迟执行的function。如果使用匿名函数，可以直接把参数放到匿名函数里面。如果使用的是外部定义的函数，setTimeout()的第三个参数就可以成为调用的函数的参数。</p>
+
+<p>&nbsp;</p>
+
+<ul>
+	<li>不断重复执行的setTimeout()</li>
+</ul>
+
+<p>setTimeout()函数预设只执行一次，但我们可以使用一个循环的方式，使到一个setTimeout()的时候再执行自己一次。就会使第一个执行第二个，第二个执行第三个，这样循环下去，setTimeout()函数就会不断地执行下去。</p>
+
+<p>例：每秒+1的函数</p>
+
+<p><code>var i=0;</code></p>
+
+<p><code>var call_sec = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; console.log(i++);</code></p>
+
+<p><code>&nbsp; &nbsp; setTimeout(call_sec, 1000);</code></p>
+
+<p><code>}</code></p>
+
+<ul>
+	<li>设定条件使setTimeout()停止</li>
+</ul>
+
+<p>setTimeout()循环开始后，就会不断的重复，在上一个例子中，我们可以设定一个条件来使数字到达某个大小之后，停止输出</p>
+
+<p><code>var i=0;</code></p>
+
+<p><code>var call_sec = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; if(i&lt;20){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; console.log(i++);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; setTimeout(call_sec, 1000);</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<ul>
+	<li>cleatTimeout()</li>
+</ul>
+
+<p>当一个setTimeout()循环开始之后，使用clearTimeout()函数就可以使它停下来。</p>
+
+<p>clearTimeout()有以下用法：clearTimeout(timeoutID)</p>
+
+<p>要使用clearTimeout()，我们就必须在设定setTimeout()的时候给与它一个名称，比如说var meter1 = setTimeout(&quot;count()&quot;, 1000);</p>
+
+<p>上面的例子可以写成：</p>
+
+<p>var i=0;</p>
+
+<p>var call_sec = function(){</p>
+
+<p>&nbsp; &nbsp; console.log(i++);</p>
+
+<p>&nbsp; &nbsp; var timer = setTimeout(call_sec, 1000);</p>
+
+<p>&nbsp; &nbsp; if(i&gt;=20){</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; clearTimeout(timer);</p>
+
+<p>&nbsp; &nbsp; &nbsp;}</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>2. setInterval()</p>
+
+<p>setInterval用于每隔一段时间执行一次函数，和setTimeout的区别就在于不用自定义循环。可以用clearInterval()来停止循环。</p>
+
+<p>参数和用法都合setTimeout()是一样的。不同的地方是setTimeout()预定是只执行一次，循环是用递归来做，clearTimeout应放在下面。</p>
+
+<p>而setInterval()预定就是循环，clearInterval要放在setInterval执行的函数里面。例如：</p>
+
+<p><code>var i=0, a = [1, 2, 3, 4]</code></p>
+
+<p><code>var call_sec = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; var timer = setInterval(function(){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; console.log(a[i++]);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; if(i&gt;=a.length){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; clearInterval(timer);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; }</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>用来停止循环的clearInterval也可以通过绑定事件（比如点击按钮等）来执行。反正不能和clearTimeout()一样，和setTimeout()上下摆放，那就先执行clearInterval了。</p>
+
+<p>&nbsp;</p>

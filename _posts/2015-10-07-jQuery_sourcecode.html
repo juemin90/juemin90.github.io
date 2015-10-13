@@ -1,0 +1,221 @@
+<p>(jquery.miaov.com)</p>
+
+<p>jQuery的整体的布局</p>
+
+<p>(21, 94) 定义了一些变量和函数，jQuery = function(){}</p>
+<!-- more -->
+
+<p>(96, 283) 给JQ对象添加了一些属性和方法</p>
+
+<p>(285,347) extend方法，jQuery的继承方法。既可以后续为jQuery添加静态方法，也可以用于jQuery插件的开发</p>
+
+<p>(348, 817) 使用extend方法为jQuery添加了静态方法，扩展工具方法&nbsp;</p>
+
+<p>(877，2856) Sizzle，复杂选择器的实现</p>
+
+<p>(2880, 3042) Callback，回调函数：对函数的统一管理</p>
+
+<p>(3043, 3183) Deferred，延迟对象：对异步的统一管理</p>
+
+<p>(3184, 3295) Support，功能检测：检测浏览器是否支持某些功能</p>
+
+<p>(3308, 3652) Data，数据缓存：存储数据，不是简单的放在对象的属性里，而是通过一系列的操作，避免大数据量的元素挂载、预防内存泄露</p>
+
+<p>(3653, 3797) queue/dequeeue，队列/出队</p>
+
+<p>(3803, 4299) attr(), prop(), val(), addClass()等：对元素属性的操作</p>
+
+<p>(4300, 5128) on(), trigger()等：事件操作的相关方法</p>
+
+<p>(5140, 6057) DOM操作：添加、删除、获取、包裹等</p>
+
+<p>(6058, 6620) css()方法：对样式的操作</p>
+
+<p>(6621, 7854) 提交的数据和ajax：ajax(), load(), getJson()等</p>
+
+<p>(7855, 8584) 运动的操作：例如animate(), show(), hide()等</p>
+
+<p>(8585, 8792) 位置与尺寸的方法：例如offset()，scrollTop()等</p>
+
+<p>(8804, 8821) jQuery支持模块化的支持</p>
+
+<p>(8826) 对外提供的借口：window.$ = window.jQuery = jQuery</p>
+
+<p>&nbsp;</p>
+
+<p>从头开始详细解释</p>
+
+<p>1. 匿名函数自执行</p>
+
+<p><code>(function(window, undefined){</code></p>
+
+<p><code>...</code></p>
+
+<p><code>)(window);</code></p>
+
+<p>1）不传入window参数其实也可以在匿名函数里面调用window。但是window是js作用域里最高级别的，所以每次调用window的时候花费比较长的事件，所以直接调用进去。</p>
+
+<p>第二个原因是在压缩jQuery的时候，匿名函数里面的window可以改成诸如w的变量名。实际上，jQuery的压缩（min）版本里，使用e作为window来使用。</p>
+
+<p>2）为什么 要传入undefined参数？</p>
+
+<p>undefined并不是一个保留字，在某些浏览器中，undefinedke可以被修改，被赋值。所以传入undefined可以防止被别人修改</p>
+
+<p>&nbsp;</p>
+
+<p>2.<code> jQuery = function(selector, context){</code></p>
+
+<p><code>&nbsp; &nbsp; return new jQuery.fn.init(selector, context, rootjQuery);</code></p>
+
+<p><code>}</code></p>
+
+<p>为什么要这样写？</p>
+
+<p>首先，jQuery.fn就是jQuery.prototype</p>
+
+<p>看一看我们一般写一个面向对象的程序的时候是怎么写的。</p>
+
+<p><code>function Aaa(){</code></p>
+
+<p><code>}</code></p>
+
+<p><code>Aaa.prototype.init = function(){</code></p>
+
+<p><code>}</code></p>
+
+<p><code>Aaa.prototype.css = function(){</code></p>
+
+<p><code>}</code></p>
+
+<p><code>var a1 = new Aaa();</code></p>
+
+<p><code>a1.init();</code></p>
+
+<p><code>a1.css();</code></p>
+
+<p>但是jQuery里面并没有这样做。</p>
+
+<p><code>function jQuery(){<br />
+}</code></p>
+
+<p><code>jQuery.prototype.init = function(){</code></p>
+
+<p><code>}</code></p>
+
+<p><code>jQuery.prototype.css=function(){</code></p>
+
+<p><code>}</code></p>
+
+<p>如果这样写，就无法达到jQuery里面jQuery().css()的这种写法，那么jQuery应该怎样写呢？</p>
+
+<p><code>function jQuery(){</code></p>
+
+<p><code>&nbsp; &nbsp; return new jQuery.prototype.init();</code></p>
+
+<p><code>}</code></p>
+
+<p><code>jQuery.prototype.init = function(){</code></p>
+
+<p><code>}</code></p>
+
+<p><code>jQuery.prototype.css = function(){</code></p>
+
+<p><code>}</code></p>
+
+<p><code>jQuery.prototype.init.prototype = jQuery.prototype;</code></p>
+
+<p>&nbsp;</p>
+
+<p>3.&nbsp;给JQ对象添加了一些属性和方法的格式</p>
+
+<p><code>jQuery.fn = jQuery.prototype = {</code></p>
+
+<p><code>&nbsp; &nbsp; jQuery:core_version,</code></p>
+
+<p><code>&nbsp; &nbsp; constructor:jQuery &nbsp;//{}里面的内容覆盖了jQuery的原型，constructor要重新赋值，否则会试Object</code></p>
+
+<p><code>&nbsp; &nbsp; ......</code></p>
+
+<p><code>}</code></p>
+
+<p>&nbsp;</p>
+
+<p>4. <code>jQuery.fn = jQuery.prototype = {</code></p>
+
+<p><code>&nbsp; &nbsp; ...</code></p>
+
+<p><code>&nbsp; &nbsp; ...</code></p>
+
+<p><code>&nbsp; &nbsp; init:function(selector, context, rootjQuery){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; ...</code></p>
+
+<p><code>&nbsp; &nbsp;}</code></p>
+
+<p><code>&nbsp; &nbsp;...</code></p>
+
+<p><code>}</code></p>
+
+<p>init方法：初始化和参数管理</p>
+
+<p>处理当selector, context, rootjQuery为各种值的情况下的处理方式</p>
+
+<p>&nbsp;</p>
+
+<p>5. <code>jQuery.fn = jQuery.prototype</code></p>
+
+<p><code>jQuery.fn.init.prototype = jQuery.fn</code></p>
+
+<p>&nbsp;</p>
+
+<p>6. extend，继承</p>
+
+<p>简化后的代码</p>
+
+<p><code>jQuery.extend = jQuery.fn.extend = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; 定义一些变量，例如</code></p>
+
+<p><code>&nbsp; &nbsp; if(){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; //看第一个值是否是布尔值，如果是布尔值，参数就往后延一个</code></p>
+
+<p><code>&nbsp; &nbsp; } &nbsp; &nbsp;//看是不是深拷贝的情况</code></p>
+
+<p><code>&nbsp; &nbsp; if(){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; //目标对象不是对象或者函数的时候，初始化为{}</code></p>
+
+<p><code>&nbsp; &nbsp; } &nbsp; &nbsp;//看参数是否正确</code></p>
+
+<p><code>&nbsp; &nbsp; if(){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; //如果只有一个参数，那就是插件的情况。把this值赋给target</code></p>
+
+<p><code>&nbsp; &nbsp; } &nbsp; &nbsp;//看是不是插件的情况</code></p>
+
+<p><code>&nbsp; &nbsp; for(){&nbsp; &nbsp;//可能有多个对象的情况</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; //判断后续的对象是否为null，如果是null，就没必要做操作</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; if(){} &nbsp; &nbsp;//防止循环利用</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //比如$.extend(true, a, {name:a})这种形式，a循环嵌套，导致never-endingn loop</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; if(){} &nbsp; &nbsp;//深拷贝</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//递归，往里继续复制</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; else{} &nbsp; &nbsp;//浅拷贝</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //target[name] = copy，就复制最外层，不管里面</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>

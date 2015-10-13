@@ -1,0 +1,337 @@
+<p>1. console.log(typeof []);</p>
+
+<p>object</p>
+
+<p>&nbsp;</p>
+<!-- more -->
+<p>2. dl dt dd的正确用法</p>
+
+<p>dl:definition list, dt:definition title, dd:definition description</p>
+
+<p>&nbsp;</p>
+
+<p>3. 写一个once函数，传入函数，使之只执行一次</p>
+
+<p>例如：</p>
+
+<p>var foo = function(){console.log(&quot;2&quot;);}</p>
+
+<p>once(foo()); //2</p>
+
+<p>once(foo()); //undefined</p>
+
+<p>&nbsp;</p>
+
+<p>我的答案：</p>
+
+<p><code>var once = function(fn){<br />
+&nbsp;&nbsp; &nbsp;if(fn.executed!=1){<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;fn.executed = 1;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return fn();<br />
+&nbsp;&nbsp; &nbsp;}<br />
+}</code></p>
+
+<p>4. 兼容所有浏览器的事件绑定方法</p>
+
+<p><code>var addEvent(ele, type, handler, useCapture){</code></p>
+
+<p><code>&nbsp; &nbsp; if(ele.addEventListener){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; ele.addEventListener(type, handler, useCapture);</code></p>
+
+<p><code>&nbsp; &nbsp; } else if(ele.attachEvent){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; ele.attachEvent(&quot;on&quot;+type, handler);</code></p>
+
+<p><code>&nbsp; &nbsp; } else {</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; ele[&quot;on&quot;+type] = handler;</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>&nbsp;</p>
+
+<p>5. 每1秒输出一个a=[1, 2, 3, 4]里的值</p>
+
+<p><code>var i=0, a = [1, 2, 3, 4];</code></p>
+
+<p><code>var call_arr = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; if(i&gt;=a.length)</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp;console.log(a[i++]);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp;setTimeout(call_arr, 1000);</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>&nbsp;</p>
+
+<p>或者可以使用clearTimeout()来停止输出</p>
+
+<p>&nbsp;</p>
+
+<p><code>var i=0, a = [1, 2, 3, 4];</code></p>
+
+<p><code>var call_arr = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; var timer = setTimeout(call_arr, 1000);</code></p>
+
+<p><code>&nbsp;&nbsp; &nbsp;if(i&gt;=a.length){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp;clearTimeout(timer);</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>也可以用setInterval()和clearInterval()来做。</p>
+
+<p><code>var i=0, a = [1, 2, 3, 4]</code></p>
+
+<p><code>var call_sec = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; var timer = setInterval(function(){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; console.log(a[i++]);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; if(i&gt;=a.length){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; clearInterval(timer);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; }</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>&nbsp;</p>
+
+<p>6. 解析url的参数</p>
+
+<p>url的一般形式为：http://domain(ip)/folder/filename?key=value&amp;key=value#id</p>
+
+<p>参数的形式为key=value，且第一个key前面有？符号，且每个键值对之间有&amp;，最后要么没有符号，要么也有诸如#的符号来结束键值对。</p>
+
+<p>所以可以用(\w+)=(\w+)的形式来做匹配。下面为example code.</p>
+
+<p><code>var url =&nbsp;&quot;<a href="http://127.0.0.1/e/action/ShowInfo.php?classid=9&amp;id=2" target="_blank">http://127.0.0.1/e/action/ShowInfo.php?classid=9&amp;id=2</a>&quot;,</code></p>
+
+<p><code>&nbsp; &nbsp; pattern = /(\w+)=(\w+)/ig,</code></p>
+
+<p><code>&nbsp; &nbsp; params = {};</code></p>
+
+<p><code>url.replace(pattern, function(a, b, c){</code></p>
+
+<p><code>&nbsp; &nbsp; params[b] = c;</code></p>
+
+<p><code>});</code></p>
+
+<p><code>console.log(params); &nbsp; //键值对的object</code></p>
+
+<p>&nbsp;</p>
+
+<p>7. 移动端开发中触发的事件有哪些</p>
+
+<p>大体来说有click, tap, touch三个事件</p>
+
+<ul>
+	<li>click和tap比较</li>
+</ul>
+
+<p>点击屏幕的时候会触发click和tap事件。但是在手机web端，click会有200~300ms的延迟。所以尽量使用tap。singleTap和doubleTap分别代表单击和双击</p>
+
+<ul>
+	<li>tap的点透处理</li>
+</ul>
+
+<p>在使用zepto的tap时会出现点透现象，即点击会触发非当前层的点击事件。可以为元素绑定touchEnd事件，并且在内部加上e.stopPropagation()方法，也就是停止冒泡。</p>
+
+<ul>
+	<li>touch事件的过程</li>
+</ul>
+
+<p>touchStart, touchMove, touchEnd, touchCancel等。</p>
+
+<p>&nbsp;</p>
+
+<p>8. 列举跨域的方法</p>
+
+<p>在下一个博客里详细介绍</p>
+
+<p>&nbsp;</p>
+
+<p>9.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>HTTP部分</p>
+
+<p>1. 知道的HTTP状态码有哪些？</p>
+
+<table>
+	<tbody>
+		<tr>
+			<th>消息1字头</th>
+			<th>成功2字头</th>
+			<th>重定向3字头</th>
+			<th>请求错误4字头</th>
+			<th>服务器错误5字头</th>
+		</tr>
+		<tr>
+			<td>100/Continue</td>
+			<td>200/OK</td>
+			<td>300/Multi choices</td>
+			<td>400/Bad request</td>
+			<td>500/Internal server error</td>
+		</tr>
+		<tr>
+			<td>101/Switching protocols</td>
+			<td>201/Created</td>
+			<td>301/Moved Permanently</td>
+			<td>401/Unauthorized</td>
+			<td>501/Not implemented</td>
+		</tr>
+		<tr>
+			<td>102/Processing</td>
+			<td>202/Accepted</td>
+			<td>302/Moved Temporarily</td>
+			<td>402/Payment required</td>
+			<td>502/Bad gateway</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>203/Non-authorized Information</td>
+			<td>303/See other</td>
+			<td>403/Forbidden</td>
+			<td>503/Service unavailable</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>204/No content</td>
+			<td>304/Not modified</td>
+			<td>404/Not found</td>
+			<td>504/Gateway timeout</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>205/Reset content</td>
+			<td>305/Use proxy</td>
+			<td>405/Method not allowed</td>
+			<td>505/HTTP version not supported</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>206/Partial content</td>
+			<td>306/Switch proxy</td>
+			<td>406/Not acceptable</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>207/Multi status</td>
+			<td>307/Temporary redirect</td>
+			<td>407/Proxy authentication required</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>408/Request timeout</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>409/Conflict</td>
+			<td>&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>2. 请求的种类有哪些？报头的内容有哪些？</p>
+
+<p>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法。也可以利用向Web服务器发送&#39;*&#39;的请求来测试服务器的功能性。&nbsp;</p>
+
+<p>HEAD：向服务器索要与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。&nbsp;</p>
+
+<p>GET：向特定的资源发出请求。&nbsp;</p>
+
+<p>POST：向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的创建和/或已有资源的修改。&nbsp;</p>
+
+<p>PUT：向指定资源位置上传其最新内容。&nbsp;</p>
+
+<p>DELETE：请求服务器删除Request-URI所标识的资源。&nbsp;</p>
+
+<p>TRACE：回显服务器收到的请求，主要用于测试或诊断。&nbsp;</p>
+
+<p>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</p>
+
+<p>虽然HTTP的请求方式有8种，但是我们在实际应用中常用的也就是get和post，其他请求方式也都可以通过这两种方式间接的来实现。</p>
+
+<p>&nbsp;</p>
+
+<p>3. GET和POST方法的区别？</p>
+
+<ul>
+	<li>GET用于信息的获取，是幂等的；POST用于修改服务器上的资源</li>
+	<li>GET请求的数据会附加在URL之后，比如?name=peter等；POST请求的数据会放置在是HTTP包的包体中</li>
+	<li>GET方式提交的数据最多是1024字节，POST方式没有限制</li>
+	<li>
+	<p>OST的安全性要比GET的安全性高。注意：这里所说的安全性和上面GET提到的&ldquo;安全&rdquo;不是同个概念。上面&ldquo;安全&rdquo;的含义仅仅是不作数据修改，而这里安全的含义是真正的Security的含义，比如：通过GET提交数据，用户名和密码将明文出现在URL上，因为(1)登录页面有可能被浏览器缓存，(2)其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，除此之外，使用GET提交数据还可能会造成Cross-site request forgery攻击</p>
+	</li>
+</ul>
+
+<p>总结一下，Get是向服务器发索取数据的一种请求，而Post是向服务器提交数据的一种请求，在FORM（表单）中，Method默认为&quot;GET&quot;，实质上，GET和POST只是发送机制不同，并不是一个取一个发！</p>
+
+<p>&nbsp;</p>
+
+<p>4. session和cookie的区别？</p>
+
+<ul>
+	<li>cookie数据存放在客户的浏览器上，session数据放在服务器上。</li>
+	<li>cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗。考虑到安全应当使用session。</li>
+	<li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能。考虑到减轻服务器性能方面，应当使用COOKIE。</li>
+	<li>单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。</li>
+</ul>
+
+<p>所以个人建议：</p>
+
+<ul>
+	<li>将登陆信息等重要信息存放为SESSION</li>
+	<li>其他信息如果需要保留，可以放在COOKIE中</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>附加题</p>
+
+<p>1. XSS是什么？XSS的种类有哪些？如何避免？</p>
+
+<p>2. CSFR是什么？</p>
+
+<p>&nbsp;</p>
+
+<p>面试中问的一些题目：</p>
+
+<p>1. localstorage和sessionstorage的区别、使用场景、容量限制</p>
+
+<p>2. jQuery使用过程当中的优化需要考虑哪些（选择器、遍历等等）</p>
+
+<p>3. IE里面捕获怎么实现？W3C标准是捕获还是冒泡？jQuery给一个DOM元素绑定多个on事件时，执行的顺序？</p>
+
+<p>4. 跨域里JSONP是如何实现的？共同约定的函数是何意？返回的数据格式是什么？</p>
+
+<p>5. http头的内容</p>
+
+<p>6. 利用chrome的开发者选项来进行性能的检测</p>
+
+<p>7. 设计一个转盘抽奖，如何实现交互？决定抽到什么奖需要在客户端还是服务器端决定？向服务器端请求最后结果是在用户点击的时候，还是转盘转完了的时候？</p>

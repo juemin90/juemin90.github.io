@@ -1,0 +1,186 @@
+<p>转自（https://developer.chrome.com/devtools）</p>
+
+<p>The Chrome Developer Tools (DevTools for short), are a set of web authoring and debugging tools built into Google Chrome. The DevTools provide web developers deep access into the internals of the browser and their web application. Use the DevTools to efficiently track down layout issues, set JavaScript breakpoints, and get insights for code optimization.</p>
+
+<p>The DevTools docs have moved!For the latest tutorials, docs and updates&nbsp;<a href="https://developers.google.com/web/tools/chrome-devtools">head over to the new home of Chrome DevTools</a>.</p>
+
+<p>Accessing the DevTools</p>
+
+<p>To access the DevTools, open a web page or web app in Google Chrome. Either:</p>
+
+<ul>
+	<li>Select the&nbsp;<strong>Chrome menu</strong>&nbsp;<img alt="Chrome Menu" src="https://developer.chrome.com/devtools/images/chrome-menu.png" style="margin:0px" />&nbsp;at the top-right of your browser window, then select&nbsp;<strong>Tools</strong>&nbsp;&gt;&nbsp;<strong>Developer Tools</strong>.</li>
+	<li>Right-click on any page element and select&nbsp;<strong>Inspect Element</strong>.</li>
+</ul>
+
+<p>The DevTools window will open at the bottom of your Chrome browser.</p>
+
+<p>There are several useful shortcuts for opening the DevTools:</p>
+
+<ul>
+	<li>Use&nbsp;<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>&nbsp;(or&nbsp;<kbd>Cmd</kbd>+<kbd>Opt</kbd>+<kbd>I</kbd>&nbsp;on Mac) to open the DevTools.</li>
+	<li>Use&nbsp;<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd>&nbsp;(or&nbsp;<kbd>Cmd</kbd>+<kbd>Opt</kbd>+<kbd>J</kbd>&nbsp;on Mac) to open the DevTools and bring focus to the Console.</li>
+	<li>Use&nbsp;<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>&nbsp;(or&nbsp;<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>&nbsp;on Mac) to open the DevTools in Inspect Element mode, or toggle Inspect Element mode if the DevTools are already open.</li>
+</ul>
+
+<p>For your day-to-day workflow,&nbsp;<a href="https://developer.chrome.com/devtools/docs/shortcuts">learning the shortcuts</a>&nbsp;will save you time.</p>
+
+<p>The DevTools window</p>
+
+<p>The DevTools are organised into task-oriented groups in the toolbar at the top of the window. Each toolbar item and corresponding panel let you work with a specific type of page or app information, including&nbsp;DOMelements, resources, and sources.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/devtools-window.png" style="margin:1em 0px" /></p>
+
+<p>The colorpicker available in the DevTools..</p>
+
+<p>Overall, there are eight main groups of tools available view Developer Tools:</p>
+
+<p>&nbsp;</p>
+
+<ul>
+	<li><a href="https://developer.chrome.com/devtools/docs/dom-and-styles">Elements</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/resource-panel">Resources</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/network">Network</a></li>
+	<li>Sources</li>
+	<li><a href="https://developer.chrome.com/devtools/docs/timeline">Timeline</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/profiles">Profiles</a></li>
+	<li>Audits</li>
+	<li><a href="https://developer.chrome.com/devtools/docs/console">Console</a></li>
+</ul>
+
+<p>You can use the&nbsp;<kbd><kbd>Ctrl</kbd>+<kbd>[</kbd></kbd>&nbsp;and&nbsp;<kbd><kbd>Ctrl</kbd>+<kbd>]</kbd></kbd>&nbsp;shortcuts to move between panels.</p>
+
+<p>Inspecting the DOM and styles</p>
+
+<p>The&nbsp;<strong><a href="https://developer.chrome.com/devtools/docs/dom-and-styles">Elements</a></strong>&nbsp;panel lets you see everything in one DOM tree, and allows inspection and on-the-fly editing of DOM elements. You will often visit the Elements tabs when you need to identify the&nbsp;HTML&nbsp;snippet for some aspect of the page. For example, you may be curious if an image has an HTML id attribute and what the value is.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/elements-panel.png" style="margin:1em 0px" /></p>
+
+<p>Viewing a heading element in the DOM.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/dom-and-styles">Read more about inspecting the DOM and styles</a></p>
+
+<p>Working with the Console</p>
+
+<p>The&nbsp;<a href="https://developer.chrome.com/devtools/docs/console">JavaScript Console</a>&nbsp;provides two primary functions for developers testing web pages and applications. It is a place to:</p>
+
+<ul>
+	<li>Log diagnostic information in the development process.</li>
+	<li>A shell prompt which can be used to interact with the document and DevTools.</li>
+</ul>
+
+<p>You may log diagnostic information using methods provided by the&nbsp;<a href="https://developer.chrome.com/devtools/docs/console-api">Console&nbsp;API</a>. Such as&nbsp;<a href="https://developer.chrome.com/devtools/docs/console-api#consolelogobject-object">console.log()</a>&nbsp;or<a href="https://developer.chrome.com/devtools/docs/console-api#consoleprofilelabel">console.profile()</a>.</p>
+
+<p>You can evaluate expressions directly in the console and use the methods provided by the&nbsp;<a href="https://developer.chrome.com/devtools/docs/commandline-api">Command Line API</a>. These include&nbsp;<a href="https://developer.chrome.com/devtools/docs/commandline-api#selector">$()</a>&nbsp;command for selecting elements or&nbsp;<a href="https://developer.chrome.com/devtools/docs/commandline-api#profilename">profile()</a>&nbsp;to start the&nbsp;CPU&nbsp;profiler.</p>
+
+<p><img src="https://developer.chrome.com/devtools/docs/console-files/expression-evaluation.png" style="margin:1em 0px" /></p>
+
+<p>Evaluating some commands in the&nbsp;JS&nbsp;Console.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/console">Read more about working with the console</a></p>
+
+<h2>Debugging JavaScript</h2>
+
+<p>As the&nbsp;<strong>complexity</strong>&nbsp;of JavaScript applications increase, developers need powerful debugging tools to help quickly discover the cause of an issue and fix it efficiently. The Chrome DevTools include a number of useful tools to help make&nbsp;<strong>debugging</strong>&nbsp;JavaScript less painful.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/js-debugging.png" style="margin:1em 0px" /></p>
+
+<p>A conditonal breakpoint which logs to the console.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/javascript-debugging">Read more about how to debug JavaScript with the DevTools &raquo;</a></p>
+
+<p>Improving network performance</p>
+
+<p>The&nbsp;<strong>Network</strong>&nbsp;panel provides insights into resources that are requested and downloaded over the network in real time. Identifying and addressing those requests taking longer than expected is an essential step in optimizing your page.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/network-panel.png" style="margin:1em 0px" /></p>
+
+<p>The context menu for network requests.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/network">Read more about how to improve your network performance &raquo;</a></p>
+
+<p>Audits</p>
+
+<p>The Audit panel can analyze a page as it loads. Then provides suggestions and optimizations for decreasing page load time and increase perceived (and real) responsiveness. For further insight, we recommend using<a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a>.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/audits-panel.png" style="margin:0px" /></p>
+
+<p>The recommendations of an audit.</p>
+
+<p>Improving rendering performance</p>
+
+<p>The&nbsp;<strong>Timeline</strong>&nbsp;panel gives you a complete overview of where time is spent when loading and using your web app or page. All events, from loading resources to parsing JavaScript, calculating styles, and repainting are plotted on a timeline.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/timeline-panel.png" style="margin:1em 0px" /></p>
+
+<p>An example timeline with various events.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/timeline">Read more about how to improve rendering performance &raquo;</a></p>
+
+<p>JavaScript &amp;&nbsp;CSS&nbsp;performance</p>
+
+<p>The&nbsp;<strong>Profiles</strong>&nbsp;panel lets you profile the execution time and memory usage of a web app or page. These help you to understand where resources are being spent, and so help you to optimize your code. The provided profilers are:</p>
+
+<ul>
+	<li>The&nbsp;<strong>CPU profiler</strong>&nbsp;shows where execution time is spent in your page&#39;s JavaScript functions.</li>
+	<li>The&nbsp;<strong>Heap profiler</strong>&nbsp;shows memory distribution by your page&#39;s JavaScript objects and related DOM nodes.</li>
+	<li>The&nbsp;<strong>JavaScript</strong>&nbsp;profile shows where execution time is spent in your scripts</li>
+</ul>
+
+<p><img src="https://developer.chrome.com/devtools/images/profiles-panel.png" style="margin:1em 0px" /></p>
+
+<p>An example heap snapshot.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/profiles">Read more about using how to improve JavaScript and CSS performance &raquo;</a></p>
+
+<p>Inspecting storage</p>
+
+<p>The&nbsp;<strong>Resources</strong>&nbsp;panel lets you inspect resources that are loaded in the inspected page. It lets you interact with HTML5 Database, Local Storage, Cookies, AppCache, etc.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/resources-panel.png" style="margin:1em 0px" /></p>
+
+<p>The JavaScript file of the&nbsp;<a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a>&nbsp;as displayed in the resources panel.</p>
+
+<p><a href="https://developer.chrome.com/devtools/docs/resource-panel">Read more about inspecting storage resources &raquo;</a></p>
+
+<p>Further reading</p>
+
+<p>There are several other areas of the DevTools documentation that you might find beneficial to review. These include:</p>
+
+<ul>
+	<li><a href="https://developer.chrome.com/devtools/docs/heap-profiling">Heap Profiling</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/cpu-profiling">CPU Profiling</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/device-mode">Device Mode &amp; Mobile Emulation</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/remote-debugging">Remote Debugging</a></li>
+	<li><a href="https://developer.chrome.com/devtools/docs/videos">DevTools Videos</a></li>
+</ul>
+
+<h2>Further resources</h2>
+
+<p>Get more</p>
+
+<p>You can also follow us on&nbsp;<a href="http://twitter.com/ChromiumDev">@ChromiumDev</a>&nbsp;or ask a question using the&nbsp;<a href="https://groups.google.com/forum/?fromgroups#!forum/google-chrome-developer-tools">forums</a>.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/image13.png" style="margin:1em 0px" /></p>
+
+<p>Styled output in the console.</p>
+
+<p>Be sure to checkout the Google Chrome Developers page on&nbsp;<a href="https://plus.google.com/+GoogleChromeDevelopers/posts">Google+</a>.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/chrome-devs-gplus.png" style="margin:1em 0px" /></p>
+
+<p>Get involved</p>
+
+<p>To submit a bug or a feature request on DevTools, please use issue tracker at&nbsp;<a href="http://crbug.com/">http://crbug.com</a>. Please also mention &quot;DevTools&quot; in the bug summary.</p>
+
+<p><img src="https://developer.chrome.com/devtools/images/crbug.png" style="margin:1em 0px" /></p>
+
+<p><a href="http://crbug.com/">crbug.com</a>&#39;s bug report category selector.</p>
+
+<p>Anyone can also help make the DevTools better by directly&nbsp;<a href="https://developer.chrome.com/devtools/docs/contributing">contributing</a>&nbsp;back to the source.</p>
+
+<p>Debugging Extensions</p>
+
+<p>Looking to use the DevTools to debug Chrome extensions? Watch&nbsp;<a href="http://www.youtube.com/watch?v=IP0nMv_NI1s">Developing and Debugging extensions</a>. A<a href="https://developer.chrome.com/extensions/tut_debugging">Debugging</a>&nbsp;tutorial is also available.</p>
+
+<p>Content available under the&nbsp;<a href="http://creativecommons.org/licenses/by/3.0/">CC-By 3.0 license</a></p>

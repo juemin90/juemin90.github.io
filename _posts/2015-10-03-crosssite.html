@@ -1,0 +1,115 @@
+<p>跨域的定义：JavaScript出于安全性的考虑，同源策略机制对跨域访问做了限制。域仅仅是通过&ldquo;URL的首部&rdquo;来进行识别。URL的首部指的是window.location.protocol+window.location.host，也可以理解为domain, protocol, ports必须相同，只要有一个不同，都被当作是跨域。</p>
+
+<p>&nbsp;</p>
+
+<p>基于上述的同源策略，我们可以有两种方式来实现跨域的访问。</p>
+
+<p>第一种方法是构成同域，认为将其通信双方设置为同一域名下。</p>
+
+<p>第二种方法是规避跨域，使用iframe或者动态脚本、其他页面公公对象属性来传值通信。</p>
+
+<p>1. 使用document.domain和iframe实现。</p>
+
+<p>对于主域名相同，耳机子域名不同的情况，可以使用document.domain重置为相同的一级域名。主域名是不带www的域名，某一页面的domain默认等于window.location.hostname，这样设置扩大了同域的范围。如此便可互相通信。</p>
+
+<p>例子：www.mydomain.com上的a.html</p>
+
+<p><code>document.domain = &#39;domain.com&#39;;</code></p>
+
+<p><code>var ifr = document.createElement(&#39;iframe&#39;);</code></p>
+
+<p><code>ifr.src = &#39;http://game.mydomain.com/b.html&#39;;</code></p>
+
+<p><code>ifr.style.display = &#39;none&#39;;</code></p>
+
+<p><code>document.body.appendChild(ifr);</code></p>
+
+<p><code>ifr.onload = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; var doc = ifr.contentDocument || ifr.contentWindow.document;</code></p>
+
+<p><code>&nbsp; &nbsp; //在这里操纵b.html</code></p>
+
+<p><code>&nbsp; &nbsp; alert(doc.getElementsByTagName(&quot;h1&quot;)[0].childNodes[0].nodeValue);</code></p>
+
+<p><code>};</code></p>
+
+<p>game.mydomain.com上的b.html</p>
+
+<p><code>document.domain = &#39;mydomain.com&#39;;</code></p>
+
+<p>这种方法扩大了安全性的存在范围，两个域名下都有可能出现安全隐患，若一个页面中引入多个iframe需要跨子域名通信，要想能够操作所有iframe，需要全部设置相同的domain。</p>
+
+<p>2. 动态创建script</p>
+
+<p>虽然浏览器默认进制了跨域的访问，但是并不禁止访问其他域的js文件，并且可以自由的执行JS中的function。根据这个策略，可以方便的通过创建script节点的方法来实现完全跨域的通信。</p>
+
+<p><code>js.onload = js.onreadystatechange = function(){</code></p>
+
+<p><code>&nbsp; &nbsp; if(!this.readyState! || this.readyState === &#39;loaded&#39; || this.readyState === &#39;completed&#39;){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; //callback在这里执行</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; js.onload = js.onreadystatechange = null;</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>}</code></p>
+
+<p>3. 利用iframe和location.hash</p>
+
+<p>location.hash是可读写的字符串，该字符串是URL的#以后的部分。在url:&quot;www.a.com#helloworld&quot;里，#helloworld就是window.location.hash，改变hash并不会刷新页面，所以可以利用hash来传值。当然，数据容量是有限的。假设a.com下的cs1.html要喝cnblog.com下的cs2.html传递信息，cs1先创建一个隐藏的iframe，iframe的src指向cnblog.com下的cs2.html，这时hash就可以做参数来传递。</p>
+
+<p>4. window.name来实现</p>
+
+<p>window.name 在浏览器环境中是一个全局/window对象的属性，且当在 frame 中加载新页面时，name 的属性值依旧保持不变。<br />
+通过在 iframe 中加载一个资源，该目标页面将设置 frame 的 name 属性。此 name 属性值可被获取到，以访问 Web 服务发送的信息。<br />
+但 name 属性仅对相同域名的 frame 可访问。这意味着为了访问 name 属性，当远程 Web 服务页面被加载后，必须导航 frame 回到原始域。同源策略依旧防止其他 frame 访问 name 属性。一旦 name 属性获得，销毁 frame 。</p>
+
+<p>原理核心：window对象的name属性是一个很特别的属性，当该window的location变化，然后重新加载，它的name属性可以依然保持不变。<br />
+依此原理，我们可以在页面A中用iframe加载其他域的页面B，而页面B中用JavaScript把需要传递的数据赋值给 window.name，页面A的iframe加载完成之后，页面A修改iframe的地址，将其变成同域的一个地址，然后就可以读出window.name的值了。</p>
+
+<p>&nbsp;</p>
+
+<p>5. JSONP</p>
+
+<p>在javascript中，我们用XMLHttpRequest来请求不同域里面的数据，是不可以的。但是在页面里载入不同域的js文件是可以的。jsonp正是利用这个特性来实现的。</p>
+
+<p>比如，有个a.html页面，它需要用ajax来获取不同域的json数据，假设这个json数据的地址是http://example.com/data.php，那么a.html的js文件可以是这样。</p>
+<!-- more -->
+
+<p>&nbsp;</p>
+
+<p>我们看到获取数据的地址后面还有callback的参数，按惯例是用这个名字，但是也可以使用其他的名字。当提供数据的页面不是自己可以控制的情况下，必须使用提供数据的那一方的规定来执行。</p>
+
+<p>因为是当做js来引用的，所以该php文件需要返回可执行的js文件，所以这个php页面可能是这样的。</p>
+
+<p><!--?php</p--></p>
+
+<p>&nbsp;</p>
+
+<p><code><code>&nbsp; $callback = $_GET[&#39;callback&#39;];</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; $data = array(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;);</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; echo $callback.&#39;(&#39;.json_encode($data).&#39;)&#39; //输出</code></code></p>
+
+<p><code><code>?&gt;</code></code></p>
+
+<p><code>最终那个页面输出的是doSomething([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</code></p>
+
+<p><code>所以通过http://example.com/data.php?callback=dosomething获得的js文件，就是我们之前定义的dosomething函数，参数就是我们跨域获取的json数据。这样我们就跨域获取到了我们需要的数据。</code></p>
+
+<p><code>这样jsonp的原理就很清楚了，通过script标签引入一个js文件，这个js文件成功载入之后，会执行我们在url中指定的函数，并且会把我们需要的json数据作为参数传入，所以jsonp是需要服务器端的页面来配合使用的。</code></p>
+
+<p><code>如果使用jquery，那么就可以更轻松的进行jsonp操作了。</code></p>
+
+<p><code><code>$getJSON(&quot;http://example.com?data.php?callback=?&quot;, function(){</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; //处理获得的json数据</code></code></p>
+
+<p><code><code>}</code></code></p>
+
+<p><code>原理是一样的，只不过我们不需要手动的插入script标签以及定义回调函数。jquery会自动生成一个全局函数来替换callback=?中的问号，之后获取到数据后又会自动销毁，实际上就是起一个临时代理函数的作用。$.getJSON方法会自动判断是否跨域，不跨域的话，就调用普通的ajax方法；跨域的话，则会以异步加载js文件的形式来调用jsonp的回调函数。</code></p>
+
+<p><code>&nbsp;</code></p>
