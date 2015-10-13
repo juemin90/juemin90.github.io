@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href="http://vjs.zencdn.net/5.0.0/video-js.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/public.css"/>
     <title>卢珏玟的博客</title>  
     <script>
@@ -71,7 +72,18 @@
                             <ul>
                                 <li>适配于移动端；利用HTML5的geolocation配合google map api实现好友间的位置实时共享</li>
                                 <li>Java后端语言、JavaScript（jQuery）前端语言、Bootstrap作为UI框架、Tomcat服务器</li>
+
                             </ul>
+                            <div class="container" id="video">
+                            <video id="my-video" class="video-js" controls preload="auto" width="480" height="640" data-setup="{}">
+                                <source src="../im/video.mp4" type="video/mp4">
+                                <p class="vjs-no-js">
+                                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                </p>
+                            </video>
+                                
+                            </div>
                         </li>
                     </ol>
                     <hr/>
@@ -94,6 +106,7 @@
 <footer>
     <a href="http://www.juemin.win">卢珏玟的个人网站</a>©2015 -
 </footer>
+<script src="http://vjs.zencdn.net/5.0.0/video.js"></script>
 <script src="/js/app.js"></script> 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
