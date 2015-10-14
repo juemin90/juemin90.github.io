@@ -65,14 +65,10 @@ title: 卢珏玟的博客
           <ul class="pager">
             {% if paginator.previous_page %}
             <li><a href="{{ paginator.previous_page_path }}">Previous</a></li>
-             {% else %}
-             <span class="previous">Previous</span>
               {% endif %}
               <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
                {% if paginator.next_page %}
             <li><a href="{{ paginator.next_page_path }}">Next</a></li>
-            {% else %}
-            <span class="next ">Next</span>
           {% endif %}
           </ul>
         </nav>        
