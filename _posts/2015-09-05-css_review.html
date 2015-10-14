@@ -1,0 +1,180 @@
+---
+layout: default
+title: 一套面试题
+theme: study
+---
+<p>CSS很简单，但又很难，因为琐碎的东西太多，用的不多就忘了。现在需要一个温故而知新的过程。</p>
+
+<p>1. box-sizing</p>
+
+<p>先说说盒子模型。</p>
+
+<p>在一般的浏览器中（如chrome, firefox, safari等），CSS2.1以后的版本规定我们在CSS里设置的width和height只是content的宽度和高度，而这个元素真正在页面中占据的大小则是宽度=左外边距+左边框+左内边距+元素宽度+右内边距+右边框+右外边距，高度同理。</p>
+
+<p>而过去（如CSS2.1之前版本或者IE6等），CSS里设置的width则是边框（border）+内边距（padding）+元素宽度的和。</p>
+<!-- more -->
+<p>box-sizing可以在两种模式间进行切换。</p>
+
+<p>box-sizing</p>
+
+<p>值为content-box时，这是由 CSS2.1 规定的宽度高度行为。宽度和高度分别应用到元素的内容框。在宽度和高度之外绘制元素的内边距和边框。</p>
+
+<p>值为border-box时，为元素设定的宽度和高度决定了元素的边框盒。就是说，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。</p>
+
+<p>值为inherit时，继承父元素的值。</p>
+
+<p>&nbsp;</p>
+
+<p>2. 清除浮动的技巧</p>
+
+<ol>
+	<li>使用clearfix（即:after伪元素加上clear:both的content）
+	<pre>
+<code>.clearfix:after { 
+content: &quot;.&quot;;
+display: block;
+height: 0;
+clear: both;
+visibility: hidden; 
+} </code></pre>
+	</li>
+	<li>父元素也浮动</li>
+	<li>父元素加上overflow:hidden;</li>
+</ol>
+
+<p>还有一些比较trick的方法</p>
+
+<p>首先给父元素加上.clearfix的class</p>
+
+<p>然后在CSS中：</p>
+
+<p>.clearfix{ overflow:auto; _height:1%;}</p>
+
+<p>或者</p>
+
+<p>.clearfix{ overflow:hidden; _zoom:1}</p>
+
+<p>说实话不知道为什么可以这样用</p>
+
+<p>&nbsp;</p>
+
+<p>3. after伪元素</p>
+
+<p>after伪元素顾名思义，就是元素后面的意思，实质是在元素后面添加内容。</p>
+
+<p>这个伪元素允许制作人员在元素内容的最后面插入生成内容，需要和content一起使用，设置在对象后发生的内容。默认地，这个伪元素是一个inline的行内元素，不过可以使用display属性来改变这个属性。</p>
+
+<p>&nbsp;</p>
+
+<p>4. link和import的区别</p>
+
+<p>区别1：link是XHTML标签，除了加载CSS外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS。</p>
+
+<p>区别2：link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载。</p>
+
+<p>区别3：link是XHTML标签，无兼容问题；@import是在CSS2.1提出的，低版本的浏览器不支持。</p>
+
+<p>区别4：ink支持使用Javascript控制DOM去改变样式；而@import不支持。</p>
+
+<p>&nbsp;</p>
+
+<p>5.&nbsp;你做的页面在哪些流览器测试过？这些浏览器的内核分别是什么?</p>
+
+<ul>
+	<li>&nbsp;IE:&nbsp;trident内核</li>
+	<li>&nbsp;Firefox：gecko内核</li>
+	<li>&nbsp;Safari:webkit内核</li>
+	<li>&nbsp;Opera:以前是presto内核，Opera现已改用Google Chrome的Blink内核</li>
+	<li>&nbsp;Chrome:Blink</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>6. display属性</p>
+
+<p>常用的display属性有：inline, block, inline-block, none。</p>
+
+<p>把display设置为none不会保留元素本该显示的空间，但是visible:hidden还是会保留。</p>
+
+<ul>
+	<li>inline</li>
+</ul>
+
+<p>给inline元素设置width和height没有用，致使它变宽变高的因素有：内部元素的宽高+padding。inline元素不单独占据一行，其他元素会紧随其后。</p>
+
+<ul>
+	<li>block</li>
+</ul>
+
+<p>block元素是可以设置width和height的，但是它的实际宽高是本身宽高+padding。block元素单独占据一行。</p>
+
+<ul>
+	<li>inline-block</li>
+</ul>
+
+<p>当我们既需要div有宽高，又想它不单独占据一行的时候，可以使用。</p>
+
+<p>&nbsp;</p>
+
+<p>7. 伪类</p>
+
+<p>:active &nbsp; &nbsp;将样式添加到被激活的元素</p>
+
+<p>:focus &nbsp; &nbsp;将样式添加到被选择的元素</p>
+
+<p>:hover &nbsp; &nbsp;当鼠标悬浮在元素上方时，向元素添加样式</p>
+
+<p>:link &nbsp; &nbsp;将特殊的样式添加到未被访问过的链接</p>
+
+<p>:visited &nbsp; &nbsp;将特殊的样式添加到被访问过的链接</p>
+
+<p>:first-child &nbsp; &nbsp;将特殊的样式添加到元素的第一个元素</p>
+
+<p>:lang &nbsp; &nbsp;允许创作者来定义指定的元素中使用的语言</p>
+
+<p>&nbsp;</p>
+
+<p>8. 伪元素</p>
+
+<p>:first-letter &nbsp; &nbsp;将特殊的样式添加到文本的首字母</p>
+
+<p>:first-line &nbsp; &nbsp;将特殊的样式添加到文本的首行</p>
+
+<p>:before &nbsp; &nbsp;在某元素之前插入某些内容</p>
+
+<p>:after &nbsp; &nbsp;在某元素之后插入某些内容</p>
+
+<p>&nbsp;</p>
+
+<p>9. CSS3的新特性</p>
+
+<pre>
+<code>CSS3实现圆角（border-radius:8px）
+阴影（box-shadow:10px）
+对文字加特效（text-shadow、）
+线性渐变（gradient）
+旋转（transform）  transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px) skew(-9deg,0deg);//旋转,缩放,定位,倾斜  
+增加了更多的CSS选择器  
+多背景 rgba </code></pre>
+
+<p>&nbsp;</p>
+
+<p>10. border:none和border:0的区别</p>
+
+<p>把border设为0虽然在页面中无法看见，浏览器依旧对border进行了渲染，即已经占用了内存值。</p>
+
+<p>把border设为none即没有，浏览器解析none的时候不会做出渲染的动作，不会消耗内存值。</p>
+
+<p>&nbsp;</p>
+
+<p>11. CSS里单冒号和双冒号的区别</p>
+
+<p>简朴的说，区别在于：单冒号(:)用于CSS3伪类，双冒号(::)用于CSS3伪元素。</p>
+
+<p>成都网站建设技能职员学习CSS乃至是纯熟的成手，遇到这个题目也渺茫，那么二者毕竟有什么区别那？</p>
+
+<p>伪元素由双冒号和伪元素名称构成。双冒号是在当前范例中引入的，用于区分伪类和伪元素。但是伪类兼容现存样式，欣赏器必要同时支持旧的伪类，好比:first-line、:first-letter、:before、:after等。</p>
+
+<p>那么如今就可以完备的答复标题中的题目了，对付CSS2之前已有的伪元素，好比:before，单冒号和双冒号的写法::before作用是一样的。</p>
+
+<p>以是，要是你的网站只必要兼容webkit、firefox、opera等欣赏器，发起对付伪元素接纳双冒号的写法，要是不得不兼容IE欣赏器，照旧用CSS2的单冒号写法比力宁静。</p>

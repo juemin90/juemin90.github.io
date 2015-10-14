@@ -1,7 +1,7 @@
 ---
 layout: default
-title: 做一套笔试题，温故而知新
-theme: life
+title: 一些题目
+theme: study
 ---
 <p>1. 如何实现左右宽度固定，中间自适应的三列布局。</p>
 <p>div:</p>
@@ -9,6 +9,7 @@ theme: life
 <p><code>&lt;div class='right'&gt;&lt;&gt;</code></p>
 <p><code>&lt;div class='center'&gt;&lt;&gt;</code></p>
 <p>css:</p>
+<!-- more -->
 <p><code>div {</code></p>
 <p><code>height:400px;</code></p>
 <p><code>}</code></p>
@@ -25,4 +26,180 @@ theme: life
 <p><code>}</code></p>
 <p>这里重要的是div的顺序写成左右中，而不是左中右</p>
 <p></p>
-<p>2. </p>
+<p>2. 检测一个变量是否是字符串的方法</p>
+
+<p>var a = &quot;abc&quot;;</p>
+
+<p>1. typeof a //string</p>
+
+<p>2. a.constructor //String()</p>
+
+<p>&nbsp;</p>
+
+<p>3.&nbsp;如何控制alert中的换行</p>
+
+<p>\n</p>
+
+<p>alert(&ldquo;p\np&rdquo;);</p>
+
+<p>&nbsp;</p>
+
+<p>4.&nbsp;JavaScript中如何对一个对象进行深度clone</p>
+
+<p><code>function cloneObject(o)</code></p>
+
+<p><code>{</code></p>
+
+<p><code>&nbsp; if(!o || &#39;object&#39; !== typeof o)&nbsp; &nbsp;{</code></p>
+
+<p><code>&nbsp; &nbsp;return o; </code></p>
+
+<p><code>&nbsp; }</code></p>
+
+<p><code>&nbsp; varc = &#39;function&#39; === typeof o.pop ? [] : {}; varp, v; for(p in o)&nbsp; {</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp;if(o.hasOwnProperty(p))&nbsp; &nbsp;&nbsp;&nbsp;{&nbsp; &nbsp;&nbsp; &nbsp;</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; v = o[p];&nbsp; &nbsp;&nbsp; &nbsp;</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; if(v &amp;&amp; &#39;object&#39; ===typeof v){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c[p] = Ext.ux.clone(v);</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}&nbsp;else&nbsp;{</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c[p] = v;&nbsp; &nbsp;&nbsp;&nbsp;　</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+&nbsp; &nbsp; 　}<br />
+　}<br />
+&nbsp; &nbsp;return c;</code></p>
+
+<p><code>};</code></p>
+
+<p>5.&nbsp;前端开发的优化问题</p>
+
+<p>(1) 减少http请求次数：cssspirit,data uri　　</p>
+
+<p>(2) JS，CSS源码压缩</p>
+
+<p>(3) 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数</p>
+
+<p>(4) 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能</p>
+
+<p>(5) 用setTimeout来避免页面失去响应</p>
+
+<p>(6) 用hash-table来优化查找</p>
+
+<p>(7) 当需要设置的样式很多时设置className而不是直接操作style</p>
+
+<p>(8) 少用全局变量</p>
+
+<p>(9) 缓存DOM节点查找的结果</p>
+
+<p>(10) 避免使用CSSExpression　　</p>
+
+<p>(11) 图片预载</p>
+
+<p>(12) 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢</p>
+
+<p>&nbsp;</p>
+
+<p>6.&nbsp;如何控制网页在网络传输过程中的数据量</p>
+
+<p>启用GZIP压缩</p>
+
+<p>保持良好的编程习惯，避免重复的CSS，JavaScript代码，多余的HTML标签和属性</p>
+
+<p>&nbsp;</p>
+
+<p>7.&nbsp;setTimeout</p>
+
+<p><code>var t = true;</code></p>
+
+<p><code>setTimeout(function(){</code></p>
+
+<p><code>&nbsp; &nbsp; t = false;</code></p>
+
+<p><code>}, 1000);</code></p>
+
+<p><code>while(t){}</code></p>
+
+<p><code>alert(&quot;end&quot;);</code></p>
+
+<p>在这里是先执行while语句的，因为t设成true，所以setTimeout()函数没机会执行，t永远都是true。</p>
+
+<p>&nbsp;</p>
+
+<p>8. 请解读一下javascript代码，并之处问题所在</p>
+
+<p>var Obj=function(msg){this.msg=msg;</p>
+
+<p>&nbsp; &nbsp; this.shout=function(){</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; alert(this.msg);</p>
+
+<p>&nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; this.waitAndShout=function(){</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; setTimeout(this.shout, 2000);</p>
+
+<p>&nbsp; &nbsp; }<br />
+}<br />
+var aa=new Obj(&quot;abc&quot;);<br />
+aa.waitAndShout();</p>
+
+<p>因为setTimeout和setInterval是window对象下的方法，相当于window.setTimeout()，所以在这里this指向window对象，而不是obj对象，所以没有shout属性。</p>
+
+<p>&nbsp;</p>
+
+<p>9. jQuery里判断type的方法($.type()源码）</p>
+
+<p>Object.prototype.toString.call(obj);会返回[object type]格式的string，jQuery 巧妙的将类型存入到数组class2type中，然后用class2type[[object&nbsp;Boolean]]&nbsp;=&nbsp;&quot;boolean&quot; 就可以判断类型。</p>
+
+<p>&nbsp;</p>
+
+<p>10. 写出下列代码输出的结果</p>
+
+<p>Var obj={};</p>
+
+<p>Var ref=obj;</p>
+
+<p>obj.name=&quot;objectA&quot;;</p>
+
+<p>obj=[&quot;one&quot;,&quot;two&quot;,&quot;three&quot;];</p>
+
+<p>console.log(ref.name);</p>
+
+<p>console.log(ref.length);</p>
+
+<p>&nbsp;</p>
+
+<p>给变量赋值对象，永远都是引用，也就是说obj这个变量指向{}这个匿名对象，ref=obj让ref也指向obj指向的对象，而不是obj本身。</p>
+
+<p>所以当obj被赋值了一个数组的时候，ref仍然指向那个匿名对象。obj给赋值了name属性，因此obj指向的变量的name属性被添加了name。</p>
+
+<p>ref.name返回objectA，ref.length返回undefined。</p>
+
+<p>&nbsp;</p>
+
+<p>11. 算法题</p>
+
+<p>A、快速排序算法</p>
+
+<p>B、写一个函数实现字符串翻转</p>
+
+<p>5、网站有一个广告，显示规则为：</p>
+
+<p>a、第一次进入页面，广告显示10秒后隐藏</p>
+
+<p>b、一个小时内第二次进入不显示广告简单描述下，实现的方法</p>
+
+<p>6、列举你使用过的javascript操作字符串函数。</p>
+
+<p>7、描述下你对js闭包、面向对象、继承的理解</p>
+
+<p>8、你熟悉的Javascript框架，使用此框架实现过的最复杂的功能是？</p>
+
+<p>&nbsp;</p>

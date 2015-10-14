@@ -1,0 +1,183 @@
+---
+layout: default
+title: 一套面试题
+theme: JavaScript
+---
+<p>1. 让一个input的背景颜色变成蓝色，边框为红色</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>2. 将background-position:0 0; background-repeat:no-repeat; background-achment:fixed; background-color:#ff0000; background-image:url(background.gif);这段样式进行缩写，注意要符合缩写的规范。</p>
+<!-- more -->
+<pre>
+background的缩写：background-color，background-image，background-position，background-attachment，background-repeat
+
+<code>background:#ff0000 url(background.gif) 0 0 fixed no-repeat</code></pre>
+
+<p>&nbsp;</p>
+
+<p>3. CSS行内元素有哪些？块级元素有哪些？</p>
+
+<p>行内元素：input, button, span, a等</p>
+
+<p>块级元素：div, section, h1, p, br, ul, li等</p>
+
+<p>&nbsp;</p>
+
+<p>4. 怎么样才能让层显示在FLASH之上？</p>
+
+<p>给flash设置透明</p>
+
+<p>example code:</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>5. 写出尽量多的CSS Hack</p>
+
+<p>CSS Hack将在下文中详细记录</p>
+
+<p>&nbsp;</p>
+
+<p>6. JS有什么值类型？</p>
+
+<p>Number, String, Boolean, Undefined, Null等五种类型</p>
+
+<p>&nbsp;</p>
+
+<p>7. 怎么使input获得焦点？怎么失去焦点？</p>
+
+<p>js代码</p>
+
+<p>ele.focus()//获得焦点</p>
+
+<p>ele.blur()//失去焦点</p>
+
+<p>&nbsp;</p>
+
+<p>8. 简述下cookie的操作，还有cookie的属性都知道哪些。可以设置多大的cookie？</p>
+
+<p>cookie将在下文中详细记录</p>
+
+<p>&nbsp;</p>
+
+<p>9. JSON是什么，写一个简单的json数组</p>
+
+<p>JSON是JavaScript Object Notation的缩写，也就是javascript对象表示法。它是一种轻量的数据交换的格式。</p>
+
+<p>数组格式：</p>
+
+<p>var person = {</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &quot;info&quot;:[</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { &nbsp; &nbsp;&quot;name&quot;:&quot;peter&quot; &nbsp; &nbsp;, &nbsp; &nbsp;&quot;age&quot;:&quot;13&quot; &nbsp; &nbsp;},</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { &nbsp; &nbsp;&quot;name&quot;:&quot;sandy&quot; &nbsp; &nbsp;, &nbsp; &nbsp;&quot;age&quot;:&quot;13&quot; &nbsp; &nbsp;}</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ]</p>
+
+<p>};</p>
+
+<p>10. 如何制作一个combo选项，就是可以输入可以下拉菜单选择。</p>
+
+<p>使用HTML5的datalist</p>
+
+<p>Exampe Code:</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>11. DOM操作。怎样添加、移除、移动、复制、创建和查找节点</p>
+
+<p>添加：</p>
+
+<p>// &nbsp;原生</p>
+
+<p>ele1.appendChild(ele2) &nbsp;// &nbsp;将ele2元素插入到ele1子元素的最后一位（父子）</p>
+
+<p>parent.insertBefore(ele, parent.childNode[0])&nbsp; // &nbsp;将ele元素插入到parent的某个子元素的后面（兄弟）</p>
+
+<p>替换:</p>
+
+<p>parent.replaceChild(newNode, oldNode) &nbsp; &nbsp; //用newNode替代oldNode，找共同父元素作为方法的对象</p>
+
+<p>移除：</p>
+
+<p>ele1.parentNode.removeChild(ele1) &nbsp; &nbsp;//移除ele1元素</p>
+
+<p>移动：</p>
+
+<p>parent.insertBefore(node, refNode);</p>
+
+<p>复制：</p>
+
+<p>ele2 = ele1.cloneNode(true);//ele1复制并赋值给ele2，第二个参数为true时同时复制子元素，false时不复制子元素，要注意元素里面的字符串也是textnode节点</p>
+
+<p>创建：</p>
+
+<p>document.create(标签名)</p>
+
+<p>查找：</p>
+
+<p>document.getElementById()/getElementsByTagName()/querySelector()/querySelectorAll()</p>
+
+<p>&nbsp;</p>
+
+<p>12. XMLHttpRequest是什么。</p>
+
+<p>XMLHTTPRequest用于在后台与服务器交换数据。ajax操作的对象。</p>
+
+<p>&nbsp;</p>
+
+<p>13. 分别写出js，HTML如何判断浏览器</p>
+
+<p>通过浏览器版本信息判断各浏览器&nbsp;<br />
+<br />
+var _uat=navigator.userAgent;&nbsp;<br />
+if(_uat.indexOf(&quot;MSIE 6.0&quot;)&gt;0) alert(&quot;ie6&quot;);&nbsp;<br />
+else if(_uat.indexOf(&quot;MSIE 7.0&quot;)&gt;0) alert(&quot;ie7&quot;);&nbsp;<br />
+else if(_uat.indexOf(&quot;MSIE 8.0&quot;)&gt;0) alert(&quot;ie8&quot;);&nbsp;<br />
+else if(_uat.indexOf(&quot;Firefox&quot;)&gt;0) alert(&quot;firefox&quot;);&nbsp;<br />
+<br />
+CSS判断浏览器&nbsp;<br />
+#example{color:red ;} /*firefox*/&nbsp;<br />
+* html #example{color:blue;} /*ie6*/&nbsp;<br />
+*+html #example{color:green;} /*ie7*/&nbsp;<br />
+<br />
+HTML判断浏览器&nbsp;<br />
+1. <!--[if !IE]><!-->除IE外都可识别<!--<![endif]-->&nbsp;<br />
+2. <!--[if IE]> 所有的IE可识别<![endif]-->&nbsp;<br />
+3. <!--[if IE 6]> 仅IE6可识别<![endif]-->&nbsp;<br />
+4.<!--[if lt IE 6]> IE6以及IE6以下版本可识别<![endif]-->&nbsp;<br />
+5. <!--[if gte IE 6]> IE6以及IE6以上版本可识别<![endif]-->&nbsp;<br />
+6.<!--[if IE 7]> 仅IE7可识别<![endif]-->&nbsp;<br />
+7. <!--[if lt IE 7]> IE7以及IE7以下版本可识别<![endif]-->&nbsp;<br />
+8. <!--[if gte IE 7]> IE7以及IE7以上版本可识别<![endif]-->&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>14. cookie被禁止后怎样使用session</p>
+
+<p>cookie，session，localstorage等将在下文中详细记录</p>
+
+<p>&nbsp;</p>
+
+<p>15. 有如下一个表单</p>
+
+<p>xxxxx</p>
+
+<p>请不要刷新页面远程调用提交给后台</p>
+
+<p>用ajax</p>
+

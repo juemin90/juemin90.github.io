@@ -1,0 +1,137 @@
+---
+layout: default
+title: JavaScript中数据类型检测方法盘点
+theme: JavaScript
+---
+一、Js中有5种基本数据类型
+
+Undefined 、Null、Boolean、String、Number(包含NaN)
+
+NaN和任何类型的值都不相等，包括NaN；isNaN用来判断数值是不是NaN类型
+<!-- more -->
+二、类型判断
+
+1. isFinite(number)
+是不是无穷大，如果不是返回true，如果是NaN，或者正负无穷大，或者非数字类型返回false
+
+2. typeof运算符
+使用的时候，空格或者typeof(param)
+
+返回的值
+
+string
+number
+boolean
+undefined
+function
+object null也返回object
+
+根据以上，判断类型可以如下：
+
+var obtainType = function(o){
+     var t;
+     if(o === null ) return “null”;
+     else if(o !== o) return “NaN”;
+     else if( (t = typeof o) !== ‘object’) return t;
+}
+可以识别出null、NaN string number boolean undefined function。
+
+上面最后只剩下object，比如数组的识别，自定义类型的识别
+
+3. 数组等原生类型的识别，可以采用如下
+
+function obtainType(type) {
+    return function (obj) {
+        return Object.prototype.toString.call(obj) === "[object " + type + "]"
+    }
+}
+
+var isObject = isType("Object")
+var isString = isType("String")
+var isArray = Array.isArray || isType("Array")
+var isFunction = isType("Function")
+4. 自定义类型判断
+
+/**
+ * 返回函数的名字，可能为空串；不是函数，返回null
+ */
+Function.prototype.getName = function () {
+    if ("name" in this) return this.name;
+    return this.name = this.toString().match(/function\s*([^(]*)\(/)[1];
+};
+原生类型和自定义类型的object都可以判断了，于是
+
+/**
+ * 返回：null NaN undefined string number boolean
+ * function Array String Object（包括一些自定义类型） 自定义类型
+ */
+var obtainType =function(o){
+    /**
+     * 获取参数类型
+     * 对象直接量、Object.create、自定义构造函数的类属性皆为Object;
+     * 识别出原生类型 （内置构造函数和宿主对象）
+     */
+    function classOf(obj){
+        return Object.prototype.toString.call(obj).slice(8, -1);
+    }
+
+    /**
+     * 返回函数的名字，可能为空串；不是函数，返回null
+     */
+    Function.prototype.getName = function () {
+        if ("name" in this) return this.name;
+        return this.name = this.toString().match(/function\s*([^(]*)\(/)[1];
+    };
+    var t, c, n;
+    // 处理null值特殊情形
+    if (o === null) return "null";
+    // NaN：和自身值不相等
+    if (o !== o) return "NaN";
+    // 识别出原生值类型和函数、undefined
+    if ((t = typeof o) !== "object") return t;
+    // 识别出原生类型
+    if ((c = classOf(o)) !== "Object") return c;
+    // 返回自定义类型构造函数名字
+    if (o.constructor && typeof o.constructor === "function" &&
+        (n = o.constructor.getName()))
+        return n;
+    return "Object";
+};
+5.
+
+var strObj = new String('abc');
+
+typeof strObj // "object"
+
+obtainType(strObj) // "String"
+三、 其它
+
+1. Dom元素判断
+if(dom.nodeType){…Dom…}
+if(dom.createElement)
+
+2. jQuery等类型判断
+$(‘#aa’) instanceof jQuery//不支持跨多窗口和框架子页面
+
+3. if(a) a为null undefined 0 “” NaN时自动转换成false
+一般推荐的写法
+
+// bad
+if (name !== '') {
+    // ...stuff...
+}
+
+// good
+if (name) {
+    // ...stuff...
+}
+
+// bad
+if (collection.length > 0) {
+    // ...stuff...
+}
+
+// good
+if (collection.length) {
+    // ...stuff...
+}

@@ -12,7 +12,7 @@ theme: JavaScript
 <p>第一种方法是构成同域，认为将其通信双方设置为同一域名下。</p>
 
 <p>第二种方法是规避跨域，使用iframe或者动态脚本、其他页面公公对象属性来传值通信。</p>
-
+<!-- more -->
 <p>1. 使用document.domain和iframe实现。</p>
 
 <p>对于主域名相同，耳机子域名不同的情况，可以使用document.domain重置为相同的一级域名。主域名是不带www的域名，某一页面的domain默认等于window.location.hostname，这样设置扩大了同域的范围。如此便可互相通信。</p>

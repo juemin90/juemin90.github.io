@@ -1,0 +1,491 @@
+---
+layout: default
+title: 一套面试题
+theme: study
+---
+<p>对DOM操作代价昂贵，在富网页应用中通常是一个性能瓶颈。讨论三类问题。</p>
+
+<ul>
+	<li>访问和修改DOM元素</li>
+	<li>修改DOM元素的样式，造成重绘和重新排版</li>
+	<li>通过DOM事件处理用户相应</li>
+</ul>
+<!-- more -->
+<p>什么是DOM?他为什么慢？</p>
+
+<p>文档对象模型(DOM)是一个独立于语言的，使用XML和HTML文档操作的应用程序接口（API）。在浏览器中，主要与HTML文档打交道。DOM API主要用于访问这些文档中的数据。</p>
+
+<p>尽管DOM是与语言无关的API，在浏览器中的接口却是以JavaScript实现的。客户端大多数脚本程序与文档打交道，DOM就成为JavaScript代码日常行为中重要的组成部分。</p>
+
+<p>浏览器通常要求DOM实现和JavaScript的实现保持相互独立。因此，两个独立的不分以功能接口连接就会带来性能是UN好。</p>
+
+<p>1.DOM访问和修改</p>
+
+<p>简单来说，访问一个DOM元素的代价就是交一次&ldquo;过桥费&rdquo;。修改元素的费用可能更贵，因为它经常导致浏览器重新计算页面的集合变化。当然，访问或修改元素最坏的情况是使用循环执行此操作，特别是在HTML集合中使用循环。</p>
+
+<ul>
+	<li>innerHTML与DOM方法比较</li>
+</ul>
+
+<p>更新页面时，使用不标准却被靓号支持的innerHTML号呢，还是使用纯DOM方法，如document.createElement()更好呢？如果不考虑标准问题，它们的性能如何？答案是：性能差别不大，但是在所有浏览器中，innerHTML速度更快一些，除了最新的基于WebKit的浏览器（Chrome和Safari）。</p>
+
+<p>实验表明，innerHTML的好处在老式浏览器上显而易见，但在新版本浏览器上就不那么明显了。而在最新的基于WebKit的浏览器上其结果正好相反：使用DOM方法更快。因此，决定采用哪些方法将取决于用户使用的浏览器，以及你的编码偏好。</p>
+
+<p>如果在一个性能苛刻的操作中更新一大块HTML页面，innerHTML在大多数浏览器中执行更快。但对于大多数日常操作而言，其差异并不大。</p>
+
+<ul>
+	<li>节点克隆</li>
+</ul>
+
+<p>使用DOM方法更新页面内容的另一个途径是克隆已有的DOM元素，即使用element.cloneNode()代替document.createElement()；</p>
+
+<p>在大多数浏览器上，克隆节点更有效率，但提高不太多。用克隆节点的办法重新生成前面例子中的表，单元只创建一次，然后重复执行赋值操作，这样做只是稍微快了一点。</p>
+
+<p>2. HTML集合</p>
+
+<p>HTML集合是用于存放DOM节点引用的类数组对象。下列函数的返回值就是一个集合：</p>
+
+<p><code>document.getElementsByName()</code></p>
+
+<p><code>document.getElementsByClassName()</code></p>
+
+<p><code>document.getElementsByTagName()</code></p>
+
+<p>下列属性也属于HTML集合</p>
+
+<p><code>document.images &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //页面中所有的元素</code></p>
+
+<p><code>document.links &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //所有的元素</code></p>
+
+<p><code>document.forms &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //所有表单</code></p>
+
+<p><code>document.forms[0].elements &nbsp; &nbsp; &nbsp; //页面中第一个表单的所有字段</code></p>
+
+<p>这些方法和属性返回HTMLCollection对象，是一种类似数组的列表。他们不是数组（因为他们没有诸如push()和slice()等方法），但是提供了一个length属性。</p>
+
+<p>HTML集合实际上在查询文档，当你更新信息时，每次都要重复执行这种查询操作，例如读取集合中元素的数目，这正是低效率的来源。</p>
+
+<p>不建议用数组的length属性做循环判断条件。访问集合的length比数组的length还要慢，因为它意味着每次都要重新运行查询过程。有花的方法很简单，只要将集合的length属性缓存到一个变量中，然后再循环判断条件中使用这个变量：</p>
+
+<p><code>function loopCacheLengthCollection(){</code></p>
+
+<p><code>&nbsp; var coll = document.getElementsByTagName(&#39;div&#39;);</code></p>
+
+<p><code>&nbsp; len = coll.length;</code></p>
+
+<p><code>&nbsp; for(var count=0; count &nbsp;&nbsp;}</code></p>
+
+<p><code>}</code></p>
+
+<p>许多用例需要对一个相关的小集合进行遍历，只要将length缓存一下就足够好了。但是遍历数组比遍历集合快，如果先将集合元素拷贝到数组，访问它们的属性将更快。</p>
+
+<ul>
+	<li>访问集合元素时使用局部变量</li>
+</ul>
+
+<p>一般来说，对于任何类型的DOM访问，如果同一个DOM属性或方法被访问一次以上，最好使用一个局部变量缓存此DOM成员。当遍历一个集合时，第一个优化是将集合引用存储于局部变量，并在循环之外缓存length属性。然后，如果在循环体中多次访问同一个几何元素，那么使用局部变量缓存它。</p>
+
+<p>3. DOM漫谈</p>
+
+<p>DOM API提供了多种途径访问整个文档结构的特定不分。当你在多种可行方法之间进行选择时，最好针对特定操作选择最有效的API。</p>
+
+<ul>
+	<li>抓取DOM</li>
+</ul>
+
+<p>经常需要从一个DOM元素 开始，操作周围的元素，或者递归迭代所有的子节点。你可以使用childNode集合或者使用nextSibling获得每个元素的兄弟节点。</p>
+
+<p>实验表明，在不同浏览器上，这两种方法的运行时间基本相等。但是在IE中，nextSibling表现的比childNode好。在IE6，IE7中nextSibling比对手快很多。鉴于这些结果，在老的IE中性能眼科的使用条件下，用nextSibling抓取DOM是首选方法。在其他情况下，主要看个人和团队偏好。</p>
+
+<ul>
+	<li>元素节点</li>
+</ul>
+
+<p>DOM属性注入childNode，firstChild，和nextSibling不区分元素节点和其他类型节点，如注释节点和文本节点（这两个标签之间旺旺只是一些空格）。在许多情况下，只有元素节点需要被访问，所以在循环中，似乎应当对节点返回类型进行检查，过滤出非元素节点。这些检查和过滤都是不必要的DOM操作。许多现代浏览器提供了API函数值返回元素节点。如果可用最好利用起来，因为它们比你自己在JavaScript中写的过滤方法要快。列出这些遍历的DOM属性。</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td>property</td>
+			<td>use as a replacement for</td>
+		</tr>
+		<tr>
+			<td>children</td>
+			<td>childNodes</td>
+		</tr>
+		<tr>
+			<td>childElementCount</td>
+			<td>childNodes.length</td>
+		</tr>
+		<tr>
+			<td>firstElementChild</td>
+			<td>firstChild</td>
+		</tr>
+		<tr>
+			<td>lastElementChild</td>
+			<td>lastChild</td>
+		</tr>
+		<tr>
+			<td>nextElementSibling</td>
+			<td>nextSibling</td>
+		</tr>
+		<tr>
+			<td>previousElementSibling</td>
+			<td>previousSibling</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>遍历children比childNodes更快，因为集合项更少。虽然差别不是很大，在IE里，差别还是很大的。</p>
+
+<ul>
+	<li>选择器API</li>
+</ul>
+
+<p>识别DOM中的元素是，开发者经常需要更精细的控制，而不仅是getElementById()和getElementsByTagName()之类的函数。又是你结合这些函数调用并迭代操作它们返回的节点，以获得所有需要的元素，这一惊喜的过程可能造成效率低下。</p>
+
+<p>最新的浏览器提供了一个名为querySelectorAll()的原生浏览器DOM函数，可以使用CSS选择器。如：</p>
+
+<p><code>var elements = document.querySelectorAll(&quot;#menu a&quot;);</code></p>
+
+<p>函数querySelectorAll()接收一个CSS选择器字符串参数并返回一个NodeList-由父业条件的节点构成的类数组对象。此函数不反悔HTML集合，所以返回的节点不呈现文档的存在性结构。这就避免了本章前面提到的HTML集合所固有的性能问题。</p>
+
+<p>还可以从另一个函数querySelector()获益，这个遍历的函数值返回符合查询条件的第一个节点。</p>
+
+<p>4. 重绘和重拍版</p>
+
+<p>当浏览器下载完所有页面HTML标记，JavaScript，CSS，图片之后，它解析文件并创建两个内部数据结构：</p>
+
+<p>DOM树，表示页面结构和渲染树，表示DOM节点如何显示</p>
+
+<p>当DOM改变影响到元素的集合属性，将发生一系列后续动作，而且其他元素的集合属性和位置也会因此改变收到影响。浏览器使渲染书上受到影响的不分失效，然后重构渲染树，这个过程被称作重拍版。重拍版完成时，浏览器在一个重绘进程中重新绘制屏幕上受影响的部分。</p>
+
+<p>不是所有的DOM改变都会影响几何属性。例如，改变一个元素的背景颜色不会影响它的宽度或高度。在这种情况下，只需要重绘不需要重排版，因为元素的布局没有改变。</p>
+
+<p>重绘和重排版是负担很重的操作，可能导致网页应用的用户界面失去响应。所以十分有必要尽可能较少这类事情的发生。</p>
+
+<ul>
+	<li>查询并刷新渲染树改变</li>
+</ul>
+
+<p>因为计算量与每次重排版有关，大多数浏览器通过对裂化修改和批量显示优化重排版过程。然而，你可能强迫队列刷新并要求所有计划改变的部分立刻应用。获取布局信息的操作将导致刷新队列动作，这意味着使用了下面这些方法：</p>
+
+<p><code>offsetTop, offsetLeft, offsetWidth, offsetHeight</code></p>
+
+<p><code>scrollTop, scrollLeft, scrollWidth, scrollHeight</code></p>
+
+<p><code>clientTop, cliengLeft, cliengWidth, clientHeight</code></p>
+
+<p><code>getComputedStyle()</code>(currentStyle in IE)</p>
+
+<p>布局信息由这些属性和方法返回最新的数据，所以浏览器不得不运行渲染队列中待改变的项目并重新排版以返回正确的值。</p>
+
+<p>在改变风格的过程中，最好不要使用前面列出的那些属性。任何一个访问都将刷新渲染队列，及时你正在获取那些最近未发生改变的或者与最新的改变无冠的布局信息。</p>
+
+<p>考虑下面的例子，它改变同一个属性三次：</p>
+
+<p><code>var computed, tmp=&#39;&#39;, bodystyle=document.body.style;</code></p>
+
+<p><code>if(document.body.currentStyle)//IE, opera</code></p>
+
+<p><code>&nbsp; computed = document.body.currentStyle;</code></p>
+
+<p><code>} else {//W3C</code></p>
+
+<p><code>&nbsp; computed = document.defaultView.getComputedStyle(document.body,&#39;&#39;);</code></p>
+
+<p><code>}</code></p>
+
+<p><code>bodystyle.color=&#39;red&#39;;</code></p>
+
+<p><code>tmp=computed.backgroundColor;</code></p>
+
+<p><code>bodystyle.color=&#39;white&#39;;</code></p>
+
+<p><code>tmp=computed.backgroundImage;</code></p>
+
+<p><code>bodystyle.color=&#39;green&#39;;</code></p>
+
+<p><code>tmp=computed.backgroundAttachment;</code></p>
+
+<p>在这个例子中，body元素的前景色被改变了三次，每次改变之后，都导入computed的风格。导入的属性backgroundColor, backgroundImage,和backgroundAttachment与颜色改变无关。然而，浏览器需要刷新渲染队列并重排版，因为computed的风格被查询而引发。</p>
+
+<p>比这个不讲效率的例子更好的方法是不要在布局信息改变时查询它。如果将查询computed风格的代码搬到末尾，代码看起来将是这个样子。</p>
+
+<p><code>bodystyle.color=&#39;red&#39;;</code></p>
+
+<p><code>bodystyle.color=&#39;white;</code></p>
+
+<p><code>bodystyle.color=&#39;green&#39;;</code></p>
+
+<p><code>tmp=computed.backgroundColor;</code></p>
+
+<p><code>tmp=computed.backgroundImage;</code></p>
+
+<p><code>tmp=computed.backgroundAttachment;</code></p>
+
+<p>在所有浏览器上，第二个例子将更快。通过延迟访问布局信息避免重排版而带来的性能提升。</p>
+
+<ul>
+	<li>最小化重绘和重排版</li>
+</ul>
+
+<p>重排版和重绘代价昂贵，所以，提高程序响应速度一个好策略是减少此类操作发生的机会。为减少发生次数，你应该将多个DOM和风格改变合并到一个批次中一次性执行。</p>
+
+<p>考虑这个例子：</p>
+
+<p><code>var el = document.getElementById(&quot;mydiv&quot;);</code></p>
+
+<p><code>el.style.borderLeft=&#39;1px&#39;;</code></p>
+
+<p><code>el.style.borderRight=&#39;2px&#39;;</code></p>
+
+<p><code>el.style.padding=&#39;5px&#39;;</code></p>
+
+<p>这里改变了三个风格属性，每次改变都影响到元素的几何属性。在这个糟糕的例子中，它导致浏览器重排版了三次。大多数现代浏览器优化了这种情况值进行一次重排版，但是在老式浏览器中，或者同事有一个分离的同步进程（例如使用了一个定时器），将十分效率低下。而且此代码访问DOM四次，可以被优化。优化的方法是：将所有改变合并在一起执行，只修改DOM一次。可通过使用cssText属性实现：</p>
+
+<p><code>var el = document.getElementById(&#39;mydiv&#39;);</code></p>
+
+<p><code>el.style.cssText+=&#39;border-left:1px;border-right:2px;padding:5px;&#39;;</code></p>
+
+<p>另一个一次性改变风格的办法是修改CSS的类名称，而不是修改内敛风格代码。这种方法适用于那些风格不依赖于运行逻辑，不需要计算的情况。改变CSS类名称更清晰，更易于维护；它有助于保持脚本免除显示代码，虽然它可能带来轻微的性能冲击，因为改变类时需要检查级联表。</p>
+
+<p><code>var dl = document.getElementById(&#39;mydiv&#39;);</code></p>
+
+<p><code>el.className=&#39;active&#39;;</code></p>
+
+<ul>
+	<li>批量修改DOM</li>
+</ul>
+
+<p>当你需要对DOM元素进行多次修改时，你可以通过以下步骤减少重绘和重排版的次数：</p>
+
+<ol>
+	<li>从文档流中摘除该元素</li>
+	<li>对其应用多重改变</li>
+	<li>将元素带回文档中</li>
+</ol>
+
+<p>此过程引发两次重排版-第一步和第三步。如果你忽略了这两个步骤，那么第二步中每次改变豆浆引发一次重排版。</p>
+
+<p>有三种基本方法可以将DOM从文档中摘除：</p>
+
+<ol>
+	<li>隐藏元素，进行修改，然后再显示它</li>
+	<li>使用一个文档片段在已存DOM之外创建一个子树，然后将它拷贝到文档中。</li>
+	<li>将原始元素拷贝到一个脱离文档的节点中，修改副本，然后覆盖原始元素</li>
+</ol>
+
+<p>为演示脱离文档操作，考虑这样一个链接列表，它必须被更多的信息所更新：</p>
+
+<ul>
+	<li><code><a href="http://phpied.com">Stoyan</a></code></li>
+	<li><code><a href="http://julienlecomte.com">Julien</a></code></li>
+</ul>
+
+<p>假设附加数据已经存储在一个对象中了，需要插入到这个列表中。这些数据定义如下：</p>
+
+<p><code>var data=[</code></p>
+
+<p><code>{</code></p>
+
+<p><code>&nbsp; &quot;name&quot;:&quot;Nicholas&quot;,</code></p>
+
+<p><code>&nbsp; &quot;url&quot;:&quot;http://nczonline.net&quot;</code></p>
+
+<p><code>},</code></p>
+
+<p><code>{</code></p>
+
+<p><code>&nbsp; &quot;name&quot;:&quot;Ross&quot;,</code></p>
+
+<p><code>&nbsp; &quot;url&quot;:&quot;http://techfoolery.com&quot;<br />
+}</code></p>
+
+<p><code>];</code></p>
+
+<p>下面是一个通用的函数，用于将新数据更新到指定节点中：</p>
+
+<p><code>function appendDataToElement(appendToElement, data){</code></p>
+
+<p><code>&nbsp; var a, li;</code></p>
+
+<p><code>&nbsp; for(var i=0, max=data.length;i</code></p>
+
+<p><code><code>&nbsp; &nbsp; a=document.createElement(&#39;a&#39;);</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; a.href=data[i].url;</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; a.appendChild(document.createTextNode(data[i].name));</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; li = document.createElement(&#39;li&#39;);</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; li.appendChild(a);</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; appendToElement.appendChild(li);</code></code></p>
+
+<p><code><code>&nbsp; }</code></code></p>
+
+<p><code><code>};</code></code></p>
+
+<p><code>将数据更新到列表而不管重排版问题，最明显的方法如下：</code></p>
+
+<p><code>var ul = document.getElementbyid(&#39;mylist&#39;);</code></p>
+
+<p><code>appendDataToElemenet(ul, data);</code></p>
+
+<p>使用这个方法，data队列上的每个新条目追加到DOM树都会导致重排版。如前面是uo讨论过的，减少重排版的一个方法是改变display属性，临时从文档上移除元素然后再恢复它。</p>
+
+<p><code><code>var ul = document.getElementById(&#39;mylist&#39;);</code></code></p>
+
+<p><code><code>ul.style.display=&#39;none&#39;;</code></code></p>
+
+<p><code><code>appendDataToElement(ul,data);</code></code></p>
+
+<p><code><code>ul.style.display=&#39;block&#39;;</code></code></p>
+
+<p>另一种减少重排版次数的方法是：在文档之外创建并更新一个文档片段，然后将它附加在原始列表上。文档片段是一个轻量级的document对象，它被设计专用于更新、移动节点之类的人物。文档片段一个遍历的语法特性是当你向节点附加一个片段时，时机添加的是文档片段的子节点群，而不是片段自己。下面的例子减少一行代码，之引发一次重排版，支出法&ldquo;存在DOM&rdquo;一次。</p>
+
+<p><code><code>var fragment = document.createDocumentFragment();</code></code></p>
+
+<p><code><code>appendDataToElement(fragment, data);</code></code></p>
+
+<p><code><code>document.getElementById(&#39;mylist&#39;).appendChild(fragment);</code></code></p>
+
+<p>第三中解决方法首先创建要更新节点的副本，然后再副本上操作，最后用新节点覆盖老节点。</p>
+
+<p><code><code>var old = document.getElementById(&#39;mylist&#39;);</code></code></p>
+
+<p><code><code>var clone=old.cloneNode(true);</code></code></p>
+
+<p><code><code>appendDataToElement(clone, data);</code></code></p>
+
+<p><code><code>old.parentNode.replaceChild(clone, old);</code></code></p>
+
+<p>推荐尽量使用文档片段（第二种解决方案）因为它涉及最少数量的DOM操作和重排版。唯一潜在的缺点是，当前文档片段还没有得到充分利用，开发者可能不熟悉此技术。</p>
+
+<p>考虑一个例子，将元素myElement向右下方向评议，每次一个像素，起始于100*100位置，结束语500*500位置，在timeout循环体中你可以使用<code>：</code></p>
+
+<p><code><code>//inefficient</code></code></p>
+
+<p><code><code>myElement.style.left=1+myElement.offsetLeft+&#39;px&#39;;</code></code></p>
+
+<p><code><code>myElement.style.top=1+myElement.offsetTop+&#39;px&#39;;</code></code></p>
+
+<p><code><code>if(myElemenet.offsetLeft&gt;=500){</code></code></p>
+
+<p><code><code>&nbsp; stopAnimation();</code></code></p>
+
+<p><code><code>}</code></code></p>
+
+<p>这样做很没效率，因为每次元素移动，代码查询偏移量，导致浏览器刷新渲染队列，并没有从优化中获益。另一个方法只需要获取起始位置值一次，将它存入局部变量中var current = myElement.offsetLeft;。然后，在动画循环中，使用current变量而不再查询偏移量：</p>
+
+<p><code><code>current++</code></code></p>
+
+<p><code><code>myElement.style.left = current+&#39;px&#39;;</code></code></p>
+
+<p><code><code>myElement.style.top = current+&#39;px&#39;;</code></code></p>
+
+<p><code><code>if(current&gt;=500){</code></code></p>
+
+<p><code><code>&nbsp; stopAnimation();</code></code></p>
+
+<p><code><code>}</code></code></p>
+
+<p>&nbsp;</p>
+
+<p>显示和隐藏部分页面构成展开/折叠动画是一种常见的交互模式。它通常包括区域扩大的集合动画，将页面其他部分推向下方。重排版时有时值影响渲染书的一小部分，但也可以影响很大的一部分，甚至整个渲染书。浏览器需要重排版的不分越小，应用程序的响应速度就越快。所以当一个页面顶部的动画退役了差不多整个页面时，将引发巨大的重排版动作，使用户感到动画卡顿。渲染书的大多数节点需要被重新计算，它变得更糟糕。</p>
+
+<p>当动画结束时，重新定位，从而只一次下移文档其他元素的位置。</p>
+
+<p>自从版本7之后，IE可以在任何元素（严格模式）上使用:hover这个CSS位选择器。然而，如果大量的元素使用了:hover那么会降低反应速度。此问题在IE8中更显著。</p>
+
+<ul>
+	<li>缓冲布局信息</li>
+</ul>
+
+<p>将元素提出动画流</p>
+
+<p>使用以下步骤可以避免对大部分页面进行重排版：</p>
+
+<p>使用绝对坐标定位页面动画的元素，使它位于页面布局流之外。</p>
+
+<p>启动元素动画。当它扩大时，它临时覆盖部分页面。这是一个重绘过程，但只影响页面的一小部分，避免重排版并重绘一大块页面。</p>
+
+<ul>
+	<li>IE和:hover</li>
+</ul>
+
+<p>​使用:hover这个CSS伪选择器，会降低反应速度，尤其在IE8中。当元素数量很多时避免使用这种效果，诸如很大的表或很长的列表。</p>
+
+<p>5.事件托管</p>
+
+<p>当页面中存在大量元素，而且每个元素有一个或多个事件句柄与之挂接（例如onclick)时，可能会影响性能。连接每个句柄都是有代价的，无论其形式是加重了页面负担还是表现在运行期的运行时间上。浏览器需要保存没个句柄的记录，占用更多的内存。当这些工作结束时，这些事件句柄中的相当一部分根本不需要，所以很多工作都是不必要的。</p>
+
+<p>一个简单而优雅的处理DOM事件的技术是事件托管。它基于这样一个事实：事件逐层冒泡总能被父元素捕获。采用事件托管技术之后，你只需要在一个包装元素上挂接一个句柄，用于处理子元素发生的所有事件。</p>
+
+<p>根据DOM标准，每个事件有三个阶段：捕获、到达目标、冒泡</p>
+
+<p>IE不支持捕获，但实现托管技术使用冒泡就足够了。</p>
+
+<p>当用户点击了一个a链接，点击事件首先被元素收到，然后它沿着DOM树冒泡，被元素收到，一直往上升等等，一直到达文档的顶层，甚至window。这使得你可以只在父元素上挂接一个事件句柄，来接收所有子元素产生的事件通知。</p>
+
+<p>假设你要为文档提供一个逐步增强的Ajax体验。如果用户关闭了JavaScript，菜单中的链接仍然可以正常地重载页面。但是如果JavaScript打开而且用户代理有足够能力，你希望截获所有点击，阻止默认行为，发送Ajax请求获取内容，然后不刷新页面就能够更新部分页面。使用事件托管实现此功能，你可以在点击的元素挂接一个点击监听器，它封装所有链接并监听所有click事件，看看他们是否发自一个链接。</p>
+
+<p><code>document.getElementById(&#39;menu&#39;).onclick=function(e) {</code></p>
+
+<p><code>&nbsp; e = e||window.event;</code></p>
+
+<p><code>&nbsp; var target = e.target||e.srcElement;</code></p>
+
+<p><code>&nbsp; var pageid, hrefparts;</code></p>
+
+<p><code>&nbsp; if(target.nodeName!==&#39;A&#39;){</code></p>
+
+<p><code>&nbsp; &nbsp; return;</code></p>
+
+<p><code>&nbsp; }</code></p>
+
+<p><code>&nbsp; hrefparts = target.href.split(&#39;/&#39;);</code></p>
+
+<p><code>&nbsp; pageid = hrefparts[hrefparts.length-1];</code></p>
+
+<p><code>&nbsp; pageid=pageid.replace(&#39;.html&#39;,&#39;&#39;);</code></p>
+
+<p><code>&nbsp; ajaxRequest(&#39;xhr.php?page=&#39;+id, updatePageContents);</code></p>
+
+<p><code>&nbsp; if(typeof e.preventDefault === &#39;function&#39;) {</code></p>
+
+<p><code>&nbsp; &nbsp; e.preventDefault();</code></p>
+
+<p><code>&nbsp; &nbsp; e.stopPropatagion();</code></p>
+
+<p><code>&nbsp; } else {</code></p>
+
+<p><code>&nbsp; &nbsp; e.returnValue = false;</code></p>
+
+<p><code>&nbsp; &nbsp; e.cancelBubble = true;</code></p>
+
+<p><code>&nbsp; }</code></p>
+
+<p><code>};</code></p>
+
+<p>只需要监听事件，看看他们是不是从你感兴趣的元素中发出的。</p>
+
+<p>6.总结</p>
+
+<p>牢记以下几点：</p>
+
+<p>最小化DOM访问，在JavaScript端做尽可能多的事情</p>
+
+<p>在反复访问的地方使用局部变量存放DOM引用</p>
+
+<p>小心的处理HTML集合，将集合的length属性缓存到一个变量中，在迭代中使用这个变量。</p>
+
+<p>使用更快的API，注入querySelectorAll()和firstElementChild()</p>
+
+<p>注意重绘和重排版；批量修改风格，离线操作DOM树，缓存并减少对布局信息的访问。</p>
+
+<p>动画中使用绝对坐标，使用拖放代理。</p>
+
+<p>使用时间托管技术最小化事件句柄数量。</p>

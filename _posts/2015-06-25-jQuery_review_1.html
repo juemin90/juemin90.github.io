@@ -1,0 +1,118 @@
+---
+layout: default
+title: 复习jQuery（1）
+theme: jQuery
+---
+<p>jQuery很方便，但是用久了有种对javaScript知其然不知其所以然的感觉，所以这些年来一直都在抓原生JS，但是做项目肯定是要用到，也有可能在面试的时候被问到，所以还是捡起来一点知识会比较好。</p>
+
+<p>jQuery也不是什么很难的东西，所以就记一下常用的API就可以了。学习用的书就用这本jQuery in Action，个人认为是比较好的一本书，基本涵盖了最基础的用法。</p>
+<!-- more -->
+<p>第一章，jQuery基础</p>
+
+<p>jQuery最大的优点就是能减少很多代码量，例如：</p>
+
+<p><code>var checkedValue;</code></p>
+
+<p><code>var elements = document.getElementsByTagName(&quot;input&quot;);</code></p>
+
+<p><code>for(var n=0; n</code></p>
+
+<p><code><code>&nbsp; if(elements[n].type == &#39;radio&#39; &amp;&amp;&nbsp;</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; elements[n].name == &#39;someRadilGroup&#39; &amp;&amp;</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; elements[n].checked) {</code></code></p>
+
+<p><code><code>&nbsp; &nbsp; checkedValue = elements[n].value;</code></code></p>
+
+<p><code><code>&nbsp; }</code></code></p>
+
+<p><code><code>}</code></code></p>
+
+<p><code>这段在一个单选框组中选择哪一个被勾选的代码，要写这么长。但是用jQuery：</code></p>
+
+<p><code><code>var checkedValue = $(&#39;[name=&quot;someRadilGroup&quot;]:checked&#39;).val();</code></code></p>
+
+<p><code>从这段代码中可以看出，jQuery语句中选择器非常便利。</code></p>
+
+<p><code>在这里总结了jQuery中可用的选择器</code></p>
+
+<p><code>直接子节点的</code></p>
+
+<p><code>元素</code></p>
+
+<p><code>子节点的，包含超链接的</code></p>
+
+<p><code>元素</code></p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+	<tbody>
+		<tr>
+			<td><code>选择器</code></td>
+			<td><code>结果</code></td>
+		</tr>
+		<tr>
+			<td><code>$(&quot;p:even:)</code></td>
+			<td><code>选择所有偶数行的p元素</code></td>
+		</tr>
+		<tr>
+			<td><code>$(&quot;tr:nth-child(1)&quot;)</code></td>
+			<td><code>选择每个表格的第一行元素</code></td>
+		</tr>
+		<tr>
+			<td><code>$(&quot;body &gt; div&quot;)</code></td>
+			<td><code>选择</code></td>
+		</tr>
+		<tr>
+			<td><code>$(&quot;a[href$=&#39;pdf&#39;]&quot;)</code></td>
+			<td><code>选择链接到pdf文件的超链接元素</code></td>
+		</tr>
+		<tr>
+			<td><code>$(&quot;body &gt;div:has(a)&quot;)</code></td>
+			<td><code>选择作为</code></td>
+		</tr>
+	</tbody>
+</table>
+
+<p><code>包装将要操作的元素（选择器）是jQuery的$()函数最常见的功能，但是并不是唯一的职责。$()函数的另一个职责是作为一些通用适用函数集合的命名空间前缀。比如：</code></p>
+
+<p><code><code>var trimmed = $.trim(something); //去除字符串前后空格的实用函数</code></code></p>
+
+<p><code>如果觉得$.前缀有些怪异，就记住$是JavaScript中的标识符，也可以使用jQuery来调用实用函数，$仅仅是jQuery的别名。</code></p>
+
+<p><code>另外，为了遵循不唐突的JavaScript原则，需要在文档标记外部执行对页面元素的操作。我们需要一种在页面DOM元素完全渲染后再执行操作的方法。比如说，在原生JavaScript里，window实例的onload就可以实现上述目的。同样地，jQuery中也可以使用下述两种形式实现这种目的。</code></p>
+
+<p><code><code>jQuery(document).ready(function(){</code></code></p>
+
+<p><code><code>&nbsp; ....//do something</code></code></p>
+
+<p><code><code>});</code></code></p>
+
+<p><code>在这里，使用jQuery()函数包装了document对象，然后调用ready()方法并传递一个在文档就绪时执行的函数。还有一种方式：</code></p>
+
+<p><code><code>jQuery(function(){</code></code></p>
+
+<p><code><code>&nbsp; ....//do something</code></code></p>
+
+<p><code><code>});</code></code></p>
+
+<p><code>在这里，传递一个函数给jQuery，我们通知浏览器直到DOM被完全加载完毕（仅仅是DOM）后再执行此段代码。更棒的是，可以在一个HTML文档中多次调用此函数，浏览器会按照它们在页面中声明的顺序依次调用这些函数。</code></p>
+
+<p><code>原生JavaScript的window.onload和jQuery的方法看似相同，但是也有一些不同之处，总结如下：</code></p>
+
+<ol>
+	<li><code>window.onload要等所有外部资源全部加载完毕才会被执行。外部资源不仅包括DOM树，还有图片资源、嵌入在页面上的QuickTime和Flash视频资源。而jQuery的方式只需要等到DOM被完全加载完毕，就可以执行。减少很多的延迟。</code></li>
+	<li><code>jQuery的方式可以在一个HTML文档中多次调用，浏览器会按照它们在页面中声明的顺序依次调用这些函数。与此相反，window的onload机制只允许指定一个函数。如果包含的任何一个第三方代码出自自身考虑使用onload机制，那么这个限制可能导致难以发现的问题。</code></li>
+</ol>
+
+<p><code>&nbsp;</code></p>
+
+<p><code>另外，向$()函数传递一个包含HTML标记的字符串，可以动态的创建DOM元素。例如：$(&quot;</code></p>
+
+<p><code>Hi there!</code></p>
+
+<p><code>&quot;)，下一步可以进行DOM操作。</code></p>
+
+<p>&nbsp;</p>
+
+<p><code>&nbsp;</code></p>

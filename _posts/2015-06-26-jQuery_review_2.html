@@ -1,0 +1,560 @@
+---
+layout: default
+title: 复习jQuery（2）
+theme: jQuery
+---
+<p>这本书是我在2012年末买的，记得当时小兰过年回家，跟我一起合租的那几个小伙子也回家了，我自己在厨房看的。</p>
+
+<p>当时是刚开始学前端，JavaScript也只看了最基础的一本书，只是照着书上写的代码抄，看效果。其实有很多东西是看不懂的，留下的印象仅仅是选择器很好用。现在虽然只是看了第一章，但还是能感觉到这次看懂了很多以前没看懂的东西。所以说看一本书（好书）时要重复的看，你的基础知识积累的怎么样，决定了这本书能给你带来多少东西。废话不多说，继续看第二章，期待又能发现新东西。</p>
+
+<p>第二章，选择要操作的元素</p>
+<!-- more -->
+<p>使用jQuery的选择器，普遍的形式是:</p>
+
+<p><code>$(selector);</code></p>
+
+<p>这种形式是在所有DOM树中寻找选择器所要寻找的元素，如果要减少遍历时间，也就是缩小搜索的范围，可以这样写:</p>
+
+<p><code>$(selector, subTree);</code></p>
+
+<p>例如：</p>
+
+<p><code>$(&quot;a#b&quot;, &quot;div#sampleDom&quot;);//在ID未sampleDom的div力选择ID为b的a元素</code></p>
+
+<p>最基本的选择器就不说了，就是a, a#b, a.b, a#b.c a b之类的形式。</p>
+
+<p>来看看子节点、容器和特性选择器的使用</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+	<tbody>
+		<tr>
+			<td>选择器</td>
+			<td>描述</td>
+		</tr>
+		<tr>
+			<td>E&gt;F</td>
+			<td>匹配标签名为F的所有元素，这些元素是E的直接子节点</td>
+		</tr>
+		<tr>
+			<td>E+F</td>
+			<td>匹配标签名为F的所有元素，这些元素是E后面的第一个兄弟节点</td>
+		</tr>
+		<tr>
+			<td>E~F</td>
+			<td>匹配标签名为F的所有元素，这些元素是E后面的兄弟节点之一</td>
+		</tr>
+		<tr>
+			<td>E[A]</td>
+			<td>匹配标签名为F的所有元素，这些元素拥有特性A</td>
+		</tr>
+		<tr>
+			<td>E[A=V]</td>
+			<td>匹配标签名为F的所有元素，这些元素的A特性值为V</td>
+		</tr>
+		<tr>
+			<td>E[A^=V]</td>
+			<td>匹配标签名为F的所有元素，这些元素的A特性值以V开始</td>
+		</tr>
+		<tr>
+			<td>E[A$=V]</td>
+			<td>匹配标签名为F的所有元素，这些元素的A特性值以V结尾</td>
+		</tr>
+		<tr>
+			<td>E[A!V]</td>
+			<td>匹配标签名为F的所有元素，这些元素的A特性值不等于V或者根本就不存在A特性</td>
+		</tr>
+		<tr>
+			<td>E[A*=V]</td>
+			<td>匹配标签名为F的所有元素，这些元素的A特性值包含V</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>还可以通过位置来选择元素</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+	<tbody>
+		<tr>
+			<td>选择器</td>
+			<td>描述</td>
+		</tr>
+		<tr>
+			<td>:first</td>
+			<td>匹配上下文中第一个元素</td>
+		</tr>
+		<tr>
+			<td>:last</td>
+			<td>匹配上下文中最后一个元素</td>
+		</tr>
+		<tr>
+			<td>:first-child</td>
+			<td>匹配上下文中的第一个子节点</td>
+		</tr>
+		<tr>
+			<td>:last-child</td>
+			<td>匹配上下文中的最后一个子节点</td>
+		</tr>
+		<tr>
+			<td>:only-child</td>
+			<td>返回所有没有兄弟节点的元素</td>
+		</tr>
+		<tr>
+			<td>:nth-child(n)</td>
+			<td>返回上下文中第n个子节点</td>
+		</tr>
+		<tr>
+			<td>:nth-child(even|odd)</td>
+			<td>返回上下文中的偶数或奇数子节点</td>
+		</tr>
+		<tr>
+			<td>:nth-child(Xn+Y)</td>
+			<td>匹配上下文中的由提供的公式计算出的子节点。</td>
+		</tr>
+		<tr>
+			<td>:even</td>
+			<td>匹配上下文中的偶数元素</td>
+		</tr>
+		<tr>
+			<td>:odd</td>
+			<td>匹配上下文中的奇数元素</td>
+		</tr>
+		<tr>
+			<td>:eq(n)</td>
+			<td>匹配第n个元素</td>
+		</tr>
+		<tr>
+			<td>:gt(n)</td>
+			<td>匹配第n个元素之后的元素（不包含第n个元素）</td>
+		</tr>
+		<tr>
+			<td>:lt(n)</td>
+			<td>匹配第n个元素之前的元素（不包含第n个元素）</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>在这里，为了和CSS兼容，:nth-child过滤器从1开始计数，而其他的选择器都是从0开始计数。</p>
+
+<p>还有一些伪类，真他妈难记啊。</p>
+
+<p>元素</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+	<tbody>
+		<tr>
+			<td>选择器</td>
+			<td>描述</td>
+		</tr>
+		<tr>
+			<td>:animated</td>
+			<td>选择处于动画状态的元素</td>
+		</tr>
+		<tr>
+			<td>:button</td>
+			<td>选择按钮元素</td>
+		</tr>
+		<tr>
+			<td>:checkbox</td>
+			<td>选择复选框元素</td>
+		</tr>
+		<tr>
+			<td>:checked</td>
+			<td>选择处于选中状态的复选框或者单选按钮元素</td>
+		</tr>
+		<tr>
+			<td>:contains(food)</td>
+			<td>选择包含文本food的元素</td>
+		</tr>
+		<tr>
+			<td>:disabled</td>
+			<td>选择处于禁用状态的元素</td>
+		</tr>
+		<tr>
+			<td>:enabled</td>
+			<td>选择处于启用状态的元素</td>
+		</tr>
+		<tr>
+			<td>:file</td>
+			<td>选择文件输入元素，等于input[type=file]</td>
+		</tr>
+		<tr>
+			<td>:has(selector)</td>
+			<td>选择至少包含一个匹配指定选择器的元素的元素</td>
+		</tr>
+		<tr>
+			<td>:header</td>
+			<td>选择标题元素，如
+			<h1>到</h1>
+			</td>
+		</tr>
+		<tr>
+			<td>:hidden</td>
+			<td>选择隐藏元素</td>
+		</tr>
+		<tr>
+			<td>:image</td>
+			<td>选择图片输入元素(input[type=image])</td>
+		</tr>
+		<tr>
+			<td>:input</td>
+			<td>选择表单元素</td>
+		</tr>
+		<tr>
+			<td>:not(selector)</td>
+			<td>选择不匹配制定选择器的元素</td>
+		</tr>
+		<tr>
+			<td>:parent</td>
+			<td>选择有子节点的元素，空元素除外</td>
+		</tr>
+		<tr>
+			<td>:password</td>
+			<td>选择口令元素(input[type=password])</td>
+		</tr>
+		<tr>
+			<td>:radio</td>
+			<td>选择单选框元素</td>
+		</tr>
+		<tr>
+			<td>:reset</td>
+			<td>选择重置按钮元素</td>
+		</tr>
+		<tr>
+			<td>:selected</td>
+			<td>选择列表中处于选中状态的</td>
+		</tr>
+		<tr>
+			<td>:submit</td>
+			<td>选择提交按钮元素</td>
+		</tr>
+		<tr>
+			<td>:text</td>
+			<td>选择文本输入框元素</td>
+		</tr>
+		<tr>
+			<td>:visible</td>
+			<td>选择可见的元素</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>我们也可以组合过滤选择器，也就是使用多重过滤，例如：</p>
+
+<p><code>:checkbox:checked:enabled //选择了同时处于启用和选中状态的复选框。</code></p>
+
+<p>创建新的HTML元素时，可以使用例如：</p>
+
+<p><code>$(&quot;</code></p>
+
+<p><code>&quot;)</code></p>
+
+<p>&nbsp;</p>
+
+<p>的方式来创建一个空白的div元素，这与$(&quot;</p>
+
+<p>&quot;)和$(&quot;</p>
+
+<p>&quot;)是等价的。</p>
+
+<p>&nbsp;</p>
+
+<p>利用jQuery的链式操作，创建更复杂的元素也不会太难。</p>
+
+<p>比如，我们可以用css方法为元素应用样式，也可以用attr()方法为元素创建特性。例如：</p>
+
+<p><code>$(&quot;&quot;,</code></p>
+
+<p><code>&nbsp; {</code></p>
+
+<p><code>&nbsp; &nbsp; src:&quot;image/little.bear.png&quot;,</code></p>
+
+<p><code>&nbsp; &nbsp; alt:&quot;little bear&quot;,</code></p>
+
+<p><code>&nbsp; &nbsp; title:&quot;I woof in &nbsp;your general direction&quot;,</code></p>
+
+<p><code>&nbsp; &nbsp; click:function(){</code></p>
+
+<p><code>&nbsp; &nbsp; &nbsp; alert($(this).attr(&quot;title&quot;));</code></p>
+
+<p><code>&nbsp; &nbsp; }</code></p>
+
+<p><code>&nbsp; })</code></p>
+
+<p><code>&nbsp; .css({</code></p>
+
+<p><code>&nbsp; &nbsp; cursor:&quot;pointer&quot;,</code></p>
+
+<p><code>&nbsp; &nbsp; border:&quot;1px solid black&quot;</code></p>
+
+<p><code>&nbsp; })</code></p>
+
+<p><code>&nbsp; .appendTo(&quot;body&quot;);</code></p>
+
+<p>甚至可以省略对链式方法css的调用，用attribute参数中的对象的属性来代替。</p>
+
+<p>&nbsp;</p>
+
+<p>对包装集进行操作</p>
+
+<p>1. 通过索引获取元素</p>
+
+<pre>
+size()
+
+返回包装集中元素的个数，无参数
+
+</pre>
+
+<pre>
+get(index)
+
+获取包装集中的一个或全部匹配元素。如果不指定参数，则返回所有元素，若提供了index参数，则会返回index所对应的元素</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+eq(index)
+
+获取包装集中与index参数相对应的元素，并且返回只包含次元素的新包装集</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+first()
+
+获取包装集中的第一个元素
+
+last()
+
+获取包装集中的最后一个元素</pre>
+
+<p>&nbsp;</p>
+
+<p>2. 以数组形式获取所有元素</p>
+
+<p>toArray()</p>
+
+<p>将包装集里的所有元素作为DOM元素数组返回</p>
+
+<p>&nbsp;</p>
+
+<p>3. 获取元素的索引</p>
+
+<p>index(element)</p>
+
+<p>在包装集中查找传入的元素，返回它在包装集中的下标，或者返回包装集中的第一个元素在同级节点中的下标。如果没有找到此元素，返回-1</p>
+
+<p>&nbsp;</p>
+
+<p>分解元素包装集</p>
+
+<p>1. 添加更多元素到包装集</p>
+
+<pre>
+add(expression, context)
+
+创建包装集的副本并向其中添加由expression参数指定的元素。
+
+这里context指定一个上下文，用来缩小匹配第一个参数的元素的查找范围。默认为整个document</pre>
+
+<p>&nbsp;</p>
+
+<p>实用的一种用法：</p>
+
+<p><code>$(&#39;img[alt]&#39;)</code></p>
+
+<p><code>&nbsp; .addClass(&quot;thickBorder&quot;)//为拥有alt属性的img标签添加thickBorder类</code></p>
+
+<p><code>&nbsp; .add(&quot;img[title]&quot;)//给包装集添加拥有title属性的img标签</code></p>
+
+<p><code>&nbsp; .addClass(&quot;seeThrouth&quot;);//给拥有alt和title属性的img标签添加seeThrough类</code></p>
+
+<p>&nbsp;</p>
+
+<p>2. 整理包装集中的内容</p>
+
+<pre>
+not(expression)
+
+创建包装集的副本，从中删除那些与expression参数值指定的标准相匹配的元素。</pre>
+
+<p>可以向not方法传递元素引用或者元素数组引用来删除单个元素。当需要最大限度的灵活性时，可以向not()传递一个函数，例如：</p>
+
+<p><code>$(&quot;imt&quot;).not(function(){return !$(this).hasClass(&quot;keepMe&quot;);})</code></p>
+
+<p>这个表达式会选择所有img元素，然后删除不包含CSS类keepMe的元素。</p>
+
+<p>&nbsp;</p>
+
+<pre>
+filter(expression)
+
+创建包装集的副本，并从中删除那些与expression参数指定的标准不匹配的元素。（与not相反）</pre>
+
+<p>&nbsp;</p>
+
+<p>3. 获取包装集的子集</p>
+
+<pre>
+slice(begin, end)
+
+创建并返回新包装集，此包装集包含匹配集中一个连续的不分。begin和end都是一个数字，从0开始计数</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+has(test)
+
+创建并返回新包装集，此包装集只包含原始包装集中子节点匹配test表达式的元素</pre>
+
+<p>&nbsp;</p>
+
+<p>4. 转换包装集中的元素</p>
+
+<pre>
+map(callback)
+
+为包装集中的每一个元素调用回调函数，并将返回值收集到jQuery对象实例中</pre>
+
+<p>看不太懂，举个例子看看</p>
+
+<p>var allIds = $(&quot;div&quot;).map(function(){</p>
+
+<p>&nbsp; return (this.id == undefined) ？ null : this.id;</p>
+
+<p>}).get();</p>
+
+<p>嗨，不看了，看不太懂啥意思，不用就是了。</p>
+
+<p>&nbsp;</p>
+
+<p>5. 遍历包装集中的元素</p>
+
+<p>each(iterator)</p>
+
+<p>遍历匹配集中的所有元素，为每一个元素调用传入的迭代函数。</p>
+
+<p>例子：</p>
+
+<p>$([1,2,3]).each(function(){alert this;});</p>
+
+<p>传入$()中数组的每个元素调用迭代函数，函数中的this指向单独的数组项。</p>
+
+<p>&nbsp;</p>
+
+<p>使用关系获取包装集</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+	<tbody>
+		<tr>
+			<td>方法</td>
+			<td>描述</td>
+		</tr>
+		<tr>
+			<td>children([selector])</td>
+			<td>返回由包装元素所有的子节点组成的包装集（不包含重复的子节点）</td>
+		</tr>
+		<tr>
+			<td>closest([selector])</td>
+			<td>返回由与传入参数匹配的单个邻近祖先元素组成的包装集</td>
+		</tr>
+		<tr>
+			<td>contents()</td>
+			<td>返回由每个元素的内容组成的包装集，包括文本节点</td>
+		</tr>
+		<tr>
+			<td>next([selector])</td>
+			<td>返回由每个包装元素后面下一个同级元素</td>
+		</tr>
+		<tr>
+			<td>nextAll([selector])</td>
+			<td>返回由每个包装元素后面所有的同级元素组成的包装集</td>
+		</tr>
+		<tr>
+			<td>nextUntio([selector])</td>
+			<td>返回由每个包装元素后面的所有同级元素组成的包装集，直到遇到与选择器相匹配的元素，但不包括此元素</td>
+		</tr>
+		<tr>
+			<td>offsetParent()</td>
+			<td>返回由包装集中离第一个元素最近的，使用相对或者据对定位的祖先元素组成的包装集</td>
+		</tr>
+		<tr>
+			<td>parent([selector])</td>
+			<td>返回由每个包装元素的直接父元素组成的包装集</td>
+		</tr>
+		<tr>
+			<td>parents([selector])</td>
+			<td>返回由每个包装元素所有的祖先元素组成的包装集（不包含重复元素）</td>
+		</tr>
+		<tr>
+			<td>parentsUntil([selector])</td>
+			<td>返回由每个包装元素所有的祖先元素组成的包装集，直至遇到选择器匹配的元素，但不包括此元素</td>
+		</tr>
+		<tr>
+			<td>prev([selector])</td>
+			<td>返回由每个包装元素前面紧邻的同级元素（不包含重复元素）组成的包装集</td>
+		</tr>
+		<tr>
+			<td>prevAll([selector])</td>
+			<td>返回由每个包装元素前面所有的同级元素组成的包装集</td>
+		</tr>
+		<tr>
+			<td>prevUntil([selector])</td>
+			<td>返回由每个包装元素前面所有的同级元素组成的包装集，直至遇到选择器匹配的元素</td>
+		</tr>
+		<tr>
+			<td>siblings([selector])</td>
+			<td>返回由每个包装元素的所有同级元素（不包含重复元素）组成的包装集</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>更多的处理包装集的方式</p>
+
+<pre>
+find(selector)
+
+返回新的包装集，它包含原始包装集中与传入的选择器表达式相匹配的元素的所有后代元素。
+
+例子：wrappedSet.find(&#39;p cite&#39;)//返回由wrappedSet包装集的各个元素的后代中符合p cite选择器的元素。
+
+
+is(selector)
+
+返回包装集中是否存在与传入的选择器表达式相匹配的元素，如果有则返回true，如果没有则返回false</pre>
+
+<p>&nbsp;</p>
+
+<p>管理jQuery链</p>
+
+<pre>
+end()
+
+在jQuery方法链中用来将当前的包装集回滚到前一个返回的包装集
+
+不用举例，这个还是记得的。</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+andSelf()
+
+合并方法链中的前两个包装集
+
+例子：</pre>
+
+<p><code>$(&quot;div&quot;)</code></p>
+
+<p><code>&nbsp; &nbsp; .addClass(&quot;a&quot;) //为所有div元素添加a类</code></p>
+
+<p><code>&nbsp; &nbsp; .find(&quot;img&quot;) //找到div元素的后代里的img元素</code></p>
+
+<p><code>&nbsp; &nbsp; .addClass(&quot;b&quot;) //为上行中img元素添加b类</code></p>
+
+<p><code>&nbsp; &nbsp; .andSelf() //合并div元素和img元素</code></p>
+
+<p><code>&nbsp; &nbsp; .addClass(&quot;c&quot;); //添加c类</code></p>
+
+<p>&nbsp;</p>
