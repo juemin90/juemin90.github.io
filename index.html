@@ -33,7 +33,7 @@ title: 卢珏玟的博客
     <div id="panel_blog">
     <div class="container">
         <div class="col-md-8" id="content">
-            {% for post in site.posts %}
+            {% for post in paginator.posts %}
             <article class="holder" id="blog">
                 <div class="header">
                     <a href="{{ site.baseurl }}{{post.url}}">
@@ -61,7 +61,19 @@ title: 卢珏玟的博客
                 </div>
             </article>
         {% endfor %}
-                   
+         <div class="pagination">
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+          {% else %}
+            <span class="previous">Previous</span>
+          {% endif %}
+          <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+          {% else %}
+            <span class="next ">Next</span>
+          {% endif %}
+        </div>          
         </div>
         <div class="col-md-4 col-sm-5 " id="aside">
             <article id="about-me" class="aside-holder">
@@ -88,7 +100,7 @@ title: 卢珏玟的博客
                     <hr>
 
                     {% endfor %}
-                        <p>Totally 2 blogs</p>
+                        <p>Totally {{total_posts}} blogs</p>
                     </article>
             <article id="recent-replies" class="aside-holder"><h2>recent replies</h2>
                         <hr>
