@@ -9,7 +9,7 @@ title: 卢珏玟的博客
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="/css/public.css">
     <title>{{ page.title }}</title>
     <script>
     var _hmt = _hmt || [];
@@ -61,19 +61,21 @@ title: 卢珏玟的博客
                 </div>
             </article>
         {% endfor %}
-         <div class="pagination">
-          {% if paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
-          {% else %}
-            <span class="previous">Previous</span>
-          {% endif %}
-          <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-          {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-          {% else %}
+        <nav>
+          <ul class="pager">
+            {% if paginator.previous_page %}
+            <li><a href="{{ paginator.previous_page_path }}">Previous</a></li>
+             {% else %}
+             <span class="previous">Previous</span>
+              {% endif %}
+              <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+               {% if paginator.next_page %}
+            <li><a href="{{ paginator.next_page_path }}">Next</a></li>
+            {% else %}
             <span class="next ">Next</span>
           {% endif %}
-        </div>          
+          </ul>
+        </nav>        
         </div>
         <div class="col-md-4 col-sm-5 " id="aside">
             <article id="about-me" class="aside-holder">
