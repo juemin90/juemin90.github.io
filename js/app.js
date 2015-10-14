@@ -26,7 +26,6 @@
 			var page_scroll = window.pageYOffset, 
 				head = $("#head");
 				prev_height = head.height()+"px";
-				console.log(prev_height);
 			if(page_scroll>100){
 				head.addClass("scrolled")
 			} else if(page_scroll<100) {
