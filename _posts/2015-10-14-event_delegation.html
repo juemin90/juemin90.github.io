@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Bullet物理引擎之碰撞检测
-theme:physics engine
+title: JS事件托管
+theme:JavaScript
 ---
 <p>事件委托，利用的就是事件的冒泡。他的好处有：性能好；针对新创建的元素也会绑定事件。</p>
 
@@ -10,15 +10,7 @@ theme:physics engine
 <p>假如有这样的一个html</p>
 <!-- more -->
 
-<p><code>&lt;ul id=&quot;lis&quot;&gt;</code></p>
-
-<p><code>&lt;li id=&quot;li1&quot;&gt;&lt;/li&gt;</code></p>
-
-<p><code>&lt;li id=&quot;li2&quot;&gt;&lt;/li&gt;</code></p>
-
-<p><code>&lt;li id=&quot;li3&quot;&gt;&lt;/li&gt;</code></p>
-
-<p><code>&lt;/ul&gt;</code></p>
+ul>li*4
 
 <p>当我们想给每个li添加事件，当点击的时候背景颜色改成红色的时候，可以用循环的方法给每个li添加事件，比如：</p>
 
