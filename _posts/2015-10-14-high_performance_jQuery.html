@@ -1,0 +1,246 @@
+---
+layout: default
+title: 如何搞笑的使用jQuery
+theme:jQuery
+---
+<p>在使用jQuery的过程当中，遵守以下规则会优化jQuery的性能</p>
+
+<ul>
+	<li>总是从ID选择器开始继承</li>
+	<li>在class前使用tag</li>
+	<li>将jquery对象缓存起来</li>
+	<li>掌握强大的链式操作</li>
+	<li>使用子查询</li>
+	<li>对直接的DOM操作进行限制</li>
+	<li>冒泡</li>
+	<li>消除无效查询</li>
+	<li>推迟到 $(window).load</li>
+	<li>压缩js</li>
+	<li>全面掌握jquery库</li>
+</ul>
+
+<p>从第一个开始仔细讲。</p>
+
+<p>1. 总是从ID选择器开始继承</p>
+
+<p>因为jQuery里的ID选择器是直接调用原生JS的getElementById()方法，所以速度很快。</p>
+
+<p>如果一个元素有ID，$(&quot;#idName .className&quot;)这种写法是低效的。</p>
+
+<p>在选择多个元素的时候，其实是在说DOM的循环和遍历，这些都是比较慢的东西，为了提高性能，最好从就近的ID开始寻找，比如：$(&quot;#idName tagName&quot;);</p>
+
+<p>&nbsp;</p>
+
+<p>2. 在class前使用Tag</p>
+
+<p>第二快的选择器是tag选择器，因为它来自原生的getElementsByTagName()，总是用一个tag来限制class，也不要忘记从就近的ID开始寻找。</p>
+
+<p>注意在jQuery里，class选择器是最慢的，IE浏览器中甚至会遍历所有的节点，不管它用在哪里。不要用tagName来修饰ID，下面的例子会对所有的div元素寻找id为content的是哪一个节点：$(&quot;div#content&quot;)。</p>
+
+<p>&nbsp;</p>
+
+<p>3. 将jQuery对象缓存起来</p>
+
+<p>要养成将jQuery对象缓存起来的习惯。不要写成下面的样子：</p>
+
+<p>$(&lsquo;#traffic_light&nbsp;input.on).bind(&lsquo;click&lsquo;,&nbsp;function(){&hellip;});<br />
+$(&lsquo;#traffic_light&nbsp;input.on).css(&lsquo;border&rsquo;, &rsquo;3px&nbsp;dashed&nbsp;yellow&rsquo;);<br />
+$(&lsquo;#traffic_light&nbsp;input.on).css(&lsquo;background-color&lsquo;, &lsquo;orange&lsquo;);<br />
+$(&lsquo;#traffic_light&nbsp;input.on).fadeIn(&lsquo;slow&rsquo;);</p>
+
+<p>如果你打算将jquery结果对象用在程序的其它部分,或者你的function会多次执行, 那么就将他们缓存到一个全局变量中.</p>
+
+<p>定义一个全局容器来存放jquery结果, 我们就可以在其它函数引用它们:</p>
+
+<p>// 在全局范围定义一个对象 (例如: window对象)</p>
+
+<p>window.$my&nbsp;=</p>
+
+<p>{</p>
+
+<p>&nbsp; &nbsp; // 初始化所有可能会不止一次要使用的查询</p>
+
+<p>&nbsp; &nbsp; head&nbsp;: $(&lsquo;head&lsquo;),</p>
+
+<p>&nbsp; &nbsp; traffic_light&nbsp;: $(&lsquo;#traffic_light&lsquo;),</p>
+
+<p>&nbsp; &nbsp; traffic_button&nbsp;: $(&lsquo;#traffic_button&lsquo;)</p>
+
+<p>};</p>
+
+<p>4. 掌握强大的链式操作</p>
+
+<p>上面的例子也可以写成这样:</p>
+
+<p>var&nbsp;$active_light&nbsp;= $(&lsquo;#traffic_light&nbsp;input.on&rsquo;);$active_light.bind(&lsquo;click&rsquo;,&nbsp;function(){&hellip;})</p>
+
+<p>.css(&lsquo;border&rsquo;, &rsquo;3px&nbsp;dashed&nbsp;yellow&rsquo;)</p>
+
+<p>.css(&lsquo;background-color&rsquo;, &lsquo;orange&rsquo;)</p>
+
+<p>.fadeIn(&lsquo;slow&rsquo;);</p>
+
+<p>这样可以写更少的代码, 让我们的js更轻量。</p>
+
+<p>&nbsp;</p>
+
+<p>5. 使用子查询</p>
+
+<p>例如, 我们可以用子查询的方法来抓取到亮或不亮的灯, 并缓存起来以备后续操作.</p>
+
+<p>var&nbsp;$traffic_light&nbsp;= $(&lsquo;#traffic_light&rsquo;),</p>
+
+<p>$active_light&nbsp;= $traffic_light.find(&lsquo;input.on&rsquo;),</p>
+
+<p>$inactive_lights&nbsp;= $traffic_light.find(&lsquo;input.off&rsquo;);</p>
+
+<p>&nbsp;</p>
+
+<p>6.&nbsp;对直接的DOM操作进行限制</p>
+
+<p>这里的基本思想是在内存中建立你确实想要的东西，然后更新DOM 。这并不是一个jQuery最佳实践，但必须进行有效的JavaScript操作 。直接的DOM操作速度很慢。</p>
+
+<p>例如,你想动态的创建一组列表元素, 千万不要这么做:</p>
+
+<p>var&nbsp;top_100_list&nbsp;=&nbsp;[...],&nbsp;//假设这里是100个独一无二的字符串</p>
+
+<p>&nbsp; &nbsp; $mylist&nbsp;= $(&lsquo;#mylist&lsquo;);&nbsp;//jQuery 选择到 &lt;ul&gt; 元素t</p>
+
+<p>&nbsp;for&nbsp;(var&nbsp;i=0,&nbsp;l=top_100_list.length;&nbsp;i&lt;l;&nbsp;i++)</p>
+
+<p>{</p>
+
+<p>&nbsp; &nbsp; $mylist.append(&lsquo;&lt;li&gt;&lsquo;&nbsp;+&nbsp;top_100_list[i]&nbsp;+&nbsp;&lsquo;&lt;/li&gt;&lsquo;);</p>
+
+<p>}</p>
+
+<p>我们应该将整套元素字符串在插入进dom中之前全部创建好:</p>
+
+<p>var&nbsp;top_100_list&nbsp;=&nbsp;[...],&nbsp;// assume this has 100 unique strings</p>
+
+<p>&nbsp; &nbsp; $mylist&nbsp;= $(&lsquo;#mylist&lsquo;),&nbsp;// jQuery selects our &lt;ul&gt; element</p>
+
+<p>&nbsp; &nbsp; top_100_li&nbsp;=&nbsp;&quot;&quot;;&nbsp;// 这个变量将用来存储我们的列表元素</p>
+
+<p>&nbsp;</p>
+
+<p>for&nbsp;(var&nbsp;i=0,&nbsp;l=top_100_list.length;&nbsp;i&lt;l;&nbsp;i++)</p>
+
+<p>{</p>
+
+<p>&nbsp; &nbsp; top_100_li&nbsp;+=&nbsp;&lsquo;&lt;li&gt;&lsquo;&nbsp;+&nbsp;top_100_list[i]&nbsp;+&nbsp;&lsquo;&lt;/li&gt;&lsquo;;</p>
+
+<p>}</p>
+
+<p>$mylist.html(top_100_li);</p>
+
+<p>我们在插入之前将多个元素包裹进一个单独的父级节点会更快:</p>
+
+<p>var&nbsp;top_100_list&nbsp;=&nbsp;[...],&nbsp;// assume this has 100 unique strings</p>
+
+<p>&nbsp; &nbsp; $mylist&nbsp;= $(&lsquo;#mylist&lsquo;),&nbsp;// jQuery selects our &lt;ul&gt; element</p>
+
+<p>&nbsp; &nbsp; top_100_ul&nbsp;=&nbsp;&lsquo;&lt;ul id=&quot;#mylist&quot;&gt;&lsquo;;&nbsp;// This will store our entire unordered list</p>
+
+<p>&nbsp;</p>
+
+<p>for&nbsp;(var&nbsp;i=0,&nbsp;l=top_100_list.length;&nbsp;i&lt;l;&nbsp;i++)</p>
+
+<p>{</p>
+
+<p>&nbsp; &nbsp; top_100_ul&nbsp;+=&nbsp;&lsquo;&lt;li&gt;&lsquo;&nbsp;+&nbsp;top_100_list[i]&nbsp;+&nbsp;&lsquo;&lt;/li&gt;&lsquo;;</p>
+
+<p>}</p>
+
+<p>top_100_ul&nbsp;+=&nbsp;&lsquo;&lt;/ul&gt;&lsquo;;&nbsp;// //关闭无序列表</p>
+
+<p>&nbsp;</p>
+
+<p>$mylist.replaceWith(top_100_ul);</p>
+
+<p>如果你做了以上几条还是担心有性能问题,那么:</p>
+
+<ul>
+	<li>试试jquery的 clone() 方法, 它会创建一个节点树的副本, 它允许以&rdquo;离线&rdquo;的方式进行dom操作, 当你操作完成后再将其放回到节点树里.</li>
+	<li>使用<a href="http://www.devguru.com/technologies/xmldom/quickref/obj_documentFragment.html" target="_blank">DOM DocumentFragments</a>. 正如jQuery作者所言, 它的性能要明显优于直接的dom操作.</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>7. 冒泡</p>
+
+<p>就是事件代理</p>
+
+<p>&nbsp;</p>
+
+<p>8.&nbsp;消除无效查询</p>
+
+<p>8. 消除无效查询</p>
+
+<p>尽管jquery可以很优雅的处理没有匹配元素的情况, 但它还是需要花费时间去寻找. 如果你整站只有一个全局js, 那么极有可能把所有的jquery函数塞进$(document)ready(function(){//所有你引以为傲的代码})里.</p>
+
+<p>只运行在页面里用到的函数. 大多数有效的方法就是使用行内初始化函数, 这样你的模板就能准确的控制何时何处该执行js.</p>
+
+<p>例如, 你的&rdquo;文章&rdquo;页面模板, 你可能会引用如下的代码在body结束处:</p>
+
+<p>&lt;script&nbsp;type=&quot;text/javascript&gt;<br />
+mylib.article.init();<br />
+&lt;/script&gt;<br />
+&lt;/body&gt;</p>
+
+<p>如果你的页面模板包含一些多变的模块可能不会出现在页面中, 或者为了视觉呈现的原因你需要它们能够快速加载, 你可以将初始化函数紧跟在模块之后.</p>
+
+<p>&lt;ul&nbsp;id=&quot;traffic_light&quot;&gt;<br />
+&nbsp;&nbsp; &nbsp;&lt;li&gt;&lt;input&nbsp;type=&quot;radio&quot;&nbsp;class=&quot;on&quot;&nbsp;name=&quot;light&quot;&nbsp;value=&quot;red&quot;&nbsp;/&gt;&nbsp;Red&lt;/li&gt;<br />
+&nbsp;&nbsp; &nbsp;&lt;li&gt;&lt;input&nbsp;type=&quot;radio&quot;&nbsp;class=&quot;off&quot;&nbsp;name=&quot;light&quot;&nbsp;value=&quot;yellow&quot;&nbsp;/&gt;&nbsp;Yellow&lt;/li&gt;<br />
+&nbsp;&nbsp; &nbsp;&lt;li&gt;&lt;input&nbsp;type=&quot;radio&quot;&nbsp;class=&quot;off&quot;&nbsp;name=&quot;light&quot;&nbsp;value=&quot;green&quot;&nbsp;/&gt;&nbsp;Green&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+&lt;script&nbsp;type=&quot;text/javascript&gt;<br />
+mylib.traffic_light.init();<br />
+&lt;/script&gt;</p>
+
+<p>你的全局js库可能会是这样子的:</p>
+
+<p>var&nbsp;mylib&nbsp;=<br />
+{<br />
+&nbsp;&nbsp; &nbsp;article_page&nbsp;:<br />
+&nbsp;&nbsp; &nbsp;{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;init&nbsp;:&nbsp;function()<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Article page specific jQuery functions.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />
+&nbsp;&nbsp; &nbsp;},<br />
+&nbsp;&nbsp; &nbsp;traffic_light&nbsp;:<br />
+&nbsp;&nbsp; &nbsp;{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;init&nbsp;:&nbsp;function()<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Traffic light specific jQuery functions.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />
+&nbsp;&nbsp; &nbsp;}<br />
+}</p>
+
+<p>9. 推迟到 $(window).load</p>
+
+<p>jquery对于开发者来说有一个很诱人的东西, 可以把任何东西挂到$(document).ready下冒充事件. 在大多数例子中你都会发现这样的情况.</p>
+
+<p>尽管$(document).rady 确实很有用, 它可以在页面渲染时,其它元素还没下载完成就执行. 如果你发现你的页面一直是载入中的状态, 很有可能就是$(document).ready函数引起的.</p>
+
+<p>你可以通过将jquery函数绑定到$(window).load 事件的方法来减少页面载入时的cpu使用率. 它会在所有的html(包括iframe)被下载完成后执行.</p>
+
+<p>$(window).load(function(){<br />
+// 页面完全载入后才初始化的jQuery函数.<br />
+});</p>
+
+<p>多余的功能例如拖放, 视觉特效和动画, 预载入隐藏图像,等等. 都是适合这种技术的场合.</p>
+
+<p>&nbsp;</p>
+
+<p>10. 压缩js</p>
+
+<p>推荐一个js在线压缩地址:&nbsp;<a href="http://dean.edwards.name/packer/" target="_blank">http://dean.edwards.name/packer/</a></p>
+
+<p>&nbsp;</p>
+
+<p>11. 全面掌握jquery库</p>
+
+<p>知己知彼, 百战百胜. 只有更深入的了解jQuery才能更灵活的使用它. 这里提供一个<a href="http://www.artzstudio.com/files/jquery-rules/jquery_1.3_cheatsheet_v1.pdf" target="_blank">jQuery的速查手册</a>, 可以打印出来随身携带. 要是有能力将jQuery源码通读一遍那就更好了.</p>
