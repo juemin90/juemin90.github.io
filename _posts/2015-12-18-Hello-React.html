@@ -1,0 +1,309 @@
+---
+layout: default
+title: 初识React.js
+theme: React.js 
+---
+<p>终于有机会用React来写项目了，也是进公司之后第一次自己从设计到架构到开发，比较期待自己以后的表现。</p>
+
+<p>先看看React.js是个什么东西。</p>
+
+<p>React是现在最热门，最流行的前端框架。起源于Facebook的内部项目，因为facebook对市场上所有JavaScript的MVC模式都不满意，决定自己写一套，后来也用在了架设Instagram。</p>
+
+<p>这个项目从最早的UI引擎变成了一整套前后端通吃的Web App解决方案。衍生的React Native项目的目标更是宏伟，希望用写Web App的方式去写Native App。如果能够实现，整个互联网行业都会被颠覆。因为同一组人只需要写一次UI，就能同事运行在服务器、浏览器和手机。</p>
+
+<p>先记录大牛阮一峰在github做的初学react的项目：https://github.com/ruanyf/react-demos。跟着做一遍基本上就懂了。</p>
+
+<p>现在看看React怎么写。</p>
+
+<p>1. HTML模板</p>
+
+<p>因为react不需要操作DOM，而且写组件也是用js的形式来写，所以只需要一个最外层的模板即可，如：</p>
+
+<pre>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;../build/react.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../build/react-dom.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../build/browser.min.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;example&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;text/babel&quot;&gt;
+      // ** Our code goes here! **
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>上面代码有两个地方需要注意。首先，最后一个script标签的type属性为text/babel。这是因为React独有的JSX语法，使用JSX的地方，都要加上type=&quot;text/babel&quot;。Browser.js的作用是将JSX语法转化为JavaScript语法，这一步很消耗时间，时机上线的时候，应该将它放在服务器完成。</p>
+
+<p><code>$ babel src --out-dir build</code></p>
+
+<p>2. ReactDOM.render()</p>
+
+<p>ReactDom.render是React的最基本的方法，用于将模板转为HTML语言，并插入指定的DOM节点。</p>
+
+<pre>
+<code>ReactDOM.render(
+  &lt;h1&gt;Hello, world!&lt;/h1&gt;,
+  document.getElementById(&#39;example&#39;)
+);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>上面将一个h1标题，插入example节点。</p>
+
+<p>&nbsp;</p>
+
+<p>3. JSX语法</p>
+
+<p>这个会了，有两种形式，想用啥用啥。</p>
+
+<p>&nbsp;</p>
+
+<p>4. 组件</p>
+
+<p>React允许将代码封装成组件(component)，然后像普通HTML标签一样，在网页中插入这个插件。</p>
+
+<p>React.createClass方法就用于生成一个组件类。</p>
+
+<pre>
+<code>var HelloMessage = React.createClass({
+  render: function() {
+    return &lt;h1&gt;Hello {this.props.name}&lt;/h1&gt;;
+  }
+});
+
+ReactDOM.render(
+  &lt;HelloMessage name=&quot;John&quot; /&gt;,
+  document.getElementById(&#39;example&#39;)
+);</code></pre>
+
+<p>上面代码中，变量HelloMessage就是一个组件类，模板中插入HelloMessage时，会自动生成HelloMessage的一个实例，所有组件类都必须有自己的render方法，用于输出组件。</p>
+
+<p>&nbsp;</p>
+
+<p>5. this.props.children</p>
+
+<p>this.props对象的属性与组件的属性一一对应，但是有一个例外，就是this.props.children属性。它表示组件的所有子节点。</p>
+
+<p>&nbsp;</p>
+
+<p>6. PropTypes</p>
+
+<p>组件的属性可以接受任意值，字符串、对象、函数等等都可以。有时，我们需要一种机制，验证别人使用组件时，提供的参数是否符合要求。</p>
+
+<pre>
+<code>var MyTitle = React.createClass({
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+  },
+
+  render: function() {
+     return &lt;h1&gt; {this.props.title} &lt;/h1&gt;;
+   }
+});</code></pre>
+
+<p>上面的Mytitle组件有一个title属性。PropTypes告诉React，这个title属性是必须的，而且它的值必须是字符串。</p>
+
+<pre>
+<code>var data = 123;
+
+ReactDOM.render(
+  &lt;MyTitle title={data} /&gt;,
+  document.body
+);</code></pre>
+
+<p>这样是会出错的。</p>
+
+<p>更多的<code>PropTypes</code>设置，可以查看<a href="http://facebook.github.io/react/docs/reusable-components.html" target="_blank">官方文档</a>。</p>
+
+<p>此外，getDefaultProps方法可以用来设置组件属性的默认值。</p>
+
+<pre>
+<code>var MyTitle = React.createClass({
+  getDefaultProps : function () {
+    return {
+      title : &#39;Hello World&#39;
+    };
+  },
+
+  render: function() {
+     return &lt;h1&gt; {this.props.title} &lt;/h1&gt;;
+   }
+});
+
+ReactDOM.render(
+  &lt;MyTitle /&gt;,
+  document.body
+);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>7. 获取真实的DOM节点</p>
+
+<p>组件并不是真实的DOM节点，而是存在于内存之中的一种数据结构，叫做虚拟DOM(Virtual DOM)。只有当它插入文档以后，才会变成真是的DOM。根据React的设计，所有的DOM变动，都现在虚拟DOM上发生，然后再将实际发生变动的部分，反映在真实DOM上，这种算法叫做DOM diff, 它可以极大提高网页的性能表现。</p>
+
+<p>但是，有时需要从组件获取真实DOM的节点，这时就要用到ref属性。</p>
+
+<pre>
+<code>var MyComponent = React.createClass({
+  handleClick: function() {
+    this.refs.myTextInput.focus();
+  },
+  render: function() {
+    return (
+      &lt;div&gt;
+        &lt;input type=&quot;text&quot; ref=&quot;myTextInput&quot; /&gt;
+        &lt;input type=&quot;button&quot; value=&quot;Focus the text input&quot; onClick={this.handleClick} /&gt;
+      &lt;/div&gt;
+    );
+  }
+});
+
+ReactDOM.render(
+  &lt;MyComponent /&gt;,
+  document.getElementById(&#39;example&#39;)
+);</code></pre>
+
+<p>需要注意的是，ref属性获取的是真实的DOM，所以必须等到虚拟DOM插入文档以后，才能使用这个属性，否则会报错。上面代码中，通过为组件指定Click事件的回调函数，确保了只有等到DOM发生Click事件之后，才会读取this.refs[refName]属性。</p>
+
+<p>8. this.state</p>
+
+<p>组件避免不了要与用户互动，React的一大创新，就是将组件看成是一个状态机，一开始有一个初始状态，然后用户互动，导致状态变化，从而触发重新渲染UI。</p>
+
+<pre>
+<code>var LikeButton = React.createClass({
+  getInitialState: function() {
+    return {liked: false};
+  },
+  handleClick: function(event) {
+    this.setState({liked: !this.state.liked});
+  },
+  render: function() {
+    var text = this.state.liked ? &#39;like&#39; : &#39;haven\&#39;t liked&#39;;
+    return (
+      &lt;p onClick={this.handleClick}&gt;
+        You {text} this. Click to toggle.
+      &lt;/p&gt;
+    );
+  }
+});
+
+ReactDOM.render(
+  &lt;LikeButton /&gt;,
+  document.getElementById(&#39;example&#39;)
+);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>9. 表单</p>
+
+<p>用户在表单填入内容的时候，属于用户跟组件的互动，所以不能用this.props读取。</p>
+
+<pre>
+<code>var Input = React.createClass({
+  getInitialState: function() {
+    return {value: &#39;Hello!&#39;};
+  },
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+  },
+  render: function () {
+    var value = this.state.value;
+    return (
+      &lt;div&gt;
+        &lt;input type=&quot;text&quot; value={value} onChange={this.handleChange} /&gt;
+        &lt;p&gt;{value}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+});
+
+ReactDOM.render(&lt;Input/&gt;, document.body);</code></pre>
+
+<p>上面代码中，文本输入框的值，不能用this.props.value读取，而要定义一个onChange事件的回调函数，通过event.target.value读取用户输入的值。textarea元素、select元素、radio元素都属于这种情况。</p>
+
+<p>&nbsp;</p>
+
+<p>10. 组件的生命周期</p>
+
+<p>组件的生命周期分成三个状态：</p>
+
+<ul>
+	<li>Mounting: 已插入真实DOM</li>
+	<li>Updating: 正在被重新渲染</li>
+	<li>Unmounting: 已移出真实DOM</li>
+</ul>
+
+<p>React为每个状态都提供了两种处理函数，will函数在进入状态之前调用，did函数在进入状态之后调用，三种状态共计五中处理函数。</p>
+
+<ul>
+	<li>componentWillMount()</li>
+	<li>componentDidMount()</li>
+	<li>componentWillUpdate(object nextProps, object nextState)</li>
+	<li>componentDidUpdate(object prevProps, object prevState)</li>
+	<li>componentWillUnmount()</li>
+</ul>
+
+<p>此外，React还提供两种特殊状态的处理函数。</p>
+
+<ul>
+	<li>componentWillReceiveProps(object nextProps): 已加载组件收到新的参数时调用</li>
+	<li>shouldComponentUpdate(object nextProps, object nextState): 组件判读是否重新渲染时调用</li>
+</ul>
+
+<p>另外，组件的style属性的设置方式也值得注意，不能写成</p>
+
+<p><code>style=&quot;opacity:{this.state.opacity};&quot;</code></p>
+
+<p>而要写成</p>
+
+<p><code>style={{opacity: this.state.opacity }}</code></p>
+
+<p>&nbsp;</p>
+
+<p>11. Ajax</p>
+
+<p>组件的数据来源，通常是通过Ajax请求从服务器获取，可以使用componentDidMount方法设置Ajax请求，等到请求成功，再用this.setState方法重新渲染UI。</p>
+
+<pre>
+<code>var UserGist = React.createClass({
+  getInitialState: function() {
+    return {
+      username: &#39;&#39;,
+      lastGistUrl: &#39;&#39;
+    };
+  },
+
+  componentDidMount: function() {
+    $.get(this.props.source, function(result) {
+      var lastGist = result[0];
+      if (this.isMounted()) {
+        this.setState({
+          username: lastGist.owner.login,
+          lastGistUrl: lastGist.html_url
+        });
+      }
+    }.bind(this));
+  },
+
+  render: function() {
+    return (
+      &lt;div&gt;
+        {this.state.username}&#39;s last gist is
+        &lt;a href={this.state.lastGistUrl}&gt;here&lt;/a&gt;.
+      &lt;/div&gt;
+    );
+  }
+});
+
+ReactDOM.render(
+  &lt;UserGist source=&quot;<a href="https://api.github.com/users/octocat/gists">https://api.github.com/users/octocat/gists</a>&quot; /&gt;,
+  document.body
+);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
