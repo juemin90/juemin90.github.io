@@ -1,0 +1,291 @@
+---
+layout: default
+title: javascript中判断数组的正确姿势 
+theme: JavaScript 
+---
+<blockquote>
+<p>作者：韩子迟</p>
+
+<p>网址：http://www.cnblogs.com/zichi/p/5103842.html</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>在 Javascript 中，如何判断一个变量是否是数组？</p>
+
+<p>&nbsp;</p>
+
+<p>最好的方式是用 ES5 提供的 Array.isArray() 方法（毕竟原生的才是最屌的）：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>var a = [0, 1, 2];</p>
+
+<p>console.log(Array.isArray(a)); // true</p>
+</blockquote>
+
+<!-- more -->
+<p>&nbsp;</p>
+
+<p>但是鉴于低版本 IE 不支持 ES5，如需兼容，需要想想别的办法。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>typeof？</strong></p>
+
+<p>&nbsp;</p>
+
+<p>我们都知道，数组是特殊的对象，所以数组的 typeof 结果也是 object，而因为 null 的结果也是 object，所以如需用 typeof 运算符来判断数组，需要这么写：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>var a = [0, 1, 2];</p>
+
+<p>// 是 object 同时排除 null、排除纯对象</p>
+
+<p>console.log(typeof a === &#39;object&#39; &amp; a !== null &amp;&amp; Object.prototype.toString.call(a) !== &#39;[object Object]&#39;); &nbsp;// true</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p><strong>instanceof？</strong></p>
+
+<p>&nbsp;</p>
+
+<p>来回忆下 instanceof 运算符的使用方式。a instanceof b，如果返回 true，表示 a 是 b 的一个实例。那么如果 a instanceof Array 返回 true，是不是就说明 a 是 数组类型呢？跟 instanceof 师出同门的还有 constructor，是否同样可以判断呢？</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>var a = [0, 1, 2];</p>
+
+<p>console.log(a instanceof Array); &nbsp;// true 就是数组？</p>
+
+<p>console.log(a.constructor === Array); // true 数组？</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>答案是否定的，需要注意嵌套 frame 的情况。</p>
+
+<p>&nbsp;</p>
+
+<p>index.htm 代码：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>window.onload = function() {</p>
+
+<p>&nbsp; &nbsp; &nbsp;var a = window.frames[0].a;</p>
+
+<p>&nbsp; &nbsp; &nbsp;console.log(a instanceof Array); &nbsp;// false</p>
+
+<p>&nbsp; &nbsp; &nbsp;console.log(a.constructor === Array); &nbsp;// false</p>
+
+<p>};</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>a.htm 代码：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>window.a = [1, 2, 3];</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>我们看到 index.htm 代码中，变量 a 确实是一个数组，但是 a instanceof Array 的结果却是 false。</p>
+
+<p>&nbsp;</p>
+
+<p>这是因为每个 frame 都有一套自己的执行环境，跨 frame 实例化的对象彼此不共享原型链。如果打印 a instanceof window.frames[0].Array，那么结果就是 true 了。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>特性嗅探？</strong></p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>var a = [0, 1, 2];</p>
+
+<p>&nbsp;</p>
+
+<p>if (a.sort) {</p>
+
+<p>&nbsp;// 是数组</p>
+
+<p>}</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>也不靠谱，万一某个对象正好有值为 sort 的 key 呢？</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>var a = {sort: &#39;me&#39;};</p>
+
+<p>&nbsp;</p>
+
+<p>if (a.sort) {</p>
+
+<p>&nbsp;// 数组？</p>
+
+<p>&nbsp;// 其实我真的不是数组</p>
+
+<p>}</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>正确的姿势是使用 Object.prototype.toString() 判断：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>var a = [0, 1, 2];</p>
+
+<p>console.log(Object.prototype.toString.call(a) === &#39;[object Array]&#39;); // true</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>事实上，这也是一些类库进行数组（甚至其他类型）判断的主流方式。</p>
+
+<p>&nbsp;</p>
+
+<p>比如在 jQuery 中进行数组判断的相关代码（PS：摘自 jQuery 1.10.1，最近版本的 jQuery 只保留了 Array.isArray()，没有对不支持 ES5 的浏览器做兼容）：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>isArray: Array.isArray || function( obj ) {</p>
+
+<p>&nbsp; &nbsp;return jQuery.type(obj) === &quot;array&quot;;</p>
+
+<p>},</p>
+
+<p>&nbsp;</p>
+
+<p>type: function( obj ) {</p>
+
+<p>&nbsp; &nbsp;if ( obj == null ) {</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp;return String( obj );</p>
+
+<p>&nbsp; &nbsp;}</p>
+
+<p>&nbsp; &nbsp;return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot; ?</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp;class2type[ core_toString.call(obj) ] || &quot;object&quot; :</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp;typeof obj;</p>
+
+<p>},</p>
+
+<p>&nbsp;</p>
+
+<p>jQuery.each(&quot;Boolean Number String Function Array Date RegExp Object Error&quot;.split(&quot; &quot;), function(i, name) {</p>
+
+<p>&nbsp; &nbsp;class2type[ &quot;[object &quot; + name + &quot;]&quot; ] = name.toLowerCase();</p>
+
+<p>});</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>代码很清晰，如支持原生的 Array.isArray()，则直接判断，不支持的话调用 toString() 进行判断。同时可以看到很多其他类型变量的判断也是基于 toString() 方法。当然这里说的 toString() 均是 Object 原型链上的 toString() 方法。</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>console.log(Object.prototype.toString.call(10)); &nbsp;// [object Number]</p>
+
+<p>console.log(Object.prototype.toString.call(&#39;hello&#39;)); // [object String]</p>
+
+<p>console.log(Object.prototype.toString.call(true)); &nbsp;// [object Boolean]</p>
+
+<p>console.log(Object.prototype.toString.call([])); &nbsp;// [object Array]</p>
+
+<p>console.log(Object.prototype.toString.call({})); &nbsp;// [object Object]</p>
+
+<p>console.log(Object.prototype.toString.call(function(){})); &nbsp;// [object Function]</p>
+
+<p>console.log(Object.prototype.toString.call(/a/g)); &nbsp;// [object RegExp]</p>
+
+<p>console.log(Object.prototype.toString.call(null)); &nbsp;// [object Null]</p>
+
+<p>console.log(Object.prototype.toString.call(undefined)); // [object Undefined]</p>
+
+<p>console.log(Object.prototype.toString.call(new Date())); // [object Date]</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>Object.prototype.toString() 为何能返回这样类型的字符串？</p>
+
+<p>&nbsp;</p>
+
+<p>ECMA-262：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>Object.prototype.toString( ) When the toString method is called, the following steps are taken:</p>
+
+<p>1. Get the [[Class]] property of this object.</p>
+
+<p>2. Compute a string value by concatenating the three strings &ldquo;[object &ldquo;, Result (1), and &ldquo;]&rdquo;.</p>
+
+<p>3. Return Result (2)</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>上面的规范定义了 Object.prototype.toString 的行为：首先，取得对象的一个内部属性[[Class]]，然后依据这个属性，返回一个类似于 &ldquo;[object Array]&rdquo; 的字符串作为结果（[[]]用来表示语言内部用到的、外部不可直接访问的属性，称为 &ldquo;内部属性&rdquo;）。利用这个方法，再配合 call，我们可以取得任何对象的内部属性 [[Class]]，然后把类型检测转化为字符串比较，以达到我们的目的。还是先来看看在 ECMA 标准中 Array 的描述吧：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>new Array([ item0[, item1 [,&hellip;]]])</p>
+
+<p>The [[Class]] property of the newly constructed object is set to &ldquo;Array&rdquo;.</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>所以 Javascript 中判断数组的函数可以这样写：</p>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p>function isArray(a) {</p>
+
+<p>&nbsp;Array.isArray ? Array.isArray(a) : Object.prototype.toString.call(a) === &#39;[object Array]&#39;;</p>
+
+<p>}</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>Read More：</p>
+
+<p>&nbsp;</p>
+
+<ul>
+	<li>
+	<p>Javascript数组类型检测：编写更强壮的isArray函数</p>
+	</li>
+	<li>
+	<p>JavaScript:Object.prototype.toString方法的原理</p>
+	</li>
+</ul>
+
