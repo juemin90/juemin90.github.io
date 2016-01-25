@@ -1,0 +1,13 @@
+---
+layout: default
+title: 在React实现Loading动画
+theme: JavaScript 
+---
+<p>一个设计良好的Loading动画会很大程度上提升用户体验，减少用户等待时候的不适程度，所以可以在很多的web app/app中看到诸多很有趣的Loading动画。在这里，并不会讲怎么做一个Loading动画，而是要讲如何在React项目中实现Loading动画。</p>
+
+<p>都知道React.js是一个状态机(state machine)，页面是什么样子的，依赖于这个页面的state，Loading动画的show/hide也是如此。</p>
+
+<p>回想过往没有用React的项目中是怎么样实现的，比如Backbone.js。我们用ajax做网络请求，在调用ajax之前，用css设置<code>display: block</code>来显示Loading动画，然后在ajax里success或error的回调函数里设置<code>display: none来</code>隐藏Loading动画，就是这么简单。但是React中甚至React+Redux中，所有的事件是配合action, reducer和state来做的，网络请求也是用isomorphic-fetch来做，整个过程并没有ajax请求，更没有直接调用success和fail/error回调函数的机会。</p>
+
+<p>React的状态机是个很让人蛋疼的东西，但是用好了，确实可以让整个网页的状态变得很好管理。在执行fetch的时候，我们可以在action上加上isFetching(true/false)的字段来表示当前的状态是否在等待网络请求的结果，如果是true，则显示，如果是false，则不显示。大致上的原理是这样的，那看一下具体项目中应该怎么做，怎么灵活使用这个state。</p>
+
