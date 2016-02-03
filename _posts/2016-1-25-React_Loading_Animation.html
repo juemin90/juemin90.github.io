@@ -15,7 +15,7 @@ theme: JavaScript
 
 <p>从action开始说起。假设我们在做如下的一个fetch：</p>
 
-<blockquote>
+<pre>
 <p>export function getUserinfo(tel) {</p>
 
 <p>  return {</p>
@@ -29,13 +29,13 @@ theme: JavaScript
 <p>  };</p>
 
 <p>}</p>
-</blockquote>
+</pre>
 
 <p>我们在做一个名为RECEIVE_USERINFO的action，方法是GET</p>
 
 <p>然后是reducer</p>
 
-<blockquote>
+<pre>
 <p>  function userinfo(state = initialState, action) {</p>
 
 <p>    switch (action.type) {</p>
@@ -89,7 +89,7 @@ theme: JavaScript
 <p>    }</p>
 
 <p>  }  </p>
-</blockquote>
+</pre>
 
 <p>首先，如果action的状态（middleware里面已经封装好，status分别有FETCHING, SUCCESS, ERROR)是fetching的时候，就会返回<code>isFetching: true</code>，我们就可以在store的state里面拿到正在进行网络请求的状态</p>
 
@@ -99,7 +99,7 @@ theme: JavaScript
 
 <p>最后是要用到loading画面的container/component的代码</p>
 
-<blockquote>
+<pre>
 
 <p>render() {</p>
 
@@ -125,7 +125,7 @@ theme: JavaScript
 
 <p>}</p>
 
-</blockquote>
+</pre>
 
 <p>在这里我用了react-spinkit的loading组件，当isFetching是true的时候，就会显示，false的时候，就消失。</p>
 
