@@ -17,17 +17,11 @@ theme: JavaScript
 
 <pre>
 <p>export function getUserinfo(tel) {</p>
-
 <p>  return {</p>
-
 <p>    type: types.RECEIVE_USERINFO,</p>
-
 <p>    api: `/api/users/by_mobile/` + tel,</p>
-
 <p>    method: 'GET',</p>
-
 <p>  };</p>
-
 <p>}</p>
 </pre>
 
@@ -37,57 +31,31 @@ theme: JavaScript
 
 <pre>
 <p>  function userinfo(state = initialState, action) {</p>
-
 <p>    switch (action.type) {</p>
-
 <p>      case RECEIVE_USERINFO:</p>
-
 <p>        if (action.status === 'FETCHING') {</p>
-
 <p>          return {</p>
-
 <p>            isFetching: true,</p>
-
 <p>            data: state.data,</p>
-
 <p>          };</p>
-
 <p>        }</p>
-
 <p>        if (action.status === 'SUCCESS') {</p>
-
 <p>          return {</p>
-
 <p>            isFetching: false,</p>
-
 <p>            data: Object.assign({}, state.data, action.resp.data),</p>
-
 <p>          };</p>
-
 <p>        }</p>
-
 <p>        if (action.status === 'ERROR') {</p>
-
 <p>          alert('获取用户数据失败');</p>
-
 <p>          return {</p>
-
 <p>            isFetching: false,</p>
-
 <p>            data: state.data,</p>
-
 <p>          };</p>
-
 <p>        }</p>
-
 <p>        break;</p>
-
 <p>      default:</p>
-
 <p>        return state;</p>
-
 <p>    }</p>
-
 <p>  }  </p>
 </pre>
 
@@ -102,29 +70,17 @@ theme: JavaScript
 <pre>
 
 <p>render() {</p>
-
 <p>...</p>
-
 <p>...</p>
-
 <p>return {</p>
-
 <p>  <div></p>
-
 <p>    { isFetching &&</p>
-
-<p>      <div className="loading"></p>
-
-<p>        <Spinner spinnerName="cube-grid" /></p>
-
-<p>      </div></p>
-
+<p>      &lt;div className="loading"&gt;&lt;/p&gt;
+<p>        &lt;Spinner spinnerName="cube-grid" /&gt;&lt;/p&gt;
+<p>      &lt;/div&gt;&lt;/p&gt;
 <p>    }  </p>
-
 <p>  }</p>
-
 <p>}</p>
-
 </pre>
 
 <p>在这里我用了react-spinkit的loading组件，当isFetching是true的时候，就会显示，false的时候，就消失。</p>
