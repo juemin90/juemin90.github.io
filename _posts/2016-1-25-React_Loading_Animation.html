@@ -1,13 +1,132 @@
 ---
 layout: default
 title: 在React中使用Loading动画
-theme: JavaScript 
+theme: JavaScript
 ---
 <p>一个设计良好的Loading动画会很大程度上提升用户体验，减少用户等待时候的不适程度，所以可以在很多的web app/app中看到诸多很有趣的Loading动画。在这里，并不会讲怎么做一个Loading动画，而是要讲如何在React项目中实现Loading动画。</p>
 
 <p>都知道React.js是一个状态机(state machine)，页面是什么样子的，依赖于这个页面的state，Loading动画的show/hide也是如此。</p>
 
+<!-- more -->
+
 <p>回想过往没有用React的项目中是怎么样实现的，比如Backbone.js。我们用ajax做网络请求，在调用ajax之前，用css设置<code>display: block</code>来显示Loading动画，然后在ajax里success或error的回调函数里设置<code>display: none来</code>隐藏Loading动画，就是这么简单。但是React中甚至React+Redux中，所有的事件是配合action, reducer和state来做的，网络请求也是用isomorphic-fetch来做，整个过程并没有ajax请求，更没有直接调用success和fail/error回调函数的机会。</p>
 
 <p>React的状态机是个很让人蛋疼的东西，但是用好了，确实可以让整个网页的状态变得很好管理。在执行fetch的时候，我们可以在action上加上isFetching(true/false)的字段来表示当前的状态是否在等待网络请求的结果，如果是true，则显示，如果是false，则不显示。一言以蔽之，显示或隐藏应该由state来决定，而不是用户的某个行为触发的事件。大致上的原理是这样的，那看一下具体项目中应该怎么做，怎么灵活使用这个state。</p>
 
+<p>从action开始说起。假设我们在做如下的一个fetch：</p>
+
+<blockquote>
+<p>export function getUserinfo(tel) {</p>
+
+<p>  return {</p>
+
+<p>    type: types.RECEIVE_USERINFO,</p>
+
+<p>    api: `/api/users/by_mobile/` + tel,</p>
+
+<p>    method: 'GET',</p>
+
+<p>  };</p>
+
+<p>}</p>
+</blockquote>
+
+<p>我们在做一个名为RECEIVE_USERINFO的action，方法是GET</p>
+
+<p>然后是reducer</p>
+
+<blockquote>
+<p>  function userinfo(state = initialState, action) {</p>
+
+<p>    switch (action.type) {</p>
+
+<p>      case RECEIVE_USERINFO:</p>
+
+<p>        if (action.status === 'FETCHING') {</p>
+
+<p>          return {</p>
+
+<p>            isFetching: true,</p>
+
+<p>            data: state.data,</p>
+
+<p>          };</p>
+
+<p>        }</p>
+
+<p>        if (action.status === 'SUCCESS') {</p>
+
+<p>          return {</p>
+
+<p>            isFetching: false,</p>
+
+<p>            data: Object.assign({}, state.data, action.resp.data),</p>
+
+<p>          };</p>
+
+<p>        }</p>
+
+<p>        if (action.status === 'ERROR') {</p>
+
+<p>          alert('获取用户数据失败');</p>
+
+<p>          return {</p>
+
+<p>            isFetching: false,</p>
+
+<p>            data: state.data,</p>
+
+<p>          };</p>
+
+<p>        }</p>
+
+<p>        break;</p>
+
+<p>      default:</p>
+
+<p>        return state;</p>
+
+<p>    }</p>
+
+<p>  }  </p>
+</blockquote>
+
+<p>首先，如果action的状态（middleware里面已经封装好，status分别有FETCHING, SUCCESS, ERROR)是fetching的时候，就会返回<code>isFetching: true</code>，我们就可以在store的state里面拿到正在进行网络请求的状态</p>
+
+<p>然后，当action的状态变成SUCCESS的时候，就会返回<code>isFetching: false</code>，也就是说网络请求已经结束，可以停止显示loading画面了。</p>
+
+<p>就这样，我们就在store的state里面插入了可以作为判断是否显示loading画面的flag。</p>
+
+<p>最后是要用到loading画面的container/component的代码</p>
+
+<blockquote>
+
+<p>render() {</p>
+
+<p>...</p>
+
+<p>...</p>
+
+<p>return {</p>
+
+<p>  <div></p>
+
+<p>    { isFetching &&</p>
+
+<p>      <div className="loading"></p>
+
+<p>        <Spinner spinnerName="cube-grid" /></p>
+
+<p>      </div></p>
+
+<p>    }  </p>
+
+<p>  }</p>
+
+<p>}</p>
+
+</blockquote>
+
+<p>在这里我用了react-spinkit的loading组件，当isFetching是true的时候，就会显示，false的时候，就消失。</p>
+
+<p>在这里，最重要的地方就是理解网页的状态和store里的状态应该紧密的结合起来，要忘记之前的写代码的习惯，交互以及变化都要先通过redux的store状态树来进行。</p>
