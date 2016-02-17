@@ -67,25 +67,23 @@ a.social {
 a.social:hover {
     border-radius: 10px;
 }
-a.social#github {
+#github {
     background-position: 80px 40px;
 }
-a.social#weibo {
+#weibo {
     background-position: 80px 0;
 }
-a.social#facebook {
+#facebook {
     background-position: 200px 0;
 }
-a.social#twitter {
+#twitter {
     background-position: 240px 0;
 }
-a.social#stackoverflow {
+#stackoverflow {
     background-position: 40px 40px;
 }
-a.social#linkedin {
+#linkedin {
     background-position: 120px 0;
-}
-#innerContent {
 }
 footer {
     height:50px;
@@ -110,7 +108,7 @@ section.holder {
     line-height:50px;
 }
 
-section.holder#blog{
+#blog{
     line-height: 30px;
 }
 
@@ -160,9 +158,6 @@ article.holder .post-label {
     color:darksalmon;
 }
 
-#content .content {
-    /*margin:50px 0;*/
-}
 #content .footer {
     line-height: 50px;
 }
@@ -190,7 +185,7 @@ article.holder .post-label {
 }
 
 /*asdies*/
-article.aside-holder {
+.aside-holder {
     margin:20px 0;
     background-color:#ffffff;
     box-shadow: 2px 2px 2px #aaa;
@@ -221,7 +216,7 @@ article.aside-holder {
 }
 
 /*message page*/
-div#message-container {
+#message-container {
     margin-top:30px;
     padding:20px;
     min-height:100px;
@@ -237,11 +232,11 @@ div#message-container {
 #content #message .content {
     margin:20px 0;
 }
-div#message-container article {
+#message-container article {
     padding:20px;
 }
 
-div#message-container h1, h2, h3, h4, h5, h6, small{
+#message-container h1, h2, h3, h4, h5, h6, small{
     color:peru;
     text-transform: uppercase;
 }
@@ -249,10 +244,10 @@ div#message-container h1, h2, h3, h4, h5, h6, small{
 div.editor {
     padding:0 20px;
 }
-div.editor div.form-group {
+div.editor .form-group {
     margin:10px 0
 }
-p#message-preview {
+#message-preview {
     background-color: #ffffff;
     margin-top:20px;
     padding:10px;
@@ -330,7 +325,7 @@ p#message-preview {
         box-shadow: 2px 2px 2px #aaa;
     }
 
-    div#research section.research-selector {
+    .research-selector {
         padding-top:0;
         margin:0;
         min-height: 100px;
@@ -346,17 +341,17 @@ p#message-preview {
         float: none;
     }
 
-    div#message-container article {
+    #message-container article {
         padding:0;
     }
 
-    div#message-editor {
+    #message-editor {
         padding:0;
     }
-    p#message-preview {
+    #message-preview {
         display: none;
     }
-    span#theme {
+    #theme {
         display:none;
     }
 }
