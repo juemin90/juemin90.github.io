@@ -111,9 +111,3 @@ nav.pagination{
 	left:-100%;
 	top:30px;
 }
-#innerContent .label {
-	display: inline-block;
-	background-color: #428BCA;
-	padding: 0 10px;
-	float: right;
-}

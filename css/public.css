@@ -6,7 +6,7 @@ html, body {
     position: fixed;
     height:150px;
     width:100%;
-    line-height: 150px;    
+    line-height: 150px;
     background-color: rgba(255,255,255,0.8);
     overflow: hidden;
     transition:all 300ms ease;
@@ -133,6 +133,19 @@ article.holder {
     background-color:white;
     box-shadow: 2px 2px 2px #aaa;
     padding:30px 50px;
+}
+article.holder .post-label {
+	display: inline-block;
+	background-color: #428BCA;
+	padding: 0 10px;
+  text-align: right;
+}
+
+#innerContent .post-label {
+	display: inline-block;
+	background-color: #428BCA;
+	padding: 0 10px;
+  text-align: right;
 }
 
 
@@ -307,7 +320,7 @@ p#message-preview {
 
     article.holder {
         padding:10px 20px;
-    
+
     }
     section.holder {
         padding:30px 30px 0 30px;
