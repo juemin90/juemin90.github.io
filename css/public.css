@@ -135,17 +135,21 @@ article.holder {
     padding:30px 50px;
 }
 article.holder .post-label {
-	display: inline-block;
+	display: inline;
 	background-color: #428BCA;
 	padding: 0 10px;
   text-align: right;
+  border-radius: 3px;
+  color: white;
 }
 
 #innerContent .post-label {
-	display: inline-block;
+	display: inline;
 	background-color: #428BCA;
 	padding: 0 10px;
   text-align: right;
+  border-radius: 3px;
+  color: white;
 }
 
 
