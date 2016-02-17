@@ -102,7 +102,7 @@ nav.pagination{
 }
 #dialog #dialog_triangle{
 	position: absolute;
-	width:0px;
+	width:0;
 	height:0px;
 	border-top: 10px solid transparent;
     border-right: 20px solid rgba(72, 77, 216, 0.5);
@@ -110,4 +110,10 @@ nav.pagination{
 
 	left:-100%;
 	top:30px;
+}
+#innerContent .label {
+	display: inline-block;
+	background-color: #428BCA;
+	padding: 0 10px;
+	float: right;
 }

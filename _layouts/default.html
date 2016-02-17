@@ -15,7 +15,7 @@
 	(function() {
 	  var hm = document.createElement("script");
 	  hm.src = "//hm.baidu.com/hm.js?791b6e28c2e0619db9f66c55d31f40b2";
-	  var s = document.getElementsByTagName("script")[0]; 
+	  var s = document.getElementsByTagName("script")[0];
 	  s.parentNode.insertBefore(hm, s);
 	})();
 	</script>
@@ -39,7 +39,7 @@
 		                        <h1>{{ page.title }}</h1>
 		                    </a>
 		                    <hr>
-		                    <p>Posted by <small>Lu Juemin</small> on <small>{{ page.date | date_to_string }}</small><span class='label label-default' style = 'float:right;'>{{ page.theme }}</span></p>
+		                    <p>Posted by <small>Lu Juemin</small> on <small>{{ page.date | date_to_string }}</small><div class='label'>{{ page.theme }}</div></p>
 						</div>
 						<div class="content"><p>{{page.content}}</p></div>
 						<div class='footer'>
@@ -55,7 +55,7 @@
 									ds.type = 'text/javascript';ds.async = true;
 									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
 									ds.charset = 'UTF-8';
-									(document.getElementsByTagName('head')[0] 
+									(document.getElementsByTagName('head')[0]
 									 || document.getElementsByTagName('body')[0]).appendChild(ds);
 								})();
 								</script>
