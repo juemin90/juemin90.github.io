@@ -134,7 +134,7 @@ article.holder {
 }
 article.holder .post-label {
 	background-color: #428BCA;
-	padding: 5px 15px;
+	padding: 0px 15px;
   float: right;
   border-radius: 3px;
   color: white;
@@ -142,7 +142,7 @@ article.holder .post-label {
 
 #innerContent .post-label {
 	background-color: #428BCA;
-	padding: 5px 15px;
+	padding: 0px 15px;
   float: right;
   border-radius: 3px;
   color: white;
