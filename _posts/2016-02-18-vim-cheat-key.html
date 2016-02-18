@@ -1,0 +1,263 @@
+---
+layout: default
+title: Vim编辑器的快捷键
+theme: Vim
+---
+<p>Note: If you’re decent at vim and want your mind blown, check out <a href="advanced.html">Advanced Vim</a>.</p>
+
+<p>I’ve compiled a list of <em>essential</em> vim commands that I use every day. I then give a few instructions on how to making vim as great as it should be, because it’s painful without configuration.</p>
+
+<p>Cursor movement (Inside command/normal mode)</p>
+
+<p><img src="http://vimsheet.com/images/hjkl.png" alt="The four directions in VIM - hjkl"/></p>
+
+<ul>
+<li><code>w</code> - jump by start of words (punctuation considered words)</li>
+<li><code>W</code> - jump by words (spaces separate words)</li>
+<li><code>e</code> - jump to end of words (punctuation considered words)</li>
+<li><code>E</code> - jump to end of words (no punctuation)</li>
+<li><code>b</code> - jump backward by words (punctuation considered words)</li>
+<li><code>B</code> - jump backward by words (no punctuation)</li>
+<li><code>0</code> - (zero) start of line</li>
+<li><code>^</code> - first non-blank character of line (same as 0w)</li>
+<li><code>$</code> - end of line</li>
+<li>Advanced (in order of what I find useful)
+
+<ul>
+<li><code>Ctrl+d</code> - move down half a page</li>
+<li><code>Ctrl+u</code> - move up half a page</li>
+<li><code>}</code> - go forward by paragraph (the next blank line)</li>
+<li><code>{</code> - go backward by paragraph (the next blank line)</li>
+<li><code>gg</code> - go to the top of the page</li>
+<li><code>G</code> - go the bottom of the page</li>
+<li><code>: [num] [enter]</code> - Go To that line in the document</li>
+<li>Searching
+
+<ul>
+<li><code>f [char]</code> - Move to the next char on the current line after the cursor</li>
+<li><code>F [char]</code> - Move to the next char on the current line before the cursor</li>
+<li><code>t [char]</code> - Move to before the next char on the current line after the cursor</li>
+<li><code>T [char]</code> - Move to before the next char on the current line before the cursor</li>
+<li>All these commands can be followed by <code>;</code> (semicolon) to go to the next searched item, and <code>,</code> (comma) to go the the previous searched item</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>Insert/Appending/Editing Text</p>
+
+<ul>
+<li>Results in insert mode
+
+<ul>
+<li><code>i</code> - start insert mode at cursor</li>
+<li><code>I</code> - insert at the beginning of the line</li>
+<li><code>a</code> - append after the cursor</li>
+<li><code>A</code> - append at the end of the line</li>
+<li><code>o</code> - open (append) blank line below current line (no need to press return)</li>
+<li><code>O</code> - open blank line above current line</li>
+<li><code>cc</code> - change (replace) an entire line</li>
+<li><code>c  [movement command]</code> - change (replace) from the cursor to the move-to point.</li>
+<li>ex. <code>ce</code> changes from the cursor to the end of the cursor word</li>
+</ul></li>
+<li>Esc - exit insert mode</li>
+<li><code>r  [char]</code> - replace a single character with the specified char (does not use insert mode)</li>
+<li><code>d</code> - delete
+
+<ul>
+<li><code>d</code> - [movement command] deletes from the cursor to the move-to point.</li>
+<li>ex. <code>de</code> deletes from the cursor to the end of the current word</li>
+</ul></li>
+<li><code>dd</code> - delete the current line</li>
+<li>Advanced
+
+<ul>
+<li><code>J</code> - join line below to the current one</li>
+</ul></li>
+</ul>
+
+<p>Marking text (visual mode)</p>
+
+<ul>
+<li><code>v</code> - starts visual mode
+
+<ul>
+<li>From here you can move around as in normal mode (hjkl etc.) and can then do a command (such as <code>y</code>, <code>d</code>, or <code>c</code>)</li>
+</ul></li>
+<li><code>V</code> - starts linewise visual mode</li>
+<li><code>Ctrl+v</code> - start visual block mode</li>
+<li><code>Esc</code> - exit visual mode</li>
+<li>Advanced
+
+<ul>
+<li><code>O</code> - move to Other corner of block</li>
+<li><code>o</code> - move to other end of marked area</li>
+</ul></li>
+</ul>
+
+<p>Visual commands</p>
+
+<p>Type any of these while some text is selected to apply the action</p>
+
+<ul>
+<li><code>y</code> - yank (copy) marked text</li>
+<li><code>d</code> - delete marked text</li>
+<li><code>c</code> - delete the marked text and go into insert mode (like c does above)</li>
+</ul>
+
+<p>Cut and Paste</p>
+
+<ul>
+<li><code>yy</code> - yank (copy) a line</li>
+<li><code>p</code> - put (paste) the clipboard after cursor</li>
+<li><code>P</code> - put (paste) before cursor</li>
+<li><code>dd</code> - delete (cut) a line</li>
+<li><code>x</code> - delete (cut) current character</li>
+<li><code>X</code> - delete previous character (like backspace)</li>
+</ul>
+
+<p>Exiting</p>
+
+<ul>
+<li><code>:w</code> - write (save) the file, but don&#39;t exit</li>
+<li><code>:wq</code> - write (save) and quit</li>
+<li><code>:q</code> - quit (fails if anything has changed)</li>
+<li><code>:q!</code> - quit and throw away changes</li>
+</ul>
+
+<p>Search/Replace</p>
+
+<ul>
+<li><code>/pattern</code> - search for pattern</li>
+<li><code>?pattern</code> - search backward for pattern</li>
+<li><code>n</code> - repeat search in same direction</li>
+<li><code>N</code> - repeat search in opposite direction</li>
+<li><code>:%s/old/new/g</code> - replace all old with new throughout file (<a href="https://github.com/vinitkumar/white-paper">gn</a> is better though)</li>
+<li><code>:%s/old/new/gc</code> - replace all old with new throughout file with confirmations</li>
+</ul>
+
+<p>Working with multiple files</p>
+
+<ul>
+<li><code>:e filename</code> - Edit a file</li>
+<li><code>:tabe</code> - make a new tab</li>
+<li><code>gt</code> - go to the next tab</li>
+<li><code>gT</code> - go to the previous tab</li>
+<li>Advanced
+
+<ul>
+<li><code>:vsp</code> - vertically split windows</li>
+<li><code>ctrl+ws</code> - Split windows horizontally</li>
+<li><code>ctrl+wv</code> - Split windows vertically</li>
+<li><code>ctrl+ww</code> - switch between windows</li>
+<li><code>ctrl+wq</code> - Quit a window</li>
+</ul></li>
+</ul>
+
+<p>Marks</p>
+
+<p>Marks allow you to jump to designated points in your code.</p>
+
+<ul>
+<li><code>m{a-z}</code> - Set mark {a-z} at cursor position </li>
+<li>A capital mark {A-Z} sets a global mark and will work between files</li>
+<li><code>‘{a-z}</code> - move the cursor to the start of the line where the mark was set</li>
+<li><code>‘’</code> - go back to the previous jump location</li>
+</ul>
+
+<p>General</p>
+
+<ul>
+<li><code>u</code> - undo</li>
+<li><code>Ctrl+r</code> - redo</li>
+<li><code>.</code> - repeat last command</li>
+</ul>
+
+<p>Making Vim actually useful</p>
+
+<p>Vim is quite unpleasant out of the box. For example, typeing <code>:w</code> for every file save is awkward and copying and pasting to the system clipboard does not work. But a few changes will get you much closer to the editor of your dreams.</p>
+
+<p>.vimrc</p>
+
+<ul>
+<li><a href="https://github.com/theicfire/dotfiles/blob/master/vim/.vimrc">My .vimrc file</a> has some pretty great ideas I haven&#39;t seen elsewhere.</li>
+<li>This is a minimal vimrc that focuses on three priorities:
+
+<ul>
+<li>adding options that are strictly better (like more information showing in autocomplete)</li>
+<li>more convenient keystrokes (like  <code>[space]w</code> for write, instead of <code>:w [enter]</code>)</li>
+<li>a similar workflow to normal text editors (like enabling the mouse)</li>
+</ul></li>
+</ul>
+
+<h3>Installation</h3>
+
+<ul>
+<li>Copy this to your home directory and restart vim. Read through it to see what you can now do (like  <code>[space]w</code> to save a file)
+
+<ul>
+<li>mac users - making a hidden normal file is suprisingly tricky. Here’s one way:
+
+<ul>
+<li>in the command line, go to the home directory</li>
+<li>type <code>nano .vimrc</code></li>
+<li>paste in the contents of the .vimrc file</li>
+<li><code>ctrl+x</code>, <code>y</code>, <code>[enter]</code> to save</li>
+</ul></li>
+</ul></li>
+<li>You should now be able to press  <code>[space]w</code> in normal mode to save a file.</li>
+<li><code>[space]p</code> should paste from the system clipboard (outside of vim).
+
+<ul>
+<li>If you can’t paste, it’s probably because vim was not built with the system clipboard option. To check, run <code>vim --version</code> and see if <code>+clipboard</code> exists. If it says <code>-clipboard</code>, you will not be able to copy from outside of vim.</li>
+<li>For mac users, homebrew install vim with the clipboard option. Install homebrew and then run <code>brew install vim</code>.
+
+<ul>
+<li>then move the old vim binary: <code>$ mv /usr/bin/vim /usr/bin/vimold</code></li>
+<li>restart your terminal and you should see <code>vim --version</code> now with <code>+clipboard</code></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>Plugins</p>
+
+<ul>
+<li>The easiest way to make vim more powerful is to use Vintageous in sublime (version 3). This gives you Vim mode inside sublime. I suggest this (or a similar setup with the Atom editor) if you aren&#39;t a vim master. Check out <a href="advanced.html">Advanced Vim</a> if you are.</li>
+<li><p>Vintageous is great, but I suggest you change a few settings to make it better.</p>
+
+<ul>
+<li>Clone <a href="https://github.com/theicfire/Vintageous">this repository</a> to <code>~/.config/sublime-text-3/Packages/Vintageous</code>, or similar. Then check out the &quot;custom&quot; branch.
+
+<ul>
+<li>Alternatively, you can get a more updated Vintageous version by cloning <a href="https://github.com/guillermooo/Vintageous">the official</a> repo and then copying over <a href="https://github.com/theicfire/Vintageous/commit/19ff6311b01e3ae259b7eb8e3944687b42ba06ff">this patch</a>.</li>
+</ul></li>
+<li>Change the user settings (<code>User/Preferences.sublime-settings</code>) to include:
+
+<ul>
+<li><code>&quot;caret_style&quot;: &quot;solid&quot;</code></li>
+<li>This will make the cursor not blink, like in vim.</li>
+<li>sublime might freeze when you do this. It’s a bug; just restart sublime after changing the file.</li>
+</ul></li>
+<li><code>ctrl+r</code> in vim means &quot;redo&quot;. But there is a handy ctrl+r shortcut in sublime that gives an &quot;outline&quot; of a file. I remapped it to alt+r by putting this in the User keymap
+
+<ul>
+<li><code>{ &quot;keys&quot;: [&quot;alt+r&quot;], &quot;command&quot;: &quot;show_overlay&quot;, &quot;args&quot;: {&quot;overlay&quot;: &quot;goto&quot;, &quot;text&quot;: &quot;@&quot;} },</code></li>
+</ul></li>
+<li><a href="https://github.com/guillermooo/Vintageous/wiki/Toggling-Vintageous">Add the ability to toggle vintageous on and off</a></li>
+<li>Mac users: you will not have the ability to hold down a navigation key (like holding j to go down). To fix this, run the commands specified here: <a href="https://gist.github.com/kconragan/2510186">https://gist.github.com/kconragan/2510186</a></li>
+</ul></li>
+<li><p>Now you should be able to restart sublime and have a great vim environment! Sweet Dude.</p></li>
+</ul>
+
+<p>Switch Caps Lock and Escape</p>
+
+<ul>
+<li>I highly recommend you switch the mapping of your caps lock and escape keys. You&#39;ll love it, promise! Switching the two keys is platform dependent; google should get you the answer</li>
+</ul>
+
+<p>Other</p>
+
+<p>I don’t personally use these yet, but I’ve heard other people do!</p>
+
+<ul>
+<li><code>:wqa</code> - Write and quit all open tabs (thanks Brian Zick)</li>
+</ul>
