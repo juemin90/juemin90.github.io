@@ -149,6 +149,9 @@ article.holder .post-label {
   float: right;
   border-radius: 3px;
   color: white;
+  position: absolute;
+  top: -5px;
+  right: 5px;
 }
 
 #content .header {
