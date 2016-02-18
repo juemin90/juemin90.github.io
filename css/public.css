@@ -138,6 +138,9 @@ article.holder .post-label {
   float: right;
   border-radius: 3px;
   color: white;
+  position: absolute;
+  top: -5px;
+  right: 5px;
 }
 
 #innerContent .post-label {
@@ -148,6 +151,9 @@ article.holder .post-label {
   color: white;
 }
 
+#content .header {
+  position: relative;
+}
 
 #content .header h1 {
     color:peru;
