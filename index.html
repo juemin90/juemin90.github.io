@@ -40,8 +40,9 @@ title: 卢珏玟的博客
                     <a href="{{ site.baseurl }}{{post.url}}">
                         <h1>{{ post.title }}</h1>
                     </a>
+                    <span class="post-label">{{ post.theme }}</span>
                     <hr>
-                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small><span class="post-label">{{ post.theme }}</span></p>
+                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small></p>
                 </div>
                 <div class="content">
                     {% if post.content contains "<!-- more -->" %}
