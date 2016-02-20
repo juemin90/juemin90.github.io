@@ -1,0 +1,46 @@
+---
+layout: default
+title: Node.js学习笔记（1）
+theme: Node.js
+---
+
+<p>今天开始学习Node.js。和往常一样，找一本书，一天一个章节，一周搞定。『Node.js实战』。</p>
+
+<p>直接从第二章开始，用Node开发Web程序，如果有看不懂的，可以回头看看之前讲基础的部分。</p>
+
+<p>为了保证速度和灵活性，Node的HTTP接口比较底层。</p>
+
+<p>这里要重点讨论:
+
+<ul>
+
+  <li>Node如何向开发者呈现HTTP请求；</li>
+
+  <li>如何编写一个简单的HTTP服务器，用"Hello World"做响应；</li>
+
+  <li>如何读取请求头，以及如何设置响应头；</li>
+
+  <li>如何设置HTTP响应的状态码；</li>
+
+</ul>
+
+</p>
+
+<p>Node中的http模块提供了HTTP服务器和客户端接口：</p>
+
+<p><pre>var http = require('http');</pre></p>
+
+<p>创建HTTP服务器要调用<code>http.createServer()函数</code>，它只有一个参数，是个回调函数，服务器每次收到HTTP请求后都会调用这个回调函数。这个请求回调会收到两个参数，请求和响应对象，通常简写为req和res。</p>
+
+<p>
+  <pre>var http = require('http');</pre>
+
+  <pre>  var server = http.createServer(function (req, res) { </pre>
+
+  <pre>// 处理请求</pre>
+
+  <pre>});</pre>
+
+</p>
+
+<p>Node不会自动往客户端写任何响应。在调用玩请求回调函数之后，就要由你负责用res,end()方法结束响应了。</p>
