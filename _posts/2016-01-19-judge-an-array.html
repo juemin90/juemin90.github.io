@@ -1,29 +1,27 @@
 ---
 layout: default
-title: javascript中判断数组的正确姿势 
-theme: JavaScript 
+title: javascript中判断数组的正确姿势
+theme: JavaScript
 ---
-<blockquote>
+<pre>
+
 <p>作者：韩子迟</p>
 
 <p>网址：http://www.cnblogs.com/zichi/p/5103842.html</p>
-</blockquote>
 
-<p>&nbsp;</p>
+</pre>
 
 <p>在 Javascript 中，如何判断一个变量是否是数组？</p>
 
-<p>&nbsp;</p>
-
 <p>最好的方式是用 ES5 提供的 Array.isArray() 方法（毕竟原生的才是最屌的）：</p>
 
-<p>&nbsp;</p>
+<pre>
 
-<blockquote>
 <p>var a = [0, 1, 2];</p>
 
 <p>console.log(Array.isArray(a)); // true</p>
-</blockquote>
+
+</pre>
 
 <!-- more -->
 <p>&nbsp;</p>
@@ -40,13 +38,14 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
 <p>var a = [0, 1, 2];</p>
 
 <p>// 是 object 同时排除 null、排除纯对象</p>
 
 <p>console.log(typeof a === &#39;object&#39; &amp; a !== null &amp;&amp; Object.prototype.toString.call(a) !== &#39;[object Object]&#39;); &nbsp;// true</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -58,13 +57,13 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
 <p>var a = [0, 1, 2];</p>
 
 <p>console.log(a instanceof Array); &nbsp;// true 就是数组？</p>
 
 <p>console.log(a.constructor === Array); // true 数组？</p>
-</blockquote>
+</pre>
 
 <p>&nbsp;</p>
 
@@ -76,7 +75,7 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
 <p>window.onload = function() {</p>
 
 <p>&nbsp; &nbsp; &nbsp;var a = window.frames[0].a;</p>
@@ -86,7 +85,8 @@ theme: JavaScript
 <p>&nbsp; &nbsp; &nbsp;console.log(a.constructor === Array); &nbsp;// false</p>
 
 <p>};</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -94,9 +94,11 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>window.a = [1, 2, 3];</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -112,7 +114,8 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>var a = [0, 1, 2];</p>
 
 <p>&nbsp;</p>
@@ -122,7 +125,8 @@ theme: JavaScript
 <p>&nbsp;// 是数组</p>
 
 <p>}</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -130,7 +134,8 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>var a = {sort: &#39;me&#39;};</p>
 
 <p>&nbsp;</p>
@@ -142,7 +147,7 @@ theme: JavaScript
 <p>&nbsp;// 其实我真的不是数组</p>
 
 <p>}</p>
-</blockquote>
+</pre>
 
 <p>&nbsp;</p>
 
@@ -150,11 +155,13 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>var a = [0, 1, 2];</p>
 
 <p>console.log(Object.prototype.toString.call(a) === &#39;[object Array]&#39;); // true</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -166,7 +173,8 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>isArray: Array.isArray || function( obj ) {</p>
 
 <p>&nbsp; &nbsp;return jQuery.type(obj) === &quot;array&quot;;</p>
@@ -198,7 +206,8 @@ theme: JavaScript
 <p>&nbsp; &nbsp;class2type[ &quot;[object &quot; + name + &quot;]&quot; ] = name.toLowerCase();</p>
 
 <p>});</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -206,7 +215,8 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>console.log(Object.prototype.toString.call(10)); &nbsp;// [object Number]</p>
 
 <p>console.log(Object.prototype.toString.call(&#39;hello&#39;)); // [object String]</p>
@@ -226,7 +236,8 @@ theme: JavaScript
 <p>console.log(Object.prototype.toString.call(undefined)); // [object Undefined]</p>
 
 <p>console.log(Object.prototype.toString.call(new Date())); // [object Date]</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -238,7 +249,8 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>Object.prototype.toString( ) When the toString method is called, the following steps are taken:</p>
 
 <p>1. Get the [[Class]] property of this object.</p>
@@ -246,7 +258,8 @@ theme: JavaScript
 <p>2. Compute a string value by concatenating the three strings &ldquo;[object &ldquo;, Result (1), and &ldquo;]&rdquo;.</p>
 
 <p>3. Return Result (2)</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -254,11 +267,13 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>new Array([ item0[, item1 [,&hellip;]]])</p>
 
 <p>The [[Class]] property of the newly constructed object is set to &ldquo;Array&rdquo;.</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -266,13 +281,15 @@ theme: JavaScript
 
 <p>&nbsp;</p>
 
-<blockquote>
+<pre>
+
 <p>function isArray(a) {</p>
 
 <p>&nbsp;Array.isArray ? Array.isArray(a) : Object.prototype.toString.call(a) === &#39;[object Array]&#39;;</p>
 
 <p>}</p>
-</blockquote>
+
+</pre>
 
 <p>&nbsp;</p>
 
@@ -288,4 +305,3 @@ theme: JavaScript
 	<p>JavaScript:Object.prototype.toString方法的原理</p>
 	</li>
 </ul>
-
