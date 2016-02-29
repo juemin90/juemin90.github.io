@@ -1,0 +1,31 @@
+---
+layout: default
+title: 用原生JavaScript获取DOM元素的宽度/高度
+theme: JavaScript
+---
+
+<p>已经习惯了用jQuery做DOM操作，现在想在没有jQuery的情况下获取DOM元素的宽度和高度都不知道该怎么做了，遂google了一下，还是有一些容易混淆的地方，记录之。</p>
+
+<p>大概有这么几种方法，offsetWidth, scrollWidth, clientWidth, cssWidth和getComputedStyle等，这些都有一些细小的区别，让我们好好看一下。</p>
+
+<p>首先放一张图，前四种方法之间的区别可以比较一目了然的看到</p>
+
+<p><img src="http://jsfiddle.net/y8Y32/25/" alt=""></p>
+
+<ul>
+  <li><code>offsetWidth</code>包括border和padding大小在内的宽度；在<code>display: block;</code>的情况下，可以通过这个方法来获得包括padding, border的宽度。</li>
+  <li><code>scrollWidth</code>元素content的宽度，包括因滚动而没有出现在页面内的部分。</li>
+  <li><code>clientWidth</code>包括padding大小在内的宽度，不包括border和滚动条的宽度。</li>
+</ul>
+
+<p>以上三种方法的用法相同，如下: <code>ele.offsetWidth</code></p>
+
+<p>还有一个共同点是这几个方法返回的都是Number型的结果，可以直接做运算；而且都是取整之后的结果，如果宽度是浮点数，那么会造成一定的误差。</p>
+
+<p>而且默认的单位是px, 如果强行设置了单位，比如100em之类，它还是会返回px的大小</p>
+
+<p>如果想要获取准确的宽度，那么就要用getComputedStyle方法，用法如下：<code>getComputedStyle(document.getElementById('test'), null).width</code></p>
+
+<p>getComputedStyle方法的第一个参数是DOM元素，第二个参数是可选项，叫pseudoElt，不太懂啥意思，放个null就可以了。</p>
+
+<p>这个方法会返回准确的浮点数结果，但是这个结果是带px的字符串，如果想做运算，必须做一些变换，比如parseFloat。</p>
