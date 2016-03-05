@@ -134,6 +134,7 @@ article.holder {
     padding:30px 50px;
 }
 article.holder .post-label {
+  line-height: 30px;
 	background-color: #428BCA;
 	padding: 0 15px;
   float: right;
@@ -145,6 +146,7 @@ article.holder .post-label {
 }
 
 .innerContent .post-label {
+  line-height: 30px;
 	background-color: #428BCA;
 	padding: 0 15px;
   float: right;
