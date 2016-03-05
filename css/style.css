@@ -30,29 +30,25 @@ html {
       html body header.scrolled {
         height: 50px;
         line-height: 50px; }
-    html body .innerContent .panel {
-      padding-top: 180px;
-      background-color: #f1eee8;
-      position: relative; }
-    html body .innerContent .panel_blog {
+    html body .innerContent .panel, html body .innerContent .panel_blog {
       padding-top: 180px;
       width: 100%;
       background-color: #f1eee8;
       position: relative;
       line-height: 30px; }
-      html body .innerContent .panel_blog .content .holder.blog-list {
+      html body .innerContent .panel .content .holder.blog-list, html body .innerContent .panel_blog .content .holder.blog-list {
         margin-bottom: 30px;
         padding: 30px 50px 30px 50px;
         background-color: white;
         box-shadow: 2px 2px 2px #aaa;
         line-height: 50px; }
-      html body .innerContent .panel_blog .content .holder.blog {
+      html body .innerContent .panel .content .holder.blog, html body .innerContent .panel_blog .content .holder.blog {
         margin: 20px 0;
         background-color: white;
         box-shadow: 2px 2px 2px #aaa;
         padding: 30px 50px;
         line-height: 30px; }
-      html body .innerContent .panel_blog .content .holder .post-label {
+      html body .innerContent .panel .content .holder .post-label, html body .innerContent .panel_blog .content .holder .post-label {
         line-height: 30px;
         background-color: #428BCA;
         padding: 0 15px;
@@ -62,56 +58,56 @@ html {
         position: absolute;
         top: -5px;
         right: 5px; }
-      html body .innerContent .panel_blog .content .holder .header {
+      html body .innerContent .panel .content .holder .header, html body .innerContent .panel_blog .content .holder .header {
         position: relative; }
-        html body .innerContent .panel_blog .content .holder .header h1 {
+        html body .innerContent .panel .content .holder .header h1, html body .innerContent .panel_blog .content .holder .header h1 {
           color: peru;
           font-size: 20px; }
-        html body .innerContent .panel_blog .content .holder .header small {
+        html body .innerContent .panel .content .holder .header small, html body .innerContent .panel_blog .content .holder .header small {
           color: darksalmon; }
-      html body .innerContent .panel_blog .content .holder .footer {
+      html body .innerContent .panel .content .holder .footer, html body .innerContent .panel_blog .content .holder .footer {
         line-height: 50px; }
-        html body .innerContent .panel_blog .content .holder .footer a {
+        html body .innerContent .panel .content .holder .footer a, html body .innerContent .panel_blog .content .holder .footer a {
           color: #93a1a1;
           transition: 300ms linear;
           -webkit-transition: 300ms linear;
           -moz-transition: 300ms linear;
           -o-transition: 300ms linear;
           -ms-transition: 300ms linear; }
-          html body .innerContent .panel_blog .content .holder .footer a:hover {
+          html body .innerContent .panel .content .holder .footer a:hover, html body .innerContent .panel_blog .content .holder .footer a:hover {
             color: darkslategray; }
-      html body .innerContent .panel_blog .content .holder .read-more {
+      html body .innerContent .panel .content .holder .read-more, html body .innerContent .panel_blog .content .holder .read-more {
         letter-spacing: 0.2em;
         text-transform: uppercase;
         float: left; }
-      html body .innerContent .panel_blog .content .holder .social-widget-holder {
+      html body .innerContent .panel .content .holder .social-widget-holder, html body .innerContent .panel_blog .content .holder .social-widget-holder {
         letter-spacing: 0.2em;
         float: right;
         text-transform: uppercase; }
-      html body .innerContent .panel_blog .aside h2 {
+      html body .innerContent .panel .aside h2, html body .innerContent .panel_blog .aside h2 {
         color: peru;
         text-transform: uppercase;
         text-align: center; }
-      html body .innerContent .panel_blog .aside a {
+      html body .innerContent .panel .aside a, html body .innerContent .panel_blog .aside a {
         color: black;
         transition: 200ms linear;
         -webkit-transition: 200ms linear;
         -o-transition: 200ms linear;
         -moz-transition: 200ms linear;
         -ms-transition: 200ms linear; }
-        html body .innerContent .panel_blog .aside a:hover {
+        html body .innerContent .panel .aside a:hover, html body .innerContent .panel_blog .aside a:hover {
           color: silver; }
-      html body .innerContent .panel_blog .aside .aside-holder {
+      html body .innerContent .panel .aside .aside-holder, html body .innerContent .panel_blog .aside .aside-holder {
         margin: 20px 0;
         background-color: #ffffff;
         box-shadow: 2px 2px 2px #aaa;
         padding: 20px; }
-        html body .innerContent .panel_blog .aside .aside-holder .recent-posts p {
+        html body .innerContent .panel .aside .aside-holder .recent-posts p, html body .innerContent .panel_blog .aside .aside-holder .recent-posts p {
           text-align: right;
           color: palevioletred; }
-        html body .innerContent .panel_blog .aside .aside-holder .about-me p {
+        html body .innerContent .panel .aside .aside-holder .about-me p, html body .innerContent .panel_blog .aside .aside-holder .about-me p {
           margin-top: 20px; }
-        html body .innerContent .panel_blog .aside .aside-holder .about-me .social {
+        html body .innerContent .panel .aside .aside-holder .about-me .social, html body .innerContent .panel_blog .aside .aside-holder .about-me .social {
           display: inline-block;
           height: 40px;
           width: 40px;
@@ -120,19 +116,19 @@ html {
           cursor: pointer;
           background-image: url(../im/social.png);
           transition: all 300ms linear; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social:hover {
+          html body .innerContent .panel .aside .aside-holder .about-me .social:hover, html body .innerContent .panel_blog .aside .aside-holder .about-me .social:hover {
             border-radius: 10px; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .github {
+          html body .innerContent .panel .aside .aside-holder .about-me .social .github, html body .innerContent .panel_blog .aside .aside-holder .about-me .social .github {
             background-position: 80px 40px; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .weibo {
+          html body .innerContent .panel .aside .aside-holder .about-me .social .weibo, html body .innerContent .panel_blog .aside .aside-holder .about-me .social .weibo {
             background-position: 80px 0; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .facebook {
+          html body .innerContent .panel .aside .aside-holder .about-me .social .facebook, html body .innerContent .panel_blog .aside .aside-holder .about-me .social .facebook {
             background-position: 200px 0; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .twitter {
+          html body .innerContent .panel .aside .aside-holder .about-me .social .twitter, html body .innerContent .panel_blog .aside .aside-holder .about-me .social .twitter {
             background-position: 240px 0; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .stackoverflow {
+          html body .innerContent .panel .aside .aside-holder .about-me .social .stackoverflow, html body .innerContent .panel_blog .aside .aside-holder .about-me .social .stackoverflow {
             background-position: 40px 40px; }
-          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .linkedin {
+          html body .innerContent .panel .aside .aside-holder .about-me .social .linkedin, html body .innerContent .panel_blog .aside .aside-holder .about-me .social .linkedin {
             background-position: 120px 0; }
     html body .innerContent .resume ul, html body .innerContent .resume ol, html body .innerContent .resume li {
       margin: 0;
