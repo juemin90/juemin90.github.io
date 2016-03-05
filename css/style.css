@@ -34,21 +34,20 @@ html {
       padding-top: 180px;
       width: 100%;
       background-color: #f1eee8;
-      position: relative;
-      line-height: 30px; }
-      html body .innerContent .panel .content .holder.blog-list, html body .innerContent .panel_blog .content .holder.blog-list {
+      position: relative; }
+      html body .innerContent .panel .holder.blog-list, html body .innerContent .panel_blog .holder.blog-list {
         margin-bottom: 30px;
         padding: 30px 50px 30px 50px;
         background-color: white;
         box-shadow: 2px 2px 2px #aaa;
         line-height: 50px; }
-      html body .innerContent .panel .content .holder.blog, html body .innerContent .panel_blog .content .holder.blog {
+      html body .innerContent .panel .holder.blog, html body .innerContent .panel .holder.resume, html body .innerContent .panel_blog .holder.blog, html body .innerContent .panel_blog .holder.resume {
         margin: 20px 0;
         background-color: white;
         box-shadow: 2px 2px 2px #aaa;
         padding: 30px 50px;
         line-height: 30px; }
-      html body .innerContent .panel .content .holder .post-label, html body .innerContent .panel_blog .content .holder .post-label {
+      html body .innerContent .panel .holder .post-label, html body .innerContent .panel_blog .holder .post-label {
         line-height: 30px;
         background-color: #428BCA;
         padding: 0 15px;
@@ -58,29 +57,29 @@ html {
         position: absolute;
         top: -5px;
         right: 5px; }
-      html body .innerContent .panel .content .holder .header, html body .innerContent .panel_blog .content .holder .header {
+      html body .innerContent .panel .holder .header, html body .innerContent .panel_blog .holder .header {
         position: relative; }
-        html body .innerContent .panel .content .holder .header h1, html body .innerContent .panel_blog .content .holder .header h1 {
+        html body .innerContent .panel .holder .header h1, html body .innerContent .panel_blog .holder .header h1 {
           color: peru;
           font-size: 20px; }
-        html body .innerContent .panel .content .holder .header small, html body .innerContent .panel_blog .content .holder .header small {
+        html body .innerContent .panel .holder .header small, html body .innerContent .panel_blog .holder .header small {
           color: darksalmon; }
-      html body .innerContent .panel .content .holder .footer, html body .innerContent .panel_blog .content .holder .footer {
+      html body .innerContent .panel .holder .footer, html body .innerContent .panel_blog .holder .footer {
         line-height: 50px; }
-        html body .innerContent .panel .content .holder .footer a, html body .innerContent .panel_blog .content .holder .footer a {
+        html body .innerContent .panel .holder .footer a, html body .innerContent .panel_blog .holder .footer a {
           color: #93a1a1;
           transition: 300ms linear;
           -webkit-transition: 300ms linear;
           -moz-transition: 300ms linear;
           -o-transition: 300ms linear;
           -ms-transition: 300ms linear; }
-          html body .innerContent .panel .content .holder .footer a:hover, html body .innerContent .panel_blog .content .holder .footer a:hover {
+          html body .innerContent .panel .holder .footer a:hover, html body .innerContent .panel_blog .holder .footer a:hover {
             color: darkslategray; }
-      html body .innerContent .panel .content .holder .read-more, html body .innerContent .panel_blog .content .holder .read-more {
+      html body .innerContent .panel .holder .read-more, html body .innerContent .panel_blog .holder .read-more {
         letter-spacing: 0.2em;
         text-transform: uppercase;
         float: left; }
-      html body .innerContent .panel .content .holder .social-widget-holder, html body .innerContent .panel_blog .content .holder .social-widget-holder {
+      html body .innerContent .panel .holder .social-widget-holder, html body .innerContent .panel_blog .holder .social-widget-holder {
         letter-spacing: 0.2em;
         float: right;
         text-transform: uppercase; }

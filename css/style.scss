@@ -41,71 +41,68 @@ html {
           width:100%;
           background-color:#f1eee8;
           position:relative;
-          line-height:30px;
-        .content {
-          .holder {
-            &.blog-list {
-              margin-bottom: 30px;
-              padding:30px 50px 30px 50px;
-              background-color:white;
-              box-shadow: 2px 2px 2px #aaa;
-              line-height:50px;
+        .holder {
+          &.blog-list {
+            margin-bottom: 30px;
+            padding:30px 50px 30px 50px;
+            background-color:white;
+            box-shadow: 2px 2px 2px #aaa;
+            line-height:50px;
+          }
+          &.blog, &.resume {
+            margin:20px 0;
+            background-color:white;
+            box-shadow: 2px 2px 2px #aaa;
+            padding:30px 50px;
+            line-height: 30px;
+          }
+          .post-label {
+            line-height: 30px;
+          	background-color: #428BCA;
+          	padding: 0 15px;
+            float: right;
+            border-radius: 3px;
+            color: white;
+            position: absolute;
+            top: -5px;
+            right: 5px;
+          }
+          .header {
+            position: relative;
+            h1 {
+              color:peru;
+              font-size:20px;
             }
-            &.blog {
-              margin:20px 0;
-              background-color:white;
-              box-shadow: 2px 2px 2px #aaa;
-              padding:30px 50px;
-              line-height: 30px;
+            small {
+              color:darksalmon;
             }
-            .post-label {
-              line-height: 30px;
-            	background-color: #428BCA;
-            	padding: 0 15px;
-              float: right;
-              border-radius: 3px;
-              color: white;
-              position: absolute;
-              top: -5px;
-              right: 5px;
-            }
-            .header {
-              position: relative;
-              h1 {
-                color:peru;
-                font-size:20px;
-              }
-              small {
-                color:darksalmon;
-              }
-            }
-            .content {
+          }
+          .content {
 
-            }
-            .footer {
-              line-height: 50px;
-              a {
-                color:#93a1a1;
-                transition:300ms linear;
-                -webkit-transition:300ms linear;
-                -moz-transition:300ms linear;
-                -o-transition:300ms linear;
-                -ms-transition:300ms linear;
-                &:hover {
-                  color:darkslategray;
-                }
+          }
+          .footer {
+            line-height: 50px;
+            a {
+              color:#93a1a1;
+              transition:300ms linear;
+              -webkit-transition:300ms linear;
+              -moz-transition:300ms linear;
+              -o-transition:300ms linear;
+              -ms-transition:300ms linear;
+              &:hover {
+                color:darkslategray;
               }
             }
-            .read-more {
-              letter-spacing: 0.2em;
-              text-transform: uppercase;
-              float:left;
-            }
-            .social-widget-holder {
-              letter-spacing: 0.2em;
-              float:right;
-              text-transform: uppercase;
-            }
+          }
+          .read-more {
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            float:left;
+          }
+          .social-widget-holder {
+            letter-spacing: 0.2em;
+            float:right;
+            text-transform: uppercase;
           }
         }
         .aside {
