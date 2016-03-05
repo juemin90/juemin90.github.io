@@ -1,0 +1,152 @@
+@charset "UTF-8";
+html {
+  height: 100%; }
+  html body {
+    font-family: Microsoft JhengHei, Microsoft YaHei,'宋体' ,sans-serif;
+    height: 100%; }
+    html body a {
+      text-decoration: nonek; }
+    html body a:hover {
+      text-decoration: none; }
+    html body header {
+      position: fixed;
+      height: 150px;
+      width: 100%;
+      line-height: 150px;
+      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+      transition: all 300ms ease;
+      -webkit-transition: all 300ms ease;
+      -moz-transition: all 300ms ease;
+      -o-transition: all 300ms ease;
+      -ms-transition: all 300ms ease;
+      z-index: 1; }
+      html body header a {
+        font-size: 2em;
+        color: #145789; }
+      html body header span {
+        float: right; }
+      html body header.scrolled {
+        height: 50px;
+        line-height: 50px; }
+    html body .innerContent .panel {
+      padding-top: 180px;
+      background-color: #f1eee8;
+      position: relative; }
+    html body .innerContent .panel_blog {
+      padding-top: 180px;
+      width: 100%;
+      background-color: #f1eee8;
+      position: relative;
+      line-height: 30px; }
+      html body .innerContent .panel_blog .content .holder.blog-list {
+        margin-bottom: 30px;
+        padding: 30px 50px 30px 50px;
+        background-color: white;
+        box-shadow: 2px 2px 2px #aaa;
+        line-height: 50px; }
+      html body .innerContent .panel_blog .content .holder.blog {
+        margin: 20px 0;
+        background-color: white;
+        box-shadow: 2px 2px 2px #aaa;
+        padding: 30px 50px;
+        line-height: 30px; }
+      html body .innerContent .panel_blog .content .holder .post-label {
+        line-height: 30px;
+        background-color: #428BCA;
+        padding: 0 15px;
+        float: right;
+        border-radius: 3px;
+        color: white;
+        position: absolute;
+        top: -5px;
+        right: 5px; }
+      html body .innerContent .panel_blog .content .holder .header {
+        position: relative; }
+        html body .innerContent .panel_blog .content .holder .header h1 {
+          color: peru;
+          font-size: 20px; }
+        html body .innerContent .panel_blog .content .holder .header small {
+          color: darksalmon; }
+      html body .innerContent .panel_blog .content .holder .footer {
+        line-height: 50px; }
+        html body .innerContent .panel_blog .content .holder .footer a {
+          color: #93a1a1;
+          transition: 300ms linear;
+          -webkit-transition: 300ms linear;
+          -moz-transition: 300ms linear;
+          -o-transition: 300ms linear;
+          -ms-transition: 300ms linear; }
+          html body .innerContent .panel_blog .content .holder .footer a:hover {
+            color: darkslategray; }
+      html body .innerContent .panel_blog .content .holder .read-more {
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        float: left; }
+      html body .innerContent .panel_blog .content .holder .social-widget-holder {
+        letter-spacing: 0.2em;
+        float: right;
+        text-transform: uppercase; }
+      html body .innerContent .panel_blog .aside h2 {
+        color: peru;
+        text-transform: uppercase;
+        text-align: center; }
+      html body .innerContent .panel_blog .aside a {
+        color: black;
+        transition: 200ms linear;
+        -webkit-transition: 200ms linear;
+        -o-transition: 200ms linear;
+        -moz-transition: 200ms linear;
+        -ms-transition: 200ms linear; }
+        html body .innerContent .panel_blog .aside a:hover {
+          color: silver; }
+      html body .innerContent .panel_blog .aside .aside-holder {
+        margin: 20px 0;
+        background-color: #ffffff;
+        box-shadow: 2px 2px 2px #aaa;
+        padding: 20px; }
+        html body .innerContent .panel_blog .aside .aside-holder .recent-posts p {
+          text-align: right;
+          color: palevioletred; }
+        html body .innerContent .panel_blog .aside .aside-holder .about-me p {
+          margin-top: 20px; }
+        html body .innerContent .panel_blog .aside .aside-holder .about-me .social {
+          display: inline-block;
+          height: 40px;
+          width: 40px;
+          border-radius: 40px;
+          background-color: silver;
+          cursor: pointer;
+          background-image: url(../im/social.png);
+          transition: all 300ms linear; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social:hover {
+            border-radius: 10px; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .github {
+            background-position: 80px 40px; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .weibo {
+            background-position: 80px 0; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .facebook {
+            background-position: 200px 0; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .twitter {
+            background-position: 240px 0; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .stackoverflow {
+            background-position: 40px 40px; }
+          html body .innerContent .panel_blog .aside .aside-holder .about-me .social .linkedin {
+            background-position: 120px 0; }
+    html body .innerContent .resume ul, html body .innerContent .resume ol, html body .innerContent .resume li {
+      margin: 0;
+      padding: 0; }
+    html body .innerContent .resume .resume_profile {
+      text-align: center; }
+      html body .innerContent .resume .resume_profile img {
+        width: 200px;
+        height: 200px; }
+      html body .innerContent .resume .resume_profile .resume_subtitle {
+        color: silver; }
+    html body footer {
+      height: 50px;
+      line-height: 50px;
+      text-align: center; }
+
+/*# sourceMappingURL=style.css.map */
