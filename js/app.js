@@ -23,8 +23,8 @@
 
 		// header change
 		$(document).scroll(function(){
-			var page_scroll = window.pageYOffset, 
-				head = $("#head");
+			var page_scroll = window.pageYOffset,
+				head = $("header");
 				prev_height = head.height()+"px";
 			if(page_scroll>100){
 				head.addClass("scrolled")
