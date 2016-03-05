@@ -36,12 +36,7 @@ html {
       }
     }
     .innerContent {
-      .panel {
-        padding-top:180px;
-        background-color:#f1eee8;
-        position:relative;
-      }
-      .panel_blog {
+      .panel, .panel_blog {
           padding-top:180px;
           width:100%;
           background-color:#f1eee8;
