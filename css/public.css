@@ -2,7 +2,7 @@ html, body {
     height:100%;
 }
 /*header*/
-.head {
+.header {
     position: fixed;
     height:150px;
     width:100%;
@@ -17,7 +17,7 @@ html, body {
     -ms-transition:all 300ms ease;
     z-index: 1;
 }
-.head a{
+.header a{
     font-size: 2em;
     color:#145789;
 }
@@ -25,7 +25,7 @@ html, body {
     height:50px;
     line-height: 50px;
 }
-.head span {
+.header span {
     float:right;
 }
 /*resume*/

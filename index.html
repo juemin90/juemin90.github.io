@@ -26,7 +26,7 @@ title: 卢珏玟的博客
     </script>
 </head>
 <body>
-<div class="head">
+<div class="header">
     <div class="container">
         <a href="http://www.juemin.win">卢珏玟 | Lu Juemin</a>
         <span><a href="http://www.juemin.win/cv">简历</a></span>
@@ -35,9 +35,9 @@ title: 卢珏玟的博客
 <section class="innerContent">
     <div class="panel_blog">
       <div class="container">
-          <div class="col-md-8" class="content">
+          <div class="col-md-8 content">
               {% for post in paginator.posts %}
-              <article class="holder" class="blog">
+              <article class="holder blog">
                   <div class="header">
                       <a href="{{ site.baseurl }}{{post.url}}">
                           <h1>{{ post.title }}</h1>
@@ -77,8 +77,8 @@ title: 卢珏玟的博客
             </ul>
           </nav>
           </div>
-          <div class="col-md-4 col-sm-5 " class="aside">
-              <article class="about-me" class="aside-holder">
+          <div class="col-md-4 col-sm-5 aside">
+              <article class="about-me aside-holder">
                   <h2>about me</h2>
                   <div class="photo-holder">
                       <a href="javascript:void(0);" class="my_photo"><img src="../im/juemin.jpg" alt="lujuemin" class="img-thumbnail"></a>
@@ -95,7 +95,7 @@ title: 卢珏玟的博客
                   </p>
               </article>
 
-              <article class="recent-posts" class="aside-holder"><h2>recent posts</h2>
+              <article class="recent-posts aside-holder"><h2>recent posts</h2>
                           <hr>
                       {% for post in site.posts limit: 5 %}
                       <a href="{{ site.baseurl }}{{post.url}}">{{ post.title }}</a>
@@ -104,7 +104,7 @@ title: 卢珏玟的博客
                       {% endfor %}
                           <p>Totally {{paginator.total_posts}} blogs</p>
                       </article>
-              <article class="recent-replies" class="aside-holder"><h2>recent replies</h2>
+              <article class="recent-replies aside-holder"><h2>recent replies</h2>
                           <hr>
                       <p>暂时没有回复</p>
               </article>
