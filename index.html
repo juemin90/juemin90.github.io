@@ -24,95 +24,94 @@ title: 卢珏玟的博客
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-
 </head>
 <body>
-<header id="head" class="head">
+<div class="head">
     <div class="container">
         <a href="http://www.juemin.win">卢珏玟 | Lu Juemin</a>
         <span><a href="http://www.juemin.win/cv">简历</a></span>
     </div>
-</header>
-<section id="innerContent">
-    <div id="panel_blog">
-    <div class="container">
-        <div class="col-md-8" id="content">
-            {% for post in paginator.posts %}
-            <article class="holder" id="blog">
-                <div class="header">
-                    <a href="{{ site.baseurl }}{{post.url}}">
-                        <h1>{{ post.title }}</h1>
-                    </a>
-                    <span class="post-label">{{ post.theme }}</span>
-                    <hr>
-                    <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small></p>
-                </div>
-                <div class="content">
-                    {% if post.content contains "<!-- more -->" %}
-                        {{ post.content | split:"<!-- more -->" | first % }}
-                    {% else %}
-                        {{ post.excerpt }}
-                    {% endif %}
-                </div>
-                <div class="footer">
-                    <hr>
-                    <div class="read-more">
-                        <a href="">continue reading</a>
-                    </div>
-                    <div class="social-widget-holder">
-                        <a href="" title="Comment on Keep learning">Leave a comment</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </article>
-        {% endfor %}
-        <nav>
-          <ul class="pager">
-            {% if paginator.previous_page %}
-            <li><a href="{{ paginator.previous_page_path }}">Previous</a></li>
-              {% endif %}
-              <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-               {% if paginator.next_page %}
-            <li><a href="{{ paginator.next_page_path }}">Next</a></li>
-          {% endif %}
-          </ul>
-        </nav>
-        </div>
-        <div class="col-md-4 col-sm-5 " id="aside">
-            <article id="about-me" class="aside-holder">
-                <h2>about me</h2>
-                <div class="photo-holder">
-                    <a href="javascript:void(0);" id="my_photo"><img src="../im/juemin.jpg" alt="lujuemin" class="img-thumbnail"></a>
-                </div>
-                <p>I'm Lu Juemin, a front-end developer in Momoso.</p>
-                <p>
-                    <a class="social" id="github" href="https://github.com/juemin90" target="_blank"></a>
-                    <a class="social" id="weibo" href="http://weibo.com/juemin" target="_blank"></a>
-                    <a class="social" id="facebook" href="https://facebook.com/huamanzhiya" target="_blank"></a>
-                    <a class="social" id="twitter" href="https://twitter.com/juemin90" target="_blank"></a>
-                    <a class="social" id="stackoverflow" href="https://www.stackoverflow.com" target="_blank"></a>
-                    <a class="social" id="linkedin" href="http://linkedin.com/juemin90" target="_blank"></a>
-                    <a class="clearfix"></a>
-                </p>
-            </article>
+</div>
+<section class="innerContent">
+    <div class="panel_blog">
+      <div class="container">
+          <div class="col-md-8" class="content">
+              {% for post in paginator.posts %}
+              <article class="holder" class="blog">
+                  <div class="header">
+                      <a href="{{ site.baseurl }}{{post.url}}">
+                          <h1>{{ post.title }}</h1>
+                      </a>
+                      <span class="post-label">{{ post.theme }}</span>
+                      <hr>
+                      <p>Posted by <small>卢珏玟</small> on <small>{{ post.date | date_to_string }}</small></p>
+                  </div>
+                  <div class="content">
+                      {% if post.content contains "<!-- more -->" %}
+                          {{ post.content | split:"<!-- more -->" | first % }}
+                      {% else %}
+                          {{ post.excerpt }}
+                      {% endif %}
+                  </div>
+                  <div class="footer">
+                      <hr>
+                      <div class="read-more">
+                          <a href="">continue reading</a>
+                      </div>
+                      <div class="social-widget-holder">
+                          <a href="" title="Comment on Keep learning">Leave a comment</a>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+              </article>
+          {% endfor %}
+          <nav>
+            <ul class="pager">
+              {% if paginator.previous_page %}
+              <li><a href="{{ paginator.previous_page_path }}">Previous</a></li>
+                {% endif %}
+                <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+                 {% if paginator.next_page %}
+              <li><a href="{{ paginator.next_page_path }}">Next</a></li>
+            {% endif %}
+            </ul>
+          </nav>
+          </div>
+          <div class="col-md-4 col-sm-5 " class="aside">
+              <article class="about-me" class="aside-holder">
+                  <h2>about me</h2>
+                  <div class="photo-holder">
+                      <a href="javascript:void(0);" class="my_photo"><img src="../im/juemin.jpg" alt="lujuemin" class="img-thumbnail"></a>
+                  </div>
+                  <p>I'm Lu Juemin, a front-end developer in Momoso.</p>
+                  <p>
+                      <a class="social github" href="https://github.com/juemin90" target="_blank"></a>
+                      <a class="social weibo" href="http://weibo.com/juemin" target="_blank"></a>
+                      <a class="social facebook" href="https://facebook.com/huamanzhiya" target="_blank"></a>
+                      <a class="social twitter" href="https://twitter.com/juemin90" target="_blank"></a>
+                      <a class="social stackoverflow" href="https://www.stackoverflow.com" target="_blank"></a>
+                      <a class="social linkedin" href="http://linkedin.com/juemin90" target="_blank"></a>
+                      <a class="clearfix"></a>
+                  </p>
+              </article>
 
-            <article id="recent-posts" class="aside-holder"><h2>recent posts</h2>
-                        <hr>
-                    {% for post in site.posts limit: 5 %}
-                    <a href="{{ site.baseurl }}{{post.url}}">{{ post.title }}</a>
-                    <hr>
+              <article class="recent-posts" class="aside-holder"><h2>recent posts</h2>
+                          <hr>
+                      {% for post in site.posts limit: 5 %}
+                      <a href="{{ site.baseurl }}{{post.url}}">{{ post.title }}</a>
+                      <hr>
 
-                    {% endfor %}
-                        <p>Totally {{paginator.total_posts}} blogs</p>
-                    </article>
-            <article id="recent-replies" class="aside-holder"><h2>recent replies</h2>
-                        <hr>
-                    <p>暂时没有回复</p>
-            </article>
-        </div>
+                      {% endfor %}
+                          <p>Totally {{paginator.total_posts}} blogs</p>
+                      </article>
+              <article class="recent-replies" class="aside-holder"><h2>recent replies</h2>
+                          <hr>
+                      <p>暂时没有回复</p>
+              </article>
+          </div>
+      </div>
     </div>
-
-</div></section>
+</section>
 <footer>
     <a href=".">卢珏玟的个人网站</a>©2015
 </footer>

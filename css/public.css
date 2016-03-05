@@ -2,11 +2,12 @@ html, body {
     height:100%;
 }
 /*header*/
-#head {
+.head {
     position: fixed;
     height:150px;
     width:100%;
     line-height: 150px;
+    background-color: rgb(255, 255, 255);
     background-color: rgba(255,255,255,0.8);
     overflow: hidden;
     transition:all 300ms ease;
@@ -16,29 +17,29 @@ html, body {
     -ms-transition:all 300ms ease;
     z-index: 1;
 }
-#head a{
+.head a{
     font-size: 2em;
     color:#145789;
 }
-#head.scrolled {
+.scrolled {
     height:50px;
     line-height: 50px;
 }
-#head span {
+.head span {
     float:right;
 }
 /*resume*/
-#resume_profile {
+.resume_profile {
     text-align: center;
 }
-#resume_profile img{
+.resume_profile img{
     width:200px;
     height:200px;
 }
-#resume_profile .resume_subtitle {
+.resume_profile .resume_subtitle {
     color:silver;
 }
-#resume ul,ol,li {
+.resume ul,ol,li {
     margin:0;
     padding:0;
 }
@@ -67,22 +68,22 @@ a.social {
 a.social:hover {
     border-radius: 10px;
 }
-#github {
+.github {
     background-position: 80px 40px;
 }
-#weibo {
+.weibo {
     background-position: 80px 0;
 }
-#facebook {
+.facebook {
     background-position: 200px 0;
 }
-#twitter {
+.twitter {
     background-position: 240px 0;
 }
-#stackoverflow {
+.stackoverflow {
     background-position: 40px 40px;
 }
-#linkedin {
+.linkedin {
     background-position: 120px 0;
 }
 footer {
@@ -91,10 +92,10 @@ footer {
     text-align: center;
 
 }
-body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+body,button, input, select, textarea, h1 ,h2, h3, h4, h5, h6 {
     font-family: Microsoft JhengHei, Microsoft YaHei,'宋体' ,sans-serif;
 }
-#panel {
+.panel {
     padding-top:180px;
     background-color:#f1eee8;
     position:relative;
@@ -108,7 +109,7 @@ section.holder {
     line-height:50px;
 }
 
-#blog{
+.blog{
     line-height: 30px;
 }
 
@@ -118,7 +119,7 @@ section.holder {
 
 
 /*blog*/
-#panel_blog {
+.panel_blog {
     padding-top:180px;
     width:100%;
     background-color:#f1eee8;
@@ -134,7 +135,7 @@ article.holder {
 }
 article.holder .post-label {
 	background-color: #428BCA;
-	padding: 0px 15px;
+	padding: 0 15px;
   float: right;
   border-radius: 3px;
   color: white;
@@ -143,9 +144,9 @@ article.holder .post-label {
   right: 5px;
 }
 
-#innerContent .post-label {
+.innerContent .post-label {
 	background-color: #428BCA;
-	padding: 0px 15px;
+	padding: 0 15px;
   float: right;
   border-radius: 3px;
   color: white;
@@ -154,23 +155,23 @@ article.holder .post-label {
   right: 5px;
 }
 
-#content .header {
+.content .header {
   position: relative;
 }
 
-#content .header h1 {
+.content .header h1 {
     color:peru;
     font-size:20px;
 }
 
-#content .header small {
+.content .header small {
     color:darksalmon;
 }
 
-#content .footer {
+.content .footer {
     line-height: 50px;
 }
-#content .footer a {
+.content .footer a {
     color:#93a1a1;
     transition:300ms linear;
     -webkit-transition:300ms linear;
@@ -178,15 +179,15 @@ article.holder .post-label {
     -o-transition:300ms linear;
     -ms-transition:300ms linear;
 }
-#content .footer a:hover {
+.content .footer a:hover {
     color:darkslategray;
 }
-#content .read-more {
+.content .read-more {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     float:left;
 }
-#content .social-widget-holder {
+.content .social-widget-holder {
     letter-spacing: 0.2em;
     float:right;
     text-transform: uppercase;
@@ -200,12 +201,12 @@ article.holder .post-label {
     box-shadow: 2px 2px 2px #aaa;
     padding:20px;
 }
-#aside h2 {
+.aside h2 {
     color:peru;
     text-transform:uppercase;
     text-align: center;
 }
-#aside a {
+.aside a {
     color: black;
     transition:200ms linear;
     -webkit-transition:200ms linear;
@@ -213,19 +214,19 @@ article.holder .post-label {
     -moz-transition:200ms linear;
     -ms-transition:200ms linear;
 }
-#aside a:hover {
+.aside a:hover {
     color:silver;
 }
-#aside #about-me p{
+.aside .about-me p{
     margin-top:20px;
 }
-#aside #recent-posts p {
+.aside .recent-posts p {
     text-align: right;
     color:palevioletred;
 }
 
 /*message page*/
-#message-container {
+.message-container {
     margin-top:30px;
     padding:20px;
     min-height:100px;
@@ -238,14 +239,14 @@ article.holder .post-label {
     -o-transition:500ms linear;
     -ms-transition:500ms linear;
 }
-#content #message .content {
+.content .message .content {
     margin:20px 0;
 }
-#message-container article {
+.message-container article {
     padding:20px;
 }
 
-#message-container h1, h2, h3, h4, h5, h6, small{
+.message-container h1, h2, h3, h4, h5, h6, small{
     color:peru;
     text-transform: uppercase;
 }
@@ -256,25 +257,25 @@ div.editor {
 div.editor .form-group {
     margin:10px 0
 }
-#message-preview {
+.message-preview {
     background-color: #ffffff;
     margin-top:20px;
     padding:10px;
     border:1px dashed black;
 }
-#alert {
+.alert {
     text-align: center;
     margin-bottom:20px;
 }
 /*navigation*/
-#nav{
+.nav{
     width:60px;
     height:240px;
     position: fixed;
     right: 30px;
     bottom: 30px;
 }
-#nav>div{
+.nav>div{
     width:60px;
     height:60px;
     border-radius: 60px;
@@ -292,14 +293,14 @@ div.editor .form-group {
     -ms-transition:all 200ms linear;
 
 }
-#nav1:nth-child(1){
+.nav1:nth-child(1){
     z-index: 1;
 }
-#nav>div>a, #nav>div {
+.nav>div>a, .nav>div {
     color:white;
     text-decoration: none;
 }
-#nav>div>a:hover{
+.nav>div>a:hover{
     color:black;
 }
 /*mobile*/
@@ -307,19 +308,19 @@ div.editor .form-group {
     h1, h2, h3, h4, h5, h6 {
         font-size:1.5em;
     }
-    #head{
+    .head{
         height:100px;
         line-height: 100px;
     }
-    #innerContent {
+    .innerContent {
         min-height: 200px;
     }
-    #panel {
+    .panel {
         padding-top:120px;
         min-height:100px;
     }
 
-    #panel_blog {
+    .panel_blog {
         padding-top:100px;
         min-height:100px;
     }
@@ -343,24 +344,24 @@ div.editor .form-group {
         padding:0;
         margin:0;
     }
-    #blog .read-more {
+    .blog .read-more {
         display:none;
     }
-    #blog .social-widget-holder {
+    .blog .social-widget-holder {
         float: none;
     }
 
-    #message-container article {
+    .message-container article {
         padding:0;
     }
 
-    #message-editor {
+    .message-editor {
         padding:0;
     }
-    #message-preview {
+    .message-preview {
         display: none;
     }
-    #theme {
+    .theme {
         display:none;
     }
 }
