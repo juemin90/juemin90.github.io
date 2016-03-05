@@ -1,0 +1,149 @@
+---
+layout: default
+title: React组件的详细说明和生命周期
+theme: JavaScript
+---
+
+<p>当通过调用<code>React.createClass()</code>来创建组件的时候，你应该提供一个包含render方法的对象，并且也可以包含其他的在这里描述的生命周期方法。</p>
+
+<pre>render</pre>
+
+<p><code>ReactComponent render()</code></p>
+
+<p>render()方法是必须的。</p>
+
+<p>当调用的时候，会检测this.props和this.state，返回一个单子级组件。该子级组件可以使虚拟的本地DOM组件（比如<div />或者React.DOM.div()），也可以是自定义的符合组件。</p>
+
+<p>render()函数应该是纯粹的，也就是说该函数不修改组件state，每次调用都返回相同的结果，不读写DOM信息，也不和浏览器交互（例如通过使用setTimeout）。</p>
+
+<p>如果需要和浏览器交互，在componentDidMount()中或者其他生命周期方法中做这件事。保持render()纯粹，可以使服务器端渲染更加切实可行。</p>
+
+<pre>getInitialState</pre>
+
+<p><code>object getInitialState()</code></p>
+
+<p>在组件挂载之前调用一次。返回值将会作为this.state的初始值。</p>
+
+<pre>getDefaultProps</pre>
+
+<p>object getDefaultProps()</p>
+
+<p>在组件类创建的时候调用一次，然后返回值被缓存下来。如果父组件没有指定props中的某个键，则此处返回的对象中的响应属性将会合并到this.props（使用in检测属性）。</p>
+
+<p>该方法在任何实例创建之前调用，因此不能依赖于this.props。另外，getDefaultProps()返回的任何复杂对象将会在实例间共享，而不是每个实例拥有一份拷贝。</p>
+
+<pre>propTypes</pre>
+
+<p><code>object propTypes</code></p>
+
+<p>propTypes对象允许验证传入到组件的props。</p>
+
+<pre>minxins</pre>
+
+<p>minxins数组允许使用混合来多个组件之间共享行为。</p>
+
+<pre>statics</pre>
+
+<p><code>object statics</code></p>
+
+<p>statics对象允许你定义静态的方法，这些静态的方法可以在组件类上调用。例如：</p>
+
+<pre>
+
+  var MyComponent = React.createClass({
+    statics: {
+      customMethod: function (foo) {
+        return foo === 'bar';
+      }
+    },
+    render: function () {
+      ...
+    }
+    MyComponent.customMethod('bar'); // true
+  });
+
+</pre>
+
+<p>在这块儿里面定义的方法都是静态的，意味着你可以在任何组件实例创建之前调用它们，这些方法不能获取组件的props和state。如果你想在静态方法中检查props的值，在调用处把props作为参数传入到静态方法。</p>
+
+<pre>displayName</pre>
+
+<code>string displayName</code>
+
+<p>displayName字符串用于输出调试信息。JSX自动设置该值。</p>
+
+<pre>挂载：componentWillMount</pre>
+
+<p><code>componentWillMount()</code></p>
+
+<p>服务端和客户端都只调用一次，在初始化渲染执行之前立刻调用。如果在这个方法内调用setState，render()将会感知到更新后的state，将会执行仅一次，尽管state改变了。</p>
+
+<pre>挂载：componentDidMount</pre>
+
+<p><code>componentDidMount()</code></p>
+
+<p>在初始化渲染执行之后立刻调用一次，仅客户端有效（服务器端不会调用）。在生命周期中的这个时间点，组件拥有一个DOM展现，你可以通过this.getDOMNode()来获取响应DOM节点。</p>
+
+<p>如果想和其他javascript框架继承，使用setTimeout或者setInterval来设置定时器，或者AJAX请求，可以在该方法中执行这些操作。</p>
+
+<pre>更新：componentWillReceiveProps</pre>
+
+<p><code>componentWillReceiveProps(object nextProps)</code></p>
+
+<p>在组件接收到新的props的时候调用。在初始化渲染的时候，该方法不会调用。</p>
+
+<p>用此函数可以作为react在prop传入之后，render()渲染之前更新state的机会。老的props可以通过this.props获取到。在该函数中调用this.setState()将不会引起第二次渲染。</p>
+
+<pre>
+
+  componentWillReceiveProps: function (nextProps) {
+    this.setState({
+      likesIncreasing: nextProps.likeCount > this.props.likeCount
+    });
+  }
+
+</pre>
+
+<p>对于state，没有相似的方法：componentWillReceiveState。将要传进来的props可能会引起state改编，反之则不然。如果需要在state改变时执行一些操作，请使用componentWillUpdate。</p>
+
+<pre>shouldComponentUpdate</pre>
+
+<p><code>boolean shouldComponentUpdate(object nextProps, object nextState)</code></p>
+
+<p>在接收到新的props或者state，将要渲染之前调用。该方法在初始化渲染的时候不会调用，在使用forceUpdate方法的时候也不会。</p>
+
+<p>如果确定新的props和state不会导致组件更新，则此处应该返回false。</p>
+
+<pre>
+
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return nextProps.id !== this.props.id;
+  }
+
+</pre>
+
+<p>如果shouldComponentUpdate返回false，则render()将不会执行，直到下一次state改变。（另外，componentWillUpdate和componentDidUpdate也不会被调用。）</p>
+
+<p>默认情况下，shouldComponentUpdate总会返回true，在state改变的时候避免细微的bug，但是如果总是小心地把state当做不可变的，在render()中只从props何state读取值，此时你可以覆盖shouldCommponentUpdate方法，实现新老props和state的比对逻辑。</p>
+
+<p>如果性能是个瓶颈，尤其是有几十个甚至上百个组件的时候，使用shouldComponentUpdate可以提升应用的性能。</p>
+
+<pre>更新：componentWillUpdate</pre>
+
+<p><code>componentWillUpdate(object nextProps, object nextState)</code></p>
+
+<p>在接收到新的props或者state之前立刻调用。在初始化渲染的时候该方法不会被调用。使用该方法做一些更新之前的准备工作。</p>
+
+<pre>更新：componentDidUpdate</pre>
+
+<p><code>componentDidUpdate(object prevProps, object prevState)</code></p>
+
+<p>在组件的更新已经同步到DOM中之后立刻被调用。该方法不会在初始化渲染的时候调用。使用该方法可以在组件更新之后操作DOM元素。</p>
+
+<pre>移除：componentWillUnmount</pre>
+
+<p><code>componentWillUnmount()</code></p>
+
+<p>在组件从DOM中移除的时候立刻被调用。</p>
+
+<p>在该方法中执行任何必要的清理，比如无效的定时器，或者清除在componentDidMount中创建的DOM元素。</p>
