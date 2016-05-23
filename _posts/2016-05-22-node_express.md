@@ -1,3 +1,13 @@
+---
+layout: default
+
+title: Node+Express做一个web应用
+
+theme: coding
+---
+
+
+
 又要开始学node.js了，为什么说又呢，因为已经是好几次尝试了。这次做项目需要用node.js和express，之前断断续续学的半懂不懂的东西，这次想好好组织一下，把这个项目的后端写的美美的。
 
 #### Getting Started with Node
