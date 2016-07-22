@@ -1,9 +1,10 @@
 ---
 layout: default
 
-title: Node+Express做一个web应用
+title: Button和Link
 
-theme: coding
+theme: HTML
+
 ---
 
 用按钮`<button>`还是链接`<a>`？分析一下各自的特点。
