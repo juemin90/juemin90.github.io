@@ -47,6 +47,8 @@ html {
         box-shadow: 2px 2px 2px #aaa;
         padding: 30px 50px;
         line-height: 30px; }
+        html body .innerContent .panel .holder.blog pre, html body .innerContent .panel .holder.resume pre, html body .innerContent .panel_blog .holder.blog pre, html body .innerContent .panel_blog .holder.resume pre {
+          line-height: 30px; }
       html body .innerContent .panel .holder .post-label, html body .innerContent .panel_blog .holder .post-label {
         line-height: 30px;
         background-color: #428BCA;

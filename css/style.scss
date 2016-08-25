@@ -55,6 +55,9 @@ html {
             box-shadow: 2px 2px 2px #aaa;
             padding:30px 50px;
             line-height: 30px;
+            pre {
+              line-height: 30px;
+            }
           }
           .post-label {
             line-height: 30px;
